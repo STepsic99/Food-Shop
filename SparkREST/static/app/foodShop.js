@@ -7,6 +7,7 @@ Vue.component("food-shop", {
 	template: ` 
 <div>
 	Neki tekst
+	<button v-on:click="openRegistration">Registruj se</button>
 </div>		  
 `
 	, 
@@ -16,10 +17,13 @@ Vue.component("food-shop", {
 	//		.post('rest/proizvodi/add', {"id":''+product.id, "count":parseInt(product.count)})
 		//	.then(response => (toast('Product ' + product.name + " added to the Shopping Cart")))
 		//}
+		openRegistration : function() {
+    		router.push(`/r`);
+    	}
 	},
 	mounted () {
-       // axios
-       //   .get('rest/restaurants/getJustRestaurants')
-         // .then(response => (this.products = response.data))
+        axios
+          .get('rest/restaurants/getJustRestaurants')
+          .then(response => (this.products = response.data))
     },
 });
