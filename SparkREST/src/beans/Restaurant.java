@@ -1,20 +1,35 @@
 package beans;
 
-import java.awt.image.BufferedImage;
+
 import java.util.ArrayList;
 
 public class Restaurant {
 
+	private String id;
 	private String name;
 	private String type;
 	private ArrayList<Article>articles;
 	private RestaurantStatus status;
 	private Location location;
-	private BufferedImage image;
+	private String imagePath;
 	
 	public Restaurant() {
 		
 	}
+	
+	
+
+	public String getId() {
+		return id;
+	}
+
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 
 	public String getName() {
 		return name;
@@ -56,12 +71,12 @@ public class Restaurant {
 		this.location = location;
 	}
 
-	public BufferedImage getImage() {
-		return image;
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 	

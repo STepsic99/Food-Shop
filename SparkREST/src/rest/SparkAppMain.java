@@ -11,13 +11,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import beans.User;
+import services.RestaurantService;
 
 
 
 
 public class SparkAppMain {
 
-	private static Gson g = new Gson();
+	private static RestaurantService restaurantService =new RestaurantService();
 	private static Gson gg=new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 	
 	
@@ -28,7 +29,7 @@ public class SparkAppMain {
 		
 		get("/rest/restaurants/getJustRestaurants", (req, res) -> {
 			res.type("application/json");
-			return "x";
+			return gg.toJson(restaurantService.getRestaurants());
 		});
 		
 		post("rest/user/add", (req, res) -> {

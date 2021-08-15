@@ -1,0 +1,9 @@
+[
+{"id": "1",
+"name": "firstRestaurant",
+"type": "Chinese",
+"articles": null,
+"RestaurantStatus": 1,
+"location": null,
+"imagePath": ".\\resources\\Restaurant1.jpg"
+}]

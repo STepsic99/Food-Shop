@@ -7,7 +7,13 @@ Vue.component("food-shop", {
 	template: ` 
 <div>
 	Neki tekst
-	<button v-on:click="openRegistration">Registruj se</button>
+	<button v-on:click="openRegistration">Registruj se</button><br>
+	<table>
+	<tr v-for="r in restaurants">
+	<td> {{r.name}}</td>
+	<td> <img  v-bind:src="r.imagePath" alt="Restaurant" width="100" height="100"/></td>
+	</tr>
+	</table>
 </div>		  
 `
 	, 
@@ -24,6 +30,6 @@ Vue.component("food-shop", {
 	mounted () {
         axios
           .get('rest/restaurants/getJustRestaurants')
-          .then(response => (this.products = response.data))
+          .then(response => (this.restaurants = response.data))
     },
 });
