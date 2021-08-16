@@ -6,8 +6,8 @@ Vue.component("food-shop", {
 	},
 	template: ` 
 <div>
-	Neki tekst
-	<button v-on:click="openRegistration">Registruj se</button><br>
+	<button v-on:click="openRegistration">Registruj se</button>
+	<button v-on:click="openLogin">Prijavi se</button><br>
 	<table>
 	<tr v-for="r in restaurants">
 	<td> {{r.name}}</td>
@@ -25,6 +25,9 @@ Vue.component("food-shop", {
 		//}
 		openRegistration : function() {
     		router.push(`/r`);
+    	},
+		openLogin : function() {
+    		router.push(`/l`);
     	}
 	},
 	mounted () {

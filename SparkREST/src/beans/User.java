@@ -9,7 +9,7 @@ public class User {
 	protected String surname;
 	protected String gender;
 	protected Date date;
-	
+	protected Role role;
 	
 	
 	public User() {
@@ -18,7 +18,7 @@ public class User {
 	}
 	
 	
-	public User(String username, String password, String name, String surname, String gender, Date date) {
+	public User(String username, String password, String name, String surname, String gender, Date date, Role role) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -26,6 +26,17 @@ public class User {
 		this.surname = surname;
 		this.gender = gender;
 		this.date = date;
+		this.role= role;
+	}
+	
+	
+
+
+	public User(String username, String password, Role role) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.role = role;
 	}
 
 
@@ -64,7 +75,18 @@ public class User {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+
+	public Role getRole() {
+		return role;
+	}
+
+
+	public void setRole(Role role) {
+		this.role = role;
 	} 
+	
 	
 	
 }

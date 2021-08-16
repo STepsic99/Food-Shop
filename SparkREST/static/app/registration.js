@@ -1,7 +1,7 @@
 Vue.component("registration", {
 	data: function () {
 		    return {
-			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null}
+			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: "SHOPPER"}
 		    }
 	},
 	template: ` 
