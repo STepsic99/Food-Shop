@@ -16,6 +16,7 @@ import beans.User;
 import services.RestaurantService;
 import services.ShopperService;
 import services.UserService;
+import spark.Session;
 
 
 
@@ -43,6 +44,12 @@ public class SparkAppMain {
 			Shopper shopper = gg.fromJson(req.body(), Shopper.class);
 			shopperService.addShopper(shopper);
 			userService.addUser(new User(shopper.getUsername(),shopper.getPassword(),Role.SHOPPER));
+			Session session=req.session(true);
+			User sessionUser = session.attribute("user");
+			if(sessionUser == null) {
+				sessionUser = shopper;
+				session.attribute("user", sessionUser);
+			}
 			return "SUCCESS";
 		});
 		
@@ -57,9 +64,44 @@ public class SparkAppMain {
 				us=shopperService.getShopper(us.getUsername());
 				break;
 			}
+			Session session=req.session(true);
+			User sessionUser = session.attribute("user");
+			if(sessionUser == null) {
+				sessionUser = us;
+				session.attribute("user", sessionUser);
+			}
 			return "SUCCESS";
 		});
 		
+		get("/rest/user/logout", (req,res) -> {
+			res.type("application/json");
+			Session session = req.session(true);
+			User user = session.attribute("user");
+			if(user != null) {
+				session.invalidate();
+			}
+			return true;
+		});
 		
+		get("/rest/user/getUser", (req,res) -> {
+			res.type("application/json");
+			Session session = req.session(true);
+			User user = session.attribute("user");
+		/*	if(user != null) {
+				return gg.toJson(user);
+			}
+			return null;*/
+			return gg.toJson(user);
+		});
+		
+		get("/rest/user/isLoggedIn", (req,res) -> {
+			res.type("application/json");
+			Session session = req.session(true);
+			User user = session.attribute("user");
+			if(user != null) {
+				return true;
+			}
+			return null;
+		});
 	}
 }

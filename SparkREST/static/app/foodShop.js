@@ -1,13 +1,17 @@
 Vue.component("food-shop", {
 	data: function () {
 		    return {
-		      restaurants: null
+		      restaurants: null,
+			  loggedin: false,
+			  notloggedin: false,
+			  user: null	
 		    }
 	},
 	template: ` 
 <div>
-	<button v-on:click="openRegistration">Registruj se</button>
-	<button v-on:click="openLogin">Prijavi se</button><br>
+	<button v-on:click="openRegistration"  v-if="notloggedin">Registruj se</button>
+	<button v-on:click="openLogin"  v-if="notloggedin">Prijavi se</button>
+	<button v-on:click="logOut" v-if="loggedin">Odjavi se</button><br>
 	<table>
 	<tr v-for="r in restaurants">
 	<td> {{r.name}}</td>
@@ -28,11 +32,31 @@ Vue.component("food-shop", {
     	},
 		openLogin : function() {
     		router.push(`/l`);
-    	}
+    	},
+		logOut : function(){
+			axios.get('/rest/user/logout')
+			this.loggedin= false
+			this.notloggedin= true	
+		},
+		isLogged : function(user){
+			this.user=user
+			if(this.user===null){
+			this.loggedin= false
+			 this.notloggedin= true	
+		}else{
+			this.loggedin= true
+			 this.notloggedin= false	
+		}
+		}
 	},
 	mounted () {
         axios
-          .get('rest/restaurants/getJustRestaurants')
+          .get('/rest/restaurants/getJustRestaurants')
           .then(response => (this.restaurants = response.data))
+		
+		 axios
+          .get('/rest/user/getUser')
+          .then(response => (this.isLogged(response.data)))
+		
     },
 });
