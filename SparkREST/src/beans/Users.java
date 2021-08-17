@@ -51,4 +51,9 @@ public class Users {
 			e.printStackTrace();
 		}
 	}
+	
+	public Boolean usernameExists(String username) {
+		if(users.containsKey(username)) return true;
+		else return false;
+	}
 }

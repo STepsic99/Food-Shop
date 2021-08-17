@@ -13,4 +13,8 @@ public class ShopperService {
 	public void addShopper(Shopper shopper) {
 		 this.shoppers.addShopper(shopper);
 	}
+	
+	public Boolean IsThereEmptyField(Shopper shopper) {
+		return this.shoppers.IsThereEmptyField(shopper);
+	}
 }

@@ -14,4 +14,8 @@ public class UserService {
 	public void addUser(User newUser) {
 		this.users.addUser(newUser);
 	}
+	
+	public Boolean usernameExists(String username) {
+		return this.users.usernameExists(username);
+	}
 }

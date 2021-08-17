@@ -49,4 +49,27 @@ public class Shoppers {
 	public Shopper getShopper(String username) {
 		return shoppers.get(username);
 	}
+	
+	public Boolean IsThereEmptyField(Shopper shopper) {
+		if(shopper.name==null || shopper.name.trim().isEmpty()) {
+			return true;
+		}
+		else if(shopper.surname==null || shopper.surname.trim().isEmpty()) {
+			return true;
+		}
+		else if(shopper.gender==null || shopper.gender.trim().isEmpty()) {
+			return true;
+		}
+		else if(shopper.username==null || shopper.username.trim().isEmpty()) {
+			return true;
+		}
+		else if(shopper.password==null || shopper.password.trim().isEmpty()) {
+			return true;
+		}
+		else if(shopper.date==null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

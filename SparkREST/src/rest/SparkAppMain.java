@@ -42,6 +42,8 @@ public class SparkAppMain {
 		post("rest/user/add", (req, res) -> {
 			res.type("application/json");
 			Shopper shopper = gg.fromJson(req.body(), Shopper.class);
+			if(shopperService.IsThereEmptyField(shopper)) return "EMPTYERROR";
+			if(userService.usernameExists(shopper.getUsername())) return "USERNAMEERROR";
 			shopperService.addShopper(shopper);
 			userService.addUser(new User(shopper.getUsername(),shopper.getPassword(),Role.SHOPPER));
 			Session session=req.session(true);
