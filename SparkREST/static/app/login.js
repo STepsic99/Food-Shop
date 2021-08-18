@@ -10,12 +10,14 @@ Vue.component("login", {
 	<h3>Prijava</h3>
      <p v-if="error" style="color:red">{{ error }}</p>
 	<form>
+	<p>
 	<label>Korisničko ime</label>
 	<input type = "text" v-model = "user.username" name = "username">
-	</br>
+	</p>
+	<p>
 	<label>Lozinka</label>
 	<input type = "password" v-model = "user.password" name = "password">
-	</br>
+	</p>
 	<input type = "submit" v-on:click = "logIn" value = "Prijavi se">
 	</form>
 </div>		  
@@ -31,6 +33,7 @@ Vue.component("login", {
 					 this.error="Uneli ste neodgovarajuće korisničko ime ili lozinku.";
 				}
 				else{
+					this.$root.$emit('prijavljivanje', 0);
 					router.push(`/`)
 				}
 			})

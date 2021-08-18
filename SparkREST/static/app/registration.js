@@ -71,6 +71,7 @@ Vue.component("registration", {
 					this.errors=[];
 					 this.errors.push('Korisnicko ime je zauzeto. Izaberite drugo.');
 				}else{
+					this.$root.$emit('prijavljivanje', 0);
 					router.push(`/`)
 				}
 				

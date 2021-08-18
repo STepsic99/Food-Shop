@@ -44,6 +44,7 @@ public class Users {
 		try {
 			fileWriter = Files.newBufferedWriter(Paths.get(".\\users.json"));
 			userList.add(newUser);
+			users.put(newUser.username, newUser);
 			gson.toJson(userList, fileWriter);
 			fileWriter.close();
 		} catch (IOException e) {

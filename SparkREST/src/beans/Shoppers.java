@@ -37,6 +37,7 @@ public class Shoppers {
 		try {
 			fileWriter = Files.newBufferedWriter(Paths.get(".\\shoppers.json"));
 			shopperList.add(shopper);
+			shoppers.put(shopper.username,shopper);
 			gson.toJson(shopperList, fileWriter);
 			fileWriter.close();
 		} catch (IOException e) {

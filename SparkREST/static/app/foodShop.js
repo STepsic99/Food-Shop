@@ -9,10 +9,8 @@ Vue.component("food-shop", {
 	},
 	template: ` 
 <div>
-	<button v-on:click="openRegistration"  v-if="notloggedin">Registruj se</button>
-	<button v-on:click="openLogin"  v-if="notloggedin">Prijavi se</button>
-	<button v-on:click="logOut" v-if="loggedin">Odjavi se</button><br>
-	<table>
+	<table style="margin-left: auto;
+  margin-right: auto;">
 	<tr v-for="r in restaurants">
 	<td> {{r.name}}</td>
 	<td> <img  v-bind:src="r.imagePath" alt="Restaurant" width="100" height="100"/></td>

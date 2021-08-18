@@ -1,3 +1,32 @@
-.proba {
-	color: red
+body {margin:0;}
+
+div.topmenu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #89ABE3FF;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+div.topmenu li {
+  float: left;
+}
+
+div.topmenu li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+div.topmenu li a:hover:not(.active) {
+  background-color: #111;
+}
+
+div.topmenu .active {
+  background-color: #04AA6D;
 }
