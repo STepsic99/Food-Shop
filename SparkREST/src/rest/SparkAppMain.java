@@ -4,6 +4,7 @@ import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
+import static spark.Spark.put;
 
 import java.io.File;
 
@@ -42,7 +43,7 @@ public class SparkAppMain {
 		post("rest/user/add", (req, res) -> {
 			res.type("application/json");
 			Shopper shopper = gg.fromJson(req.body(), Shopper.class);
-			if(shopperService.IsThereEmptyField(shopper)) return "EMPTYERROR";
+			if(shopperService.isThereEmptyField(shopper)) return "EMPTYERROR";
 			if(userService.usernameExists(shopper.getUsername())) return "USERNAMEERROR";
 			shopperService.addShopper(shopper);
 			userService.addUser(new User(shopper.getUsername(),shopper.getPassword(),Role.SHOPPER));
@@ -104,6 +105,17 @@ public class SparkAppMain {
 				return true;
 			}
 			return null;
+		});
+		
+		put("/rest/user/change", (req,res) -> {
+			res.type("application/json");
+			User us = gg.fromJson(req.body(), User.class);
+			switch(us.getRole()) {
+			case SHOPPER:
+				shopperService.editShopper(us);
+				break;
+			}
+			return "SUCCESS";
 		});
 	}
 }

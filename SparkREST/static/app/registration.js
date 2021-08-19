@@ -32,9 +32,9 @@ Vue.component("registration", {
 	<p>
 	<label>Pol</label>
 	<select v-model ="user.gender" v-on:blur="genderChange" >
-    <option value="Female">Ženski</option>
-    <option value="Male">Muški</option>
-    <option value="Rather not tell">Ne bih da navedem</option>
+    <option value="Ženski">Ženski</option>
+    <option value="Muški">Muški</option>
+    <option value="Ne bih da navedem">Ne bih da navedem</option>
   	</select><span v-if="emptyGender" style="color:red"> &nbsp;Morate izabrati opciju</span>
 	</p>
 	<p>

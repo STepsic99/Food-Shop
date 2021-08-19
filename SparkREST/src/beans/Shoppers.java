@@ -32,26 +32,35 @@ public class Shoppers {
 		}
 	}
 	
-	public void addShopper(Shopper shopper) {
+	
+	public void Serialization() {
 		Writer fileWriter;
 		try {
 			fileWriter = Files.newBufferedWriter(Paths.get(".\\shoppers.json"));
-			shopperList.add(shopper);
-			shoppers.put(shopper.username,shopper);
 			gson.toJson(shopperList, fileWriter);
 			fileWriter.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}	
+	}
+	
+	public void addShopper(Shopper shopper) {	
+			shopperList.add(shopper);
+			shoppers.put(shopper.username,shopper);
+			Serialization();
 	}
 	
 	public Shopper getShopper(String username) {
 		return shoppers.get(username);
 	}
 	
-	public Boolean IsThereEmptyField(Shopper shopper) {
+	public void deleteShopper(String username) {
+		shoppers.remove(username);
+		shopperList=new ArrayList<Shopper>(shoppers.values());
+		Serialization();
+	}
+	
+	public Boolean isThereEmptyField(Shopper shopper) {
 		if(shopper.name==null || shopper.name.trim().isEmpty()) {
 			return true;
 		}
@@ -72,5 +81,14 @@ public class Shoppers {
 		}else {
 			return false;
 		}
+	}
+	
+	public void editShopper(User user) {
+		Shopper shopper = shoppers.get(user.username);
+		shopper.name=user.name;
+		shopper.surname=user.surname;
+		shopper.gender=user.gender;
+		shopper.date=user.date;
+		Serialization();
 	}
 }

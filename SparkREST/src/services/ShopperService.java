@@ -2,6 +2,7 @@ package services;
 
 import beans.Shopper;
 import beans.Shoppers;
+import beans.User;
 
 public class ShopperService {
 	private Shoppers shoppers=new Shoppers();
@@ -14,7 +15,11 @@ public class ShopperService {
 		 this.shoppers.addShopper(shopper);
 	}
 	
-	public Boolean IsThereEmptyField(Shopper shopper) {
-		return this.shoppers.IsThereEmptyField(shopper);
+	public Boolean isThereEmptyField(Shopper shopper) {
+		return this.shoppers.isThereEmptyField(shopper);
+	}
+	
+	public void editShopper(User user) {
+		this.shoppers.editShopper(user);
 	}
 }
