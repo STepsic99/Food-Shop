@@ -1,9 +1,17 @@
 [
 {"id": "1",
 "name": "firstRestaurant",
-"type": "Chinese",
+"type": "Primorski",
 "articles": null,
 "RestaurantStatus": "OPEN",
 "location": null,
 "imagePath": ".\\resources\\Restaurant1.jpg"
+},
+{"id": "2",
+"name": "secondRestaurant",
+"type": "Italijanski",
+"articles": null,
+"RestaurantStatus": "OPEN",
+"location": null,
+"imagePath": ".\\resources\\italian.jpg"
 }]

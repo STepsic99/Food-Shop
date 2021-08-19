@@ -6,8 +6,8 @@ Vue.component("login", {
 		    }
 	},
 	template: ` 
-<div>
-	<h3>Prijava</h3>
+<div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
+	<h1>Prijava</h1>
      <p v-if="error" style="color:red">{{ error }}</p>
 	<form>
 	<p>
