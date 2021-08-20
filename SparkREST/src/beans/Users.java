@@ -31,6 +31,16 @@ public class Users {
 		}
 	}
 	
+	public void Serialization() {
+		Writer fileWriter;
+		try {
+			fileWriter = Files.newBufferedWriter(Paths.get(".\\users.json"));
+			gson.toJson(userList, fileWriter);
+			fileWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
 	public User userExists(String username, String password) {
 		if(users.containsKey(username) && users.get(username).password.equals(password)) {
 			return users.get(username);
@@ -39,22 +49,20 @@ public class Users {
 		}
 	}
 	
-	public void addUser(User newUser) {
-		Writer fileWriter;
-		try {
-			fileWriter = Files.newBufferedWriter(Paths.get(".\\users.json"));
+	public void addUser(User newUser) {	
 			userList.add(newUser);
 			users.put(newUser.username, newUser);
-			gson.toJson(userList, fileWriter);
-			fileWriter.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			Serialization();
 	}
 	
 	public Boolean usernameExists(String username) {
 		if(users.containsKey(username)) return true;
 		else return false;
+	}
+	
+	public void editUser(User changedUser) {
+		User user=users.get(changedUser.username);
+		user.password=changedUser.password;
+		Serialization();
 	}
 }

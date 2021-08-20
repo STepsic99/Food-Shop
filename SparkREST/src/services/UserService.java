@@ -18,4 +18,8 @@ public class UserService {
 	public Boolean usernameExists(String username) {
 		return this.users.usernameExists(username);
 	}
+	
+	public void editUser(User user) {
+		this.users.editUser(user);
+	}
 }

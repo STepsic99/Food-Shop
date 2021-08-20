@@ -89,6 +89,7 @@ public class Shoppers {
 		shopper.surname=user.surname;
 		shopper.gender=user.gender;
 		shopper.date=user.date;
+		shopper.password=user.password;
 		Serialization();
 	}
 }

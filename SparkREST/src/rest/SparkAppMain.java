@@ -117,5 +117,18 @@ public class SparkAppMain {
 			}
 			return "SUCCESS";
 		});
+		
+		post("rest/user/passwordChange", (req, res) -> {
+			res.type("application/json");
+			User us = gg.fromJson(req.body(), User.class);
+			userService.editUser(us);
+			switch(us.getRole()) {
+			case SHOPPER:
+				shopperService.editShopper(us);
+				break;
+			}
+			return "Lozinka uspešno promenjena";
+		});
+		
 	}
 }

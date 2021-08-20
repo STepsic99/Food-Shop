@@ -46,7 +46,8 @@ Vue.component("profile", {
 	 </span>
 	</label><br><br>
 	<label>Korisničko ime: {{user.username}}</label><br><br>
-	<button v-if="isViewing" v-on:click = "changeMode">Izmeni profil</button>
+	<button v-if="isViewing" v-on:click = "changeMode">Izmeni profil</button><br><br>
+	<button v-if="isViewing" v-on:click = "changePassword">Promeni lozinku</button>
 	<button v-if="isEditing" v-on:click = "saveChanges">Sačuvaj izmene</button>
 	<button v-if="isEditing" v-on:click = "cancelChanges">Odustani</button>
 </div>		  
@@ -85,6 +86,9 @@ Vue.component("profile", {
     	this.user.role = this.backup[6];	
 		this.isEditing=false;
 		this.isViewing=true;
+	},
+	changePassword : function(){
+		router.push(`/pass`);
 	}
 	},
 	mounted () {
