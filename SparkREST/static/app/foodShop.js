@@ -4,31 +4,37 @@ Vue.component("food-shop", {
 		      restaurants: null,
 			  loggedin: false,
 			  notloggedin: false,
-			  user: null	
+			  user: null,
+			  searchedName: null,
+			  searchedType: null,
+			  searchedLocation: null,
+			  searchedGrade:null	
 		    }
 	},
 	template: ` 
 <div>
 	<div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px; margin-bottom: 25px;">
 	<label>Naziv restorana:</label>
-  <input type="text" name="rname"><br><br>
+  <input type="text" name="rname" v-model="searchedName"><br><br>
   <label>Lokacija restorana:</label>
-  <input type="text" name="rlocation"><br><br>
+  <input type="text" name="rlocation" v-model="searchedLocation"><br><br>
   <label>Tip restorana:</label>
-  <select>
+  <select v-model="searchedType">
+    <option value="Prikaži sve">Prikaži sve</option>
     <option value="Kineski">Kineski</option>
     <option value="Italijanski">Italijanski</option>
     <option value="Primorski">Primorski</option>
   	</select><br><br>
    <label>Ocena:</label>
-  <select>
-    <option value="Prikaži sve">Prikaži sve</option>
-    <option value=">2">&gt;2</option>
-    <option value=">3">&gt;3</option>
-    <option value=">4">&gt;4</option>
+  <select v-model="searchedGrade">
+    <option value="1">Prikaži sve</option>
+    <option value="2">&gt;2</option>
+    <option value="3">&gt;3</option>
+    <option value="4">&gt;4</option>
     <option value="5">5</option>
   	</select><br><br>
-    <input type = "submit" v-on:click = "searchBy" value = "PRETRAŽI">
+    <input type = "submit" v-on:click = "searchBy" value = "PRETRAŽI"><br><br>
+     <p style="text-align:left;">Filteri</p>
 	</div>
 	<table style="margin-left: auto;
   margin-right: auto;background: rgba(255, 255, 255, 0.8); padding: 10px 515px 25px 45px;">
@@ -39,7 +45,9 @@ Vue.component("food-shop", {
 	</div>
 	</td>
 	<td>
-	Tip restorana: {{r.type}}
+	Lokacija: {{r.location.address}} <br><br>
+	Tip restorana: {{r.type}} <br><br>
+	Prosečna ocena: {{r.averageGrade}}
 	</td>
 	</tr>
 	</table>
@@ -75,7 +83,33 @@ Vue.component("food-shop", {
 		},
 		searchBy : function(){
 			event.preventDefault();
-			this.restaurants=[];
+			axios
+          .get('/rest/restaurants/getJustRestaurants')
+          .then(response => (this.searchByAgain(response.data)))
+		},
+		searchByAgain : function(res){
+			this.restaurants = res
+				var resLength = this.restaurants.length;
+			var control=0
+		/*	var tempArray=[]
+			for (var i = 0; i < resLength; i++) {
+    				if(this.restaurants[i].name.includes(this.searchedName)){
+								tempArray.push(this.restaurants[i]);	
+									}
+					}
+			this.restaurants=tempArray;		*/
+			while(control===0){
+				control=1;
+				resLength = this.restaurants.length;
+			for (var i = 0; i < resLength; i++) {
+    				if(!this.restaurants[i].name.includes(this.searchedName)){
+								this.restaurants.splice(i,1);
+								control=0;
+								break;	
+									}
+							}
+						}
+			
 		} 
 	},
 	mounted () {

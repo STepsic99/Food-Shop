@@ -12,6 +12,7 @@ public class Restaurant {
 	private RestaurantStatus status;
 	private Location location;
 	private String imagePath;
+	private double averageGrade;
 	
 	public Restaurant() {
 		
@@ -78,6 +79,20 @@ public class Restaurant {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+
+
+
+	public double getAverageGrade() {
+		return averageGrade;
+	}
+
+
+
+	public void setAverageGrade(double averageGrade) {
+		this.averageGrade = averageGrade;
+	}
+	
+	
 	
 	
 	
