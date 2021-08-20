@@ -6,9 +6,11 @@ Vue.component("food-shop", {
 			  notloggedin: false,
 			  user: null,
 			  searchedName: null,
-			  searchedType: null,
+			  searchedType: "Prikaži sve",
 			  searchedLocation: null,
-			  searchedGrade:null	
+			  searchedGrade:1,
+			  showFilters:false,
+			  status:"SVI"	
 		    }
 	},
 	template: ` 
@@ -34,7 +36,25 @@ Vue.component("food-shop", {
     <option value="5">5</option>
   	</select><br><br>
     <input type = "submit" v-on:click = "searchBy" value = "PRETRAŽI"><br><br>
-     <p style="text-align:left;">Filteri</p>
+     <p style="text-align:left;"><img src="/../resources/filter.png" style="position:relative;top:5px;right:15px" width="5%" height="2%"><a href="" v-on:click="openFilters">Filteri</a></p>
+	<div v-if="showFilters">
+	<p style="text-align:left;">Sortiraj po:
+	<select style="margin-left:3%">
+    <option value="1">Nazivu restorana</option>
+    <option value="2">Lokaciji</option>
+    <option value="3">Prosečnoj oceni</option>
+  	</select>
+	<select style="margin-left:3%">
+    <option value="1">Rastućem</option>
+    <option value="2">Opadajućem</option>
+  	</select><br><br>
+	Status restorana:
+  <input v-model="status" type="radio" name="status" value="SVI">
+  <label>SVI</label>
+  <input v-model="status" type="radio" name="status" value="OTVORENI">
+  <label>OTVORENI</label><br>  
+	</p>
+	</div>
 	</div>
 	<table style="margin-left: auto;
   margin-right: auto;background: rgba(255, 255, 255, 0.8); padding: 10px 515px 25px 45px;">
@@ -91,25 +111,34 @@ Vue.component("food-shop", {
 			this.restaurants = res
 				var resLength = this.restaurants.length;
 			var control=0
-		/*	var tempArray=[]
-			for (var i = 0; i < resLength; i++) {
-    				if(this.restaurants[i].name.includes(this.searchedName)){
-								tempArray.push(this.restaurants[i]);	
-									}
-					}
-			this.restaurants=tempArray;		*/
 			while(control===0){
 				control=1;
 				resLength = this.restaurants.length;
 			for (var i = 0; i < resLength; i++) {
-    				if(!this.restaurants[i].name.includes(this.searchedName)){
+				var loc=this.restaurants[i].location.address.split(',');
+    				if(this.searchedName && !this.restaurants[i].name.toLowerCase().includes(this.searchedName.toLowerCase())){
 								this.restaurants.splice(i,1);
 								control=0;
 								break;	
-									}
+									} else if(this.restaurants[i].averageGrade<this.searchedGrade){
+											this.restaurants.splice(i,1);
+											control=0;
+											break;	
+									}else if(this.searchedType!=="Prikaži sve" && this.restaurants[i].type!==this.searchedType){
+											this.restaurants.splice(i,1);
+											control=0;
+											break;	
+									}else if(this.searchedLocation && !loc[1].trim().toLowerCase().includes(this.searchedLocation.toLowerCase())){
+											this.restaurants.splice(i,1);
+											control=0;
+											break;	}
 							}
 						}
 			
+		},
+		openFilters : function(){
+			event.preventDefault();
+			this.showFilters=!this.showFilters;
 		} 
 	},
 	mounted () {
