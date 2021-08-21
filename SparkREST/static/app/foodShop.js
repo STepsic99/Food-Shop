@@ -52,8 +52,16 @@ Vue.component("food-shop", {
   <input v-model="status" type="radio" name="status" value="SVI">
   <label>SVI</label>
   <input v-model="status" type="radio" name="status" value="OTVORENI">
-  <label>OTVORENI</label><br>  
+  <label>OTVORENI</label><br><br>  
+  Tip restorana:
+<input type="checkbox" value="Kineski">
+  <label> Kineski</label>
+  <input type="checkbox" value="Italijanski">
+  <label> Italijanski</label>
+  <input type="checkbox" value="Primorski">
+  <label> Primorski</label><br><br>
 	</p>
+	<button>Filtriraj</button>
 	</div>
 	</div>
 	<table style="margin-left: auto;
