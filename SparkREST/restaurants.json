@@ -3,7 +3,7 @@
 "name": "Olimp",
 "type": "Primorski",
 "articles": null,
-"RestaurantStatus": "OPEN",
+"status": "OPEN",
 "location": {"address": "Slovenska obala 6, Budva, 85310", "latitude":42.28229728905753, "longitude":18.838425915340757},
 "imagePath": ".\\resources\\Restaurant1.jpg",
 "averageGrade":2.5
@@ -12,8 +12,17 @@
 "name": "Amici",
 "type": "Italijanski",
 "articles": null,
-"RestaurantStatus": "OPEN",
+"status": "CLOSED",
 "location": {"address": "Nebojšina 8, Beograd, 11000", "latitude":44.79471191576135, "longitude":20.466935084659248},
 "imagePath": ".\\resources\\italian.jpg",
 "averageGrade":4.5
+},
+{"id": "3",
+"name": "JANGCE",
+"type": "Kineski",
+"articles": null,
+"status": "OPEN",
+"location": {"address": "Trifkovićev trg 2,  Novi Sad, 21000", "latitude":19.844307426995137, "longitude":45.257170687032094},
+"imagePath": ".\\resources\\chinese.jpg",
+"averageGrade":3.5
 }]

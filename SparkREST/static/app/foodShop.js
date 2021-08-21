@@ -10,7 +10,12 @@ Vue.component("food-shop", {
 			  searchedLocation: null,
 			  searchedGrade:1,
 			  showFilters:false,
-			  status:"SVI"	
+			  status:"SVI",
+			  chineseTicked:true,
+			  italianTicked:true,
+			  seasideTicked:true,
+			  sortBy:1,
+			  sortInOrder:1	
 		    }
 	},
 	template: ` 
@@ -35,16 +40,14 @@ Vue.component("food-shop", {
     <option value="4">&gt;4</option>
     <option value="5">5</option>
   	</select><br><br>
-    <input type = "submit" v-on:click = "searchBy" value = "PRETRAŽI"><br><br>
-     <p style="text-align:left;"><img src="/../resources/filter.png" style="position:relative;top:5px;right:15px" width="5%" height="2%"><a href="" v-on:click="openFilters">Filteri</a></p>
-	<div v-if="showFilters">
-	<p style="text-align:left;">Sortiraj po:
-	<select style="margin-left:3%">
+<div v-if="showFilters">
+	<p>Sortiraj po:
+	<select style="margin-left:3%" v-model="sortBy">
     <option value="1">Nazivu restorana</option>
     <option value="2">Lokaciji</option>
     <option value="3">Prosečnoj oceni</option>
   	</select>
-	<select style="margin-left:3%">
+	<select style="margin-left:3%" v-model="sortInOrder">
     <option value="1">Rastućem</option>
     <option value="2">Opadajućem</option>
   	</select><br><br>
@@ -54,15 +57,18 @@ Vue.component("food-shop", {
   <input v-model="status" type="radio" name="status" value="OTVORENI">
   <label>OTVORENI</label><br><br>  
   Tip restorana:
-<input type="checkbox" value="Kineski">
+<input type="checkbox" value="Kineski" v-model="chineseTicked" v-bind:disabled="this.searchedType!=='Prikaži sve'">
   <label> Kineski</label>
-  <input type="checkbox" value="Italijanski">
+  <input type="checkbox" value="Italijanski" v-model="italianTicked" v-bind:disabled="this.searchedType!=='Prikaži sve'">
   <label> Italijanski</label>
-  <input type="checkbox" value="Primorski">
+  <input type="checkbox" value="Primorski" v-model="seasideTicked" v-bind:disabled="this.searchedType!=='Prikaži sve'">
   <label> Primorski</label><br><br>
 	</p>
-	<button>Filtriraj</button>
 	</div>
+	     <p style="text-align:left;"><img src="/../resources/filter.png" style="position:relative;top:5px;right:15px" width="5%" height="2%"><a href="" v-on:click="openFilters">Filteri</a></p>
+    <input type = "submit" v-on:click = "searchBy" value = "PRETRAŽI"><br><br>
+
+	
 	</div>
 	<table style="margin-left: auto;
   margin-right: auto;background: rgba(255, 255, 255, 0.8); padding: 10px 515px 25px 45px;">
@@ -140,19 +146,81 @@ Vue.component("food-shop", {
 											this.restaurants.splice(i,1);
 											control=0;
 											break;	}
+											
+									else if(this.status==="OTVORENI" && this.restaurants[i].status==="CLOSED"){
+										this.restaurants.splice(i,1);
+											control=0;
+											break;
+									}else if(!this.chineseTicked && this.restaurants[i].type==="Kineski"){
+										this.restaurants.splice(i,1);
+											control=0;
+											break;
+									}else if(!this.italianTicked && this.restaurants[i].type==="Italijanski"){
+										this.restaurants.splice(i,1);
+											control=0;
+											break;
+									}else if(!this.seasideTicked && this.restaurants[i].type==="Primorski"){
+										this.restaurants.splice(i,1);
+											control=0;
+											break;
+									}
+								
+												
+											
 							}
 						}
+						if(this.showFilters && this.sortBy=="3" && this.sortInOrder=="1"){
+										this.restaurants.sort(function (a, b) {
+											  return a.averageGrade - b.averageGrade;
+												});
+									} else if(this.showFilters && this.sortBy=="3" && this.sortInOrder=="2"){
+										this.restaurants.sort(function (a, b) {
+											  return b.averageGrade - a.averageGrade;
+												});
+									}  else if(this.showFilters && this.sortBy==1 && this.sortInOrder==1){
+										this.restaurants.sort(function (a, b) {
+											  return a.name.replace(/\s+/g, '').localeCompare(b.name.replace(/\s+/g, ''))
+												});
+									} else if(this.showFilters && this.sortBy=="1" && this.sortInOrder=="2"){
+										this.restaurants.sort(function (a, b) {
+											  return b.name.replace(/\s+/g, '').localeCompare(a.name.replace(/\s+/g, ''))
+												});
+									} else if(this.showFilters && this.sortBy==2 && this.sortInOrder==1){
+										this.restaurants.sort(function (a, b) {
+											  return a.location.address.split(',')[1].replace(/\s+/g, '').localeCompare(b.location.address.split(',')[1].replace(/\s+/g, ''))
+												});
+									} else if(this.showFilters && this.sortBy=="2" && this.sortInOrder=="2"){
+										this.restaurants.sort(function (a, b) {
+											 return b.location.address.split(',')[1].replace(/\s+/g, '').localeCompare(a.location.address.split(',')[1].replace(/\s+/g, ''))
+												});
+									}
 			
 		},
 		openFilters : function(){
 			event.preventDefault();
 			this.showFilters=!this.showFilters;
-		} 
+		},
+		openFirst : function(dat){
+			this.restaurants = dat
+				var resLength = this.restaurants.length;
+			for (var i = 0; i < resLength; i++) {
+    				if(this.restaurants[i].status==="OPEN"){
+								let restaurantBackup=this.restaurants[i]
+								this.restaurants.splice(i,1);
+								this.restaurants.unshift(restaurantBackup);
+								i++;
+									
+									} 
+							}
+						
+			
+		}
+		 
 	},
 	mounted () {
         axios
           .get('/rest/restaurants/getJustRestaurants')
-          .then(response => (this.restaurants = response.data))
+          .then(response => (this.openFirst(response.data)))
 		
 		 axios
           .get('/rest/user/getUser')
