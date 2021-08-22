@@ -130,5 +130,14 @@ public class SparkAppMain {
 			return "Lozinka uspešno promenjena";
 		});
 		
+		
+		get("/rest/restaurant/:id", (req, res) -> {
+			res.type("application/json");
+			String id = req.params("id");
+			return gg.toJson(restaurantService.getRestaurant(id));
+					});
+		
+		
+		
 	}
 }

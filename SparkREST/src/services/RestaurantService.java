@@ -11,4 +11,8 @@ public class RestaurantService {
 	public Collection<Restaurant> getRestaurants() {
 		return this.restaurants.getRestaurantList();
 	}
+	
+	public Restaurant getRestaurant(String id) {
+		return this.restaurants.getRestaurant(id);
+	}
 }

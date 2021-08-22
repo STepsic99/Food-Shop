@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,6 +15,7 @@ import com.google.gson.GsonBuilder;
 public class Restaurants {
 	
 	private ArrayList<Restaurant> restaurantList=new ArrayList<Restaurant>();
+	private HashMap<String, Restaurant> restaurants = new HashMap<String, Restaurant>();
 	private Gson gson =new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 	
 	public Restaurants() {
@@ -25,9 +27,16 @@ public class Restaurants {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		for(Restaurant restaurant : restaurantList) {
+			restaurants.put(restaurant.getId(), restaurant);
+		}
 	}
 	
 	public ArrayList<Restaurant> getRestaurantList() {
 		return restaurantList;
+	}
+	
+	public Restaurant getRestaurant(String id) {
+		return restaurants.get(id);
 	}
 }

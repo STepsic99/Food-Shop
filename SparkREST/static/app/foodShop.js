@@ -81,7 +81,8 @@ Vue.component("food-shop", {
 	<td>
 	Lokacija: {{r.location.address}} <br><br>
 	Tip restorana: {{r.type}} <br><br>
-	Prosečna ocena: {{r.averageGrade}}
+	Prosečna ocena: {{r.averageGrade}} <br><br>
+	<button v-on:click="showRestaurantDetails(r.id)">Prikaži restoran</button>
 	</td>
 	</tr>
 	</table>
@@ -214,6 +215,10 @@ Vue.component("food-shop", {
 							}
 						
 			
+		},
+		showRestaurantDetails : function(id){
+			var s=`/details/`+id;
+			router.push(s);
 		}
 		 
 	},
