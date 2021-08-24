@@ -25,7 +25,21 @@ Vue.component("restaurantDetails", {
 	</td>
 	</tr>
 	</table>
-	<button v-on:click="logIn">AAA</button>
+	<h2 style="font-size:30px">Artikli</h2>
+	<table style="column-count: 2;display: flex;max-width:100px;">
+	<tr style="display: grid; grid-template-columns: repeat(4, 1fr)" >
+	<td style="padding-left:3em;padding-bottom:5em " v-for="a in restaurant.articles">
+	 <div class="txtimg">
+	<img  v-bind:src="a.image" alt="Article" width="250" height="230"/>
+	</div>
+	<h2 style="font-size:27px" >{{a.name}}</h2><br>
+	{{a.description}}<br><br>
+	<span style="font-size:20px">{{a.price}} RSD </span><br><br>
+	<input type="number" style="width:80px" size="33" min="1" value="1">
+	<button style="margin-left:10px">Dodaj u korpu</button>
+	</td>
+	</tr>
+	</table>
 </div>		  
 `
 	, 
