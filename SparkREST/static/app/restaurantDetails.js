@@ -35,8 +35,10 @@ Vue.component("restaurantDetails", {
 	<h2 style="font-size:27px" >{{a.name}}</h2><br>
 	{{a.description}}<br><br>
 	<span style="font-size:20px">{{a.price}} RSD </span><br><br>
+	<span v-if="user">
 	<input type="number" style="width:80px" size="33" min="1" value="1">
-	<button style="margin-left:10px">Dodaj u korpu</button>
+	<button style="margin-left:10px" v-on:click="addToCart(a)">Dodaj u korpu</button>
+	</span>
 	</td>
 	</tr>
 	</table>
@@ -57,9 +59,28 @@ Vue.component("restaurantDetails", {
 					router.push(`/`)
 				}
 			})
+		},
+		addToCart : function(chosenArticle) {
+			var s="aa";
+			if(this.user.username){
+				console.log(chosenArticle.name)
+			}
+		},
+		isLogged : function(user){
+			this.user=user
+			if(this.user===null){
+			this.visibleLogout= false
+			this.visibleLogin= true	
+		}else{
+			this.visibleLogin = false;
+			this.visibleLogout = true;
+		}
 		}
 	},
 	mounted () {
+	
+	
+          
 		var s='/rest/restaurant/'+ this.$route.params.id
         axios
           .get(s)
@@ -68,5 +89,8 @@ Vue.component("restaurantDetails", {
 				this.status="Radi";
 				else this.status="Ne radi"
 			})
+		 axios
+          .get('/rest/user/getUser')
+          .then(response => (this.isLogged(response.data)))	
     },
 });
