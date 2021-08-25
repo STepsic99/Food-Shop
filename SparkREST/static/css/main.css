@@ -19,6 +19,11 @@ div.topmenu li {
   float: left;
 }
 
+div.topmenu li:hover
+{
+    background-color: #111;
+}
+
 div.topmenu li a {
   display: block;
   color: white;
@@ -27,10 +32,57 @@ div.topmenu li a {
   text-decoration: none;
 }
 
+
+
 div.topmenu li a:hover:not(.active) {
-  background-color: #111;
+ 	
 }
 
+div.topmenu li.probna a {
+  display: block;
+  color: white;
+  text-align: center;
+ 
+  text-decoration: none;
+}
+
+div.topmenu li.probna a:hover:not(.active) {
+  color: white;
+}
+
+div.topmenu li.probna:hover {
+	 background:url('../resources/sc1Black.png');
+	 background-color: #111;
+	
+	 background-repeat: no-repeat;
+	background-position: 50% 50%;
+     
+}
+
+div.topmenu li.probna .active {
+	 background:url('../resources/sc1Green.png');
+	 background-color: #04AA6D;
+	
+	 background-repeat: no-repeat;
+	background-position: 50% 50%;
+     height:18px;
+    width:58px;
+}
+
+div.topmenu li.probna{
+
+float: left;
+    background-color: #89ABE3FF;
+    height:46px;
+    width:90px;
+}
+
+.probna{
+	background:url('../resources/sc1.png');
+	 background-repeat: no-repeat;
+	 
+     background-position: 50% 50%;
+}
 div.topmenu .active {
   background-color: #04AA6D;
 }

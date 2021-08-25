@@ -16,6 +16,7 @@ Vue.component("fixedbar", {
   <li v-if="visibleLogin" style="float:right" v-on:click="openLogin"><a  v-bind:class="{active : this.selectedLink===1}" href="/l">Prijavi se</a></li>
   <li v-if="visibleLogout" style="float:right" v-on:click="logOut"><a  href="/">Odjavi se</a></li>
   <li v-if="visibleLogout" style="float:right" v-on:click="checkProfile"><a v-bind:class="{active : this.selectedLink===3}" href="/p">Profil</a></li>
+ <li v-if="visibleLogout" style="float:right;" class="probna" v-on:click="showCart"><a v-bind:class="{active : this.selectedLink===4}" href="/p"></a></li>
 </ul>
 </div>		  
 `
@@ -55,6 +56,10 @@ Vue.component("fixedbar", {
 			event.preventDefault();
 			this.selectedLink=3;
 			router.push(`/p`);
+		},
+		showCart : function(){
+		event.preventDefault();
+		this.selectedLink=4;
 		}
 	},
 	mounted () {
