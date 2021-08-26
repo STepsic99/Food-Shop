@@ -63,7 +63,9 @@ Vue.component("restaurantDetails", {
 		addToCart : function(chosenArticle) {
 				axios
 			.post('/rest/cart/addArticle', chosenArticle)
-			.then(response => (toast('Artikl ' + chosenArticle.name + " je uspešno dodat u korpu.")))
+			.then(response =>{toast('Artikl ' + chosenArticle.name + " je uspešno dodat u korpu.")
+				this.$root.$emit('promenaKorpe', chosenArticle.counter);
+			})
 		},
 		isLogged : function(user){
 			this.user=user

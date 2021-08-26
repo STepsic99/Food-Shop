@@ -25,7 +25,7 @@ Vue.component("cartContent", {
 	</tr>
 	</table>
 	<span style="font-size:30px; text-align: left;">Ukupna cena: {{user.cart.price}}</span>
-    <button style="font-size:25px;margin-left:160px;margin-right:58px">Poruči</button>
+    <button style="font-size:25px;margin-left:100px;margin-right:45px">Poruči</button>
 </div>		  
 `
 	, 
@@ -55,6 +55,7 @@ Vue.component("cartContent", {
 				break;
 				}
 				}
+				this.$root.$emit('removeItem', chosenArticle.counter);
 			})
 		
 		},
@@ -65,7 +66,9 @@ Vue.component("cartContent", {
 			for (var i = 0; i < this.user.cart.articles.length; i++){
 			if(this.user.cart.articles[i].name===chosenArticle.name && this.user.cart.articles[i].restaurant.id===chosenArticle.restaurant.id){
 				this.user.cart.price=this.user.cart.price-this.user.cart.articles[i].price*this.backup[i];
+				this.$root.$emit('counterChangeFirst', this.backup[i]);
 				this.user.cart.price=this.user.cart.price+chosenArticle.price*chosenArticle.counter;
+				this.$root.$emit('counterChangeSecond', chosenArticle.counter);
 				this.backup[i]=chosenArticle.counter;
 				break;
 				}

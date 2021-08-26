@@ -17,7 +17,7 @@ Vue.component("fixedbar", {
   <li v-if="visibleLogout" style="float:right" v-on:click="logOut"><a  href="/">Odjavi se</a></li>
   <li v-if="visibleLogout" style="float:right" v-on:click="checkProfile"><a v-bind:class="{active : this.selectedLink===3}" href="/p">Profil</a></li>
  <li v-if="visibleLogout" style="float:right;" class="probna" v-on:click="showCart"><a v-bind:class="{active : this.selectedLink===4}" href="/p">
- <span class="icon-button__badge">0</span>
+ <span class="icon-button__badge">{{this.user.cart.numberOfItems}}</span>
  </a></li>
 </ul>
 </div>		  
@@ -67,9 +67,28 @@ Vue.component("fixedbar", {
 	},
 	mounted () {
        this.$root.$on('prijavljivanje', (text) => {
+        axios
+          .get('/rest/user/getUser')
+          .then(response => (this.user=response.data))
 			this.selectedLink = text;
 			this.visibleLogin = false;
 			this.visibleLogout = true;
+		});
+		
+		 this.$root.$on('promenaKorpe', (text) => {
+			this.user.cart.numberOfItems += parseInt(text);
+		});
+		
+		this.$root.$on('removeItem', (text) => {
+			this.user.cart.numberOfItems -= parseInt(text);
+		});
+		
+		this.$root.$on('counterChangeFirst', (text) => {
+			this.user.cart.numberOfItems -= parseInt(text);
+		});
+		
+		this.$root.$on('counterChangeSecond', (text) => {
+			this.user.cart.numberOfItems += parseInt(text);
 		});
 		
 		axios

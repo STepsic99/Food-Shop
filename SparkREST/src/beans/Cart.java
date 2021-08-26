@@ -6,16 +6,18 @@ public class Cart {
 	private ArrayList<Article>articles;
 	private User user;
 	private double price;
+	private int numberOfItems;
 	
 	public Cart() {
 	
 	}
 
-	public Cart(ArrayList<Article> articles, User user, double price) {
+	public Cart(ArrayList<Article> articles, User user, double price, int numberOfItems) {
 		super();
 		this.articles = articles;
 		this.user = user;
 		this.price = price;
+		this.numberOfItems = numberOfItems;
 	}
 
 	public ArrayList<Article> getArticles() {
@@ -42,22 +44,34 @@ public class Cart {
 		this.price = price;
 	}
 	
+	
+	public int getNumberOfItems() {
+		return numberOfItems;
+	}
+
+	public void setNumberOfItems(int numberOfItems) {
+		this.numberOfItems = numberOfItems;
+	}
+
 	public void addArticle(Article article) {
 		for(Article a:articles) {
 			if(a.getName().equals(article.getName()) && a.getRestaurant().getId().equals(article.getRestaurant().getId())) {
 				price+=article.getPrice()*article.getCounter();
+				numberOfItems+=article.getCounter();
 				a.setCounter(a.getCounter()+article.getCounter());
 				return;
 			}
 		}
 		articles.add(article);
 		price+=article.getPrice()*article.getCounter();
+		numberOfItems+=article.getCounter();
 	}
 	
 	public void removeArticle(Article article) {
 		for(Article a:articles) {
 			if(a.getName().equals(article.getName()) && a.getRestaurant().getId().equals(article.getRestaurant().getId())) {
 				articles.remove(a);
+				numberOfItems-=a.getCounter();
 				price-=a.getPrice()*a.getCounter();
 				break;
 			}
@@ -69,9 +83,11 @@ public class Cart {
 		for(Article a:articles) {
 			if(a.getName().equals(article.getName()) && a.getRestaurant().getId().equals(article.getRestaurant().getId())) {
 				price-=articles.get(i).getPrice()*articles.get(i).getCounter();
+				numberOfItems-=articles.get(i).getCounter();
 				articles.remove(i);
 				articles.add(i, article);
 				price+=article.getPrice()*article.getCounter();
+				numberOfItems+=article.getCounter();
 				break;
 			}
 			i++;
