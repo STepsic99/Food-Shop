@@ -1,5 +1,6 @@
 package services;
 
+import beans.Article;
 import beans.Shopper;
 import beans.Shoppers;
 import beans.User;
@@ -21,5 +22,17 @@ public class ShopperService {
 	
 	public void editShopper(User user) {
 		this.shoppers.editShopper(user);
+	}
+	
+	public void addToCart(String username,Article article) {
+		this.shoppers.addToCart(username, article);
+	}
+	
+	public void removeFromCart(String username,Article article) {
+		this.shoppers.removeFromCart(username, article);
+	}
+	
+	public void changeInCart(String username,Article article) {
+		this.shoppers.changeInCart(username, article);
 	}
 }

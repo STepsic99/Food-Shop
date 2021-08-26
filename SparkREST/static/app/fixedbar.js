@@ -62,6 +62,7 @@ Vue.component("fixedbar", {
 		showCart : function(){
 		event.preventDefault();
 		this.selectedLink=4;
+		router.push(`/cart`);
 		}
 	},
 	mounted () {

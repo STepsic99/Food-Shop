@@ -10,13 +10,14 @@ public class Article {
 	private double quantity;
 	private String description;
 	private String image;
+	private int counter;
 	
 	public Article() {
 		
 	}
 
 	public Article(String name, double price, ArticleType type, Restaurant restaurant, double quantity,
-			String description, String image) {
+			String description, String image, int counter) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -25,6 +26,7 @@ public class Article {
 		this.quantity = quantity;
 		this.description = description;
 		this.image = image;
+		this.counter = counter;
 	}
 
 	public String getName() {
@@ -81,6 +83,14 @@ public class Article {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
 	
 	

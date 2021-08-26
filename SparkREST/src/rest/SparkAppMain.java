@@ -5,18 +5,22 @@ import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.staticFiles;
 import static spark.Spark.put;
+import static spark.Spark.delete;
 
 import java.io.File;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import beans.Article;
+import beans.Cart;
 import beans.Role;
 import beans.Shopper;
 import beans.User;
 import services.RestaurantService;
 import services.ShopperService;
 import services.UserService;
+import spark.Request;
 import spark.Session;
 
 
@@ -73,6 +77,14 @@ public class SparkAppMain {
 				sessionUser = us;
 				session.attribute("user", sessionUser);
 			}
+			if(us.getRole()==Role.SHOPPER) {
+			Cart sessionCart = session.attribute("cart"); 
+			if (sessionCart == null) {
+				sessionCart = new Cart();
+				sessionCart.setUser(new User(us.getUsername()));
+				session.attribute("cart", sessionCart);
+			}
+			}
 			return "SUCCESS";
 		});
 		
@@ -127,7 +139,7 @@ public class SparkAppMain {
 				shopperService.editShopper(us);
 				break;
 			}
-			return "Lozinka uspešno promenjena";
+			return "Lozinka uspeï¿½no promenjena";
 		});
 		
 		
@@ -138,6 +150,59 @@ public class SparkAppMain {
 					});
 		
 		
+		get("/rest/user/getCart", (req,res) -> {
+			res.type("application/json");
+			Session session = req.session(true);
+			Cart cart = session.attribute("cart");
+		/*	if(user != null) {
+				return gg.toJson(user);
+			}
+			return null;*/
+			return gg.toJson(cart);
+		});
 		
+		
+		post("/rest/cart/addArticle", (req, res) -> {
+			res.type("application/json");
+			Article article = gg.fromJson(req.body(), Article.class);
+			shopperService.addToCart(getUser(req).getUsername(), article);
+			return "OK";
+		});
+		
+		post("/rest/cart/removeArticle", (req, res) -> {
+			res.type("application/json");
+			Article article = gg.fromJson(req.body(), Article.class);
+			shopperService.removeFromCart(getUser(req).getUsername(), article);
+			return "OK";
+		});
+		
+		post("/rest/cart/changeArticle", (req, res) -> {
+			res.type("application/json");
+			Article article = gg.fromJson(req.body(), Article.class);
+			shopperService.changeInCart(getUser(req).getUsername(), article);
+			return "OK";
+		});
+		
+	}
+	
+	private static Cart getCart(Request req) {
+		Session session = req.session(true);
+		Cart sessionCart = session.attribute("cart"); 
+		if (sessionCart == null) {
+			sessionCart = new Cart();
+			sessionCart.setUser(new User(getUser(req).getUsername()));
+			session.attribute("cart", sessionCart);
+		}
+		return sessionCart;
+	}
+	
+	private static User getUser(Request req) {
+		Session session = req.session(true);
+		User user = session.attribute("user");
+		if (user == null) {
+			user = new User();
+			session.attribute("user", user);
+		}
+		return user;
 	}
 }

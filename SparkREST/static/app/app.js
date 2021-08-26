@@ -4,6 +4,7 @@ const Login = { template: '<login></login>' }
 const Profile = { template: '<profile></profile>'}
 const PasswordChange = { template: '<passwordChange></passwordChange>'}
 const RestaurantDetails = { template: '<restaurantDetails></restaurantDetails>' }
+const CartContent = { template: '<cartContent></cartContent>' }
 
 const router = new VueRouter({
 	  mode: 'hash',
@@ -13,7 +14,8 @@ const router = new VueRouter({
 	   { path: '/l', component: Login },
 	   { path: '/p', component: Profile },
        { path: '/pass', component: PasswordChange },
-       { path: '/details/:id', component: RestaurantDetails }
+       { path: '/details/:id', component: RestaurantDetails },
+       { path: '/cart', component: CartContent }
 	  ]
 });
 

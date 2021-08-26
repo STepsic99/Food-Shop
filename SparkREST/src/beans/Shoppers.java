@@ -92,4 +92,22 @@ public class Shoppers {
 		shopper.password=user.password;
 		Serialization();
 	}
+	
+	public void addToCart(String username,Article article) {
+		Shopper shopper = shoppers.get(username);
+		shopper.getCart().addArticle(article);
+		Serialization();
+	}
+	
+	public void removeFromCart(String username,Article article) {
+		Shopper shopper = shoppers.get(username);
+		shopper.getCart().removeArticle(article);
+		Serialization();
+	}
+	
+	public void changeInCart(String username,Article article) {
+		Shopper shopper = shoppers.get(username);
+		shopper.getCart().changeArticle(article);
+		Serialization();
+	}
 }

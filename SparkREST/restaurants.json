@@ -18,7 +18,8 @@
 "restaurant": {"id": "2"},
 "quantity": 500,
 "description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
-"image":".\\resources\\Spaghetti-Bolognese.jpg"
+"image":".\\resources\\Spaghetti-Bolognese.jpg",
+"counter":1
 },
 {
 "name": "Pileitna Mediteraneo",
@@ -27,7 +28,8 @@
 "restaurant": {"id": "2"},
 "quantity": 500,
 "description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
-"image":".\\resources\\mediterranean-chicken2.jpg"
+"image":".\\resources\\mediterranean-chicken2.jpg",
+"counter":1
 },
 {
 "name": "Cesar salata",
@@ -36,7 +38,8 @@
 "restaurant": {"id": "2"},
 "quantity": 305,
 "description": "(miks zelenih salata, piletina, krutoni, paradjz, pančeta, parmezan, dresing)",
-"image":".\\resources\\caesar-salad.jpg"
+"image":".\\resources\\caesar-salad.jpg",
+"counter":1
 },
 {
 "name": "Blue Lagoon",
@@ -45,7 +48,8 @@
 "restaurant": {"id": "2"},
 "quantity": 200,
 "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
-"image":".\\resources\\blue-lagoon.jpg"
+"image":".\\resources\\blue-lagoon.jpg",
+"counter":1
 },
 {
 "name": "Long Island",
@@ -54,7 +58,8 @@
 "restaurant": {"id": "2"},
 "quantity": 200,
 "description": "(rum, tequila, triple sec, gin, vodka, koka kola, limun)",
-"image":".\\resources\\Long_island.jpg"
+"image":".\\resources\\Long_island.jpg",
+"counter":1
 },
 {
 "name": "Tequila sunrise",
@@ -63,7 +68,8 @@
 "restaurant": {"id": "2"},
 "quantity": 200,
 "description": " (tequila, grenadine, đus)",
-"image":".\\resources\\Tequila-Sunrise.jpg"
+"image":".\\resources\\Tequila-Sunrise.jpg",
+"counter":1
 }],
 "status": "CLOSED",
 "location": {"address": "NebojÅ¡ina 8, Beograd, 11000", "latitude":44.79471191576135, "longitude":20.466935084659248},
@@ -80,7 +86,8 @@
 "restaurant": {"id": "3"},
 "quantity": 550,
 "description": "Udon nudle sa povrcem i piletinom seckanom na rezance u blagom sosu",
-"image":".\\resources\\udon-nudle-sa-piletinom.jpg"
+"image":".\\resources\\udon-nudle-sa-piletinom.jpg",
+"counter":1
 }],
 "status": "OPEN",
 "location": {"address": "TrifkoviÄ‡ev trg 2,  Novi Sad, 21000", "latitude":19.844307426995137, "longitude":45.257170687032094},

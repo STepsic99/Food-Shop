@@ -36,7 +36,7 @@ Vue.component("restaurantDetails", {
 	{{a.description}}<br><br>
 	<span style="font-size:20px">{{a.price}} RSD </span><br><br>
 	<span v-if="user">
-	<input type="number" style="width:80px" size="33" min="1" value="1">
+	<input type="number" style="width:80px" size="33" min="1" v-model="a.counter">
 	<button style="margin-left:10px" v-on:click="addToCart(a)">Dodaj u korpu</button>
 	</span>
 	</td>
@@ -61,10 +61,9 @@ Vue.component("restaurantDetails", {
 			})
 		},
 		addToCart : function(chosenArticle) {
-			var s="aa";
-			if(this.user.username){
-				console.log(chosenArticle.name)
-			}
+				axios
+			.post('/rest/cart/addArticle', chosenArticle)
+			.then(response => (toast('Artikl ' + chosenArticle.name + " je uspešno dodat u korpu.")))
 		},
 		isLogged : function(user){
 			this.user=user

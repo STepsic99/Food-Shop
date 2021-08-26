@@ -18,6 +18,14 @@ public class User {
 	}
 	
 	
+	
+	public User(String username) {
+		super();
+		this.username = username;
+	}
+
+
+
 	public User(String username, String password, String name, String surname, String gender, Date date, Role role) {
 		super();
 		this.username = username;
