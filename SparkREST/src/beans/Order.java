@@ -10,7 +10,7 @@ public class Order {
 	private Restaurant restaurant;
 	private Date dateTime;
 	private double price;
-	//Buyer
+	private Shopper shopper;
 	private OrderStatus status;
 	
 	public Order() {
@@ -18,7 +18,7 @@ public class Order {
 	}
 
 	public Order(String id, ArrayList<Article> articles, Restaurant restaurant, Date dateTime, double price,
-			OrderStatus status) {
+			OrderStatus status, Shopper shopper) {
 		super();
 		this.id = id;
 		this.articles = articles;
@@ -26,6 +26,7 @@ public class Order {
 		this.dateTime = dateTime;
 		this.price = price;
 		this.status = status;
+		this.shopper = shopper;
 	}
 
 	public String getId() {
@@ -74,6 +75,14 @@ public class Order {
 
 	public void setStatus(OrderStatus status) {
 		this.status = status;
+	}
+
+	public Shopper getShopper() {
+		return shopper;
+	}
+
+	public void setShopper(Shopper shopper) {
+		this.shopper = shopper;
 	}
 	
 	

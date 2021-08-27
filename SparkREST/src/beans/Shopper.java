@@ -12,6 +12,10 @@ public class Shopper extends User{
 		super();
 	}
 
+	public Shopper(String username, String name, String surname) {
+		super(username,name,surname);
+	}
+	
 	public Shopper(ArrayList<Order> orders, Cart cart, double points, ShopperType type) {
 		super();
 		this.orders = orders;

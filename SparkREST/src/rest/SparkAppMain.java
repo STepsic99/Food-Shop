@@ -8,15 +8,19 @@ import static spark.Spark.put;
 import static spark.Spark.delete;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import beans.Article;
 import beans.Cart;
+import beans.Order;
 import beans.Role;
 import beans.Shopper;
 import beans.User;
+import services.OrderService;
 import services.RestaurantService;
 import services.ShopperService;
 import services.UserService;
@@ -31,6 +35,7 @@ public class SparkAppMain {
 	private static RestaurantService restaurantService =new RestaurantService();
 	private static UserService userService =new UserService();
 	private static ShopperService shopperService =new ShopperService();
+	private static OrderService orderService = new OrderService();
 	private static Gson gg=new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 	
 	
@@ -180,6 +185,24 @@ public class SparkAppMain {
 			res.type("application/json");
 			Article article = gg.fromJson(req.body(), Article.class);
 			shopperService.changeInCart(getUser(req).getUsername(), article);
+			return "OK";
+		});
+		
+		post("/rest/order/makeOrder", (req, res) -> {
+			res.type("application/json");
+			Cart cart = gg.fromJson(req.body(), Cart.class);
+			HashMap<String,ArrayList<Article>>orderMap=new HashMap<String, ArrayList<Article>>();
+			for(Article a:cart.getArticles()) {
+				if(orderMap.containsKey(a.getRestaurant().getId())) {
+					orderMap.get(a.getRestaurant().getId()).add(a);
+				}else {
+					ArrayList<Article>auxiliaryList=new ArrayList<Article>();
+					auxiliaryList.add(a);
+					orderMap.put(a.getRestaurant().getId(),auxiliaryList);
+				}
+			}
+			Shopper shopper=shopperService.getShopper(cart.getUser().getUsername());
+			orderService.createOrders(orderMap, shopper);
 			return "OK";
 		});
 		

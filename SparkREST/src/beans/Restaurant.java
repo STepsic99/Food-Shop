@@ -19,6 +19,15 @@ public class Restaurant {
 	}
 	
 	
+	
+
+	public Restaurant(String id) {
+		super();
+		this.id = id;
+	}
+
+
+
 
 	public String getId() {
 		return id;
