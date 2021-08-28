@@ -19,7 +19,7 @@ public class Orders {
 
 	private ArrayList<Order> orderList=new ArrayList<Order>();
 	private HashMap<String, Order> orders = new HashMap<String, Order>();
-	private Gson gson =new GsonBuilder().setDateFormat("YYYY-MM-DD'T'HH:mm:ss.sss'Z'").setPrettyPrinting().create();
+	private Gson gson =new GsonBuilder() .registerTypeAdapter(Date.class, new DateDeserializer()).setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").setPrettyPrinting().create();
 	
 	
 	public Orders() {

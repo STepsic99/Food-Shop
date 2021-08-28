@@ -25,7 +25,7 @@ Artikli : 	<table>
 	</td>
 	<td>
 	{{o.restaurant.name}}
-	{{o.dateTime}}
+	{{o.dateTime.getDate()}}.{{o.dateTime.getMonth()+1}}.{{o.dateTime.getFullYear()}} {{o.dateTime.getHours()}}:{{o.dateTime.getMinutes()}}:{{o.dateTime.getSeconds()}}  
 	</td>
 	</tr>
 	</table>
@@ -53,7 +53,8 @@ Artikli : 	<table>
 		.get('/rest/order/getOrdersByUser')
 		.then(response => {this.orders=response.data
 	for (let i = 0; i < this.orders.length; i++) {
-				this.xx=new Date(this.orders.dateTime);
+				this.xx=new Date(this.orders[i].dateTime);
+				this.orders[i].dateTime=this.xx;
 			}
 		})
     },

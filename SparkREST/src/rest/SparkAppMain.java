@@ -37,7 +37,7 @@ public class SparkAppMain {
 	private static ShopperService shopperService =new ShopperService();
 	private static OrderService orderService = new OrderService();
 	private static Gson gg=new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
-	
+	private static Gson gson1=new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 	
 	public static void main(String[] args) throws Exception {
 		port(8080);
@@ -210,7 +210,7 @@ public class SparkAppMain {
 		
 		get("/rest/order/getOrdersByUser", (req, res) -> {
 			res.type("application/json");
-			return gg.toJson(orderService.getOrdersByUser(getUser(req).getUsername()));
+			return gson1.toJson(orderService.getOrdersByUser(getUser(req).getUsername()));
 		});
 		
 	}
