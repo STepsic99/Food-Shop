@@ -18,16 +18,13 @@ public class DateDeserializer  implements JsonDeserializer<Date> {
 		 String myDate = arg0.getAsString();
 		 Date dat=new Date();
 		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-	        // inspect string using regexes
-	        // convert string to Date        
-	        // return Date object
 	      try {
 			dat=simpleDateFormat.parse(myDate);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	      System.out.println(dat);
+	    
 			return dat;
 	}
 	 
