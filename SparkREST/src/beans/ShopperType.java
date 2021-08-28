@@ -2,14 +2,14 @@ package beans;
 
 public class ShopperType {
 	private String name;
-	private double discount;
+	private int discount;
 	private double requiredPoints;
 	
 	public ShopperType() {
 		
 	}
 
-	public ShopperType(String name, double discount, double requiredPoints) {
+	public ShopperType(String name, int discount, double requiredPoints) {
 		super();
 		this.name = name;
 		this.discount = discount;
@@ -24,11 +24,11 @@ public class ShopperType {
 		this.name = name;
 	}
 
-	public double getDiscount() {
+	public int getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(double discount) {
+	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
 

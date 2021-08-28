@@ -213,6 +213,14 @@ public class SparkAppMain {
 			return gson1.toJson(orderService.getOrdersByUser(getUser(req).getUsername()));
 		});
 		
+		put("/rest/order/change", (req,res) -> {
+			res.type("application/json");
+			Order order = gg.fromJson(req.body(), Order.class);
+			orderService.changeOrder(order);
+			
+			return "SUCCESS";
+		});
+		
 	}
 	
 	private static Cart getCart(Request req) {

@@ -19,4 +19,8 @@ public class OrderService {
 	public Collection<Order> getOrdersByUser(String username){
 		return this.orders.getOrdersByUser(username);
 	}
+	
+	public void changeOrder(Order newOrder) {
+		this.orders.changeOrder(newOrder);
+	}
 }

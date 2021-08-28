@@ -24,6 +24,11 @@ div.topmenu li:hover
     background-color: #111;
 }
 
+div.topmenu li#points:hover
+{
+     background-color: #89ABE3FF;
+}
+
 div.topmenu li a {
   display: block;
   color: white;

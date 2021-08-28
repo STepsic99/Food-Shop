@@ -7,6 +7,7 @@ const RestaurantDetails = { template: '<restaurantDetails></restaurantDetails>' 
 const CartContent = { template: '<cartContent></cartContent>' }
 const MyOrder = { template: '<myOrder></myOrder>' }
 
+
 const router = new VueRouter({
 	  mode: 'hash',
 	  routes: [
@@ -17,7 +18,7 @@ const router = new VueRouter({
        { path: '/pass', component: PasswordChange },
        { path: '/details/:id', component: RestaurantDetails },
        { path: '/cart', component: CartContent },
-       { path: '/myOrder', component: MyOrder }
+       { path: '/myOrder', component: MyOrder }	  
 	  ]
 });
 

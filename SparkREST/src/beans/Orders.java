@@ -96,4 +96,10 @@ public class Orders {
 		}
 		return userOrders;
 	}
+	
+	public void changeOrder(Order newOrder) {
+		Order oldOrder=orders.get(newOrder.getId());
+		oldOrder.setStatus(newOrder.getStatus());
+		Serialization();
+	}
 }
