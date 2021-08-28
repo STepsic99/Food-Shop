@@ -192,6 +192,7 @@ public class SparkAppMain {
 			res.type("application/json");
 			Cart cart = gg.fromJson(req.body(), Cart.class);
 			HashMap<String,ArrayList<Article>>orderMap=new HashMap<String, ArrayList<Article>>();
+			if(cart.getArticles().isEmpty()) return "OK";
 			for(Article a:cart.getArticles()) {
 				if(orderMap.containsKey(a.getRestaurant().getId())) {
 					orderMap.get(a.getRestaurant().getId()).add(a);
@@ -203,7 +204,13 @@ public class SparkAppMain {
 			}
 			Shopper shopper=shopperService.getShopper(cart.getUser().getUsername());
 			orderService.createOrders(orderMap, shopper);
+			shopperService.clearCart(shopper);
 			return "OK";
+		});
+		
+		get("/rest/order/getOrdersByUser", (req, res) -> {
+			res.type("application/json");
+			return gg.toJson(orderService.getOrdersByUser(getUser(req).getUsername()));
 		});
 		
 	}

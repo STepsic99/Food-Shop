@@ -19,7 +19,8 @@ public class Orders {
 
 	private ArrayList<Order> orderList=new ArrayList<Order>();
 	private HashMap<String, Order> orders = new HashMap<String, Order>();
-	private Gson gson =new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss zzz").create();
+	private Gson gson =new GsonBuilder().setDateFormat("YYYY-MM-DD'T'HH:mm:ss.sss'Z'").setPrettyPrinting().create();
+	
 	
 	public Orders() {
 		try {
@@ -75,7 +76,7 @@ public class Orders {
 	            String idRestaurant = (String)element.getKey();
 	             order.setId(getId());
 	             order.setArticles((ArrayList<Article>)element.getValue());
-	             order.setRestaurant(new Restaurant(idRestaurant));
+	             order.setRestaurant(new Restaurant(idRestaurant,order.getArticles().get(0).getRestaurant().getName()));
 	             order.setPrice(calculatePrice(order.getArticles()));
 	             order.setDateTime(new Date());
 	             order.setShopper(new Shopper(shopper.getUsername(),shopper.getName(),shopper.getSurname()));
@@ -84,5 +85,15 @@ public class Orders {
 	            orders.put(order.getId(), order);
 	        }
 		 Serialization();
+	}
+	
+	public ArrayList<Order> getOrdersByUser(String username){
+		ArrayList<Order>userOrders=new ArrayList<Order>();
+		for(Order order : orderList) {
+			if(order.getShopper().getUsername().equals(username)) {
+				userOrders.add(order);
+			}
+		}
+		return userOrders;
 	}
 }

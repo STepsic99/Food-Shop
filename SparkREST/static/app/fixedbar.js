@@ -12,11 +12,12 @@ Vue.component("fixedbar", {
 <div class="topmenu">
 <ul>
   <li><a href="/" v-bind:class="{active : this.selectedLink===0}" v-on:click="openStarterPage">Početna</a></li>
+  <li v-if="visibleLogout" v-on:click="showOrders"><a v-bind:class="{active : this.selectedLink===5}" href="/myOrder">Porudžbine</a></li>
   <li v-if="visibleLogin" style="float:right" v-on:click="openRegistration"><a href="/r" v-bind:class="{active : this.selectedLink===2}">Registruj se</a></li>
   <li v-if="visibleLogin" style="float:right" v-on:click="openLogin"><a  v-bind:class="{active : this.selectedLink===1}" href="/l">Prijavi se</a></li>
   <li v-if="visibleLogout" style="float:right" v-on:click="logOut"><a  href="/">Odjavi se</a></li>
   <li v-if="visibleLogout" style="float:right" v-on:click="checkProfile"><a v-bind:class="{active : this.selectedLink===3}" href="/p">Profil</a></li>
- <li v-if="visibleLogout" style="float:right;" class="probna" v-on:click="showCart"><a v-bind:class="{active : this.selectedLink===4}" href="/p">
+ <li v-if="visibleLogout" style="float:right;" class="probna" v-on:click="showCart"><a v-bind:class="{active : this.selectedLink===4}" href="/cart">
  <span class="icon-button__badge">{{this.user.cart.numberOfItems}}</span>
  </a></li>
 </ul>
@@ -63,6 +64,11 @@ Vue.component("fixedbar", {
 		event.preventDefault();
 		this.selectedLink=4;
 		router.push(`/cart`);
+		},
+		showOrders : function(){
+			event.preventDefault();
+			this.selectedLink=5;
+			router.push(`/myOrder`);
 		}
 	},
 	mounted () {
@@ -89,6 +95,10 @@ Vue.component("fixedbar", {
 		
 		this.$root.$on('counterChangeSecond', (text) => {
 			this.user.cart.numberOfItems += parseInt(text);
+		});
+		
+		this.$root.$on('counterZero', (text) => {
+			this.user.cart.numberOfItems = parseInt(text);
 		});
 		
 		axios

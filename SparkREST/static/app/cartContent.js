@@ -80,6 +80,10 @@ Vue.component("cartContent", {
 		makeOrder : function(){
 			axios
 			.post('/rest/order/makeOrder', this.user.cart)	
+			.then(response => {this.user.cart.articles=[]
+								this.user.cart.price=0;
+								this.$root.$emit('counterZero', 0);
+			})
 		}
 	},
 	mounted () {

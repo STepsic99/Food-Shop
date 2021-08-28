@@ -21,9 +21,10 @@ public class Restaurant {
 	
 	
 
-	public Restaurant(String id) {
+	public Restaurant(String id, String name) {
 		super();
 		this.id = id;
+		this.name = name;
 	}
 
 

@@ -35,4 +35,8 @@ public class ShopperService {
 	public void changeInCart(String username,Article article) {
 		this.shoppers.changeInCart(username, article);
 	}
+	
+	public void clearCart(Shopper shopper) {
+		this.shoppers.clearCart(shopper);
+	}
 }

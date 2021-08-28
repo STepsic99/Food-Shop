@@ -93,4 +93,10 @@ public class Cart {
 			i++;
 		}
 	}
+	
+	public void clearCart() {
+		articles.clear();
+		numberOfItems=0;
+		price=0.0;
+	}
 }

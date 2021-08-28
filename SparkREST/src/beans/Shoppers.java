@@ -110,4 +110,9 @@ public class Shoppers {
 		shopper.getCart().changeArticle(article);
 		Serialization();
 	}
+	
+	public void clearCart(Shopper shopper) {
+		shopper.getCart().clearCart();
+		Serialization();
+	}
 }

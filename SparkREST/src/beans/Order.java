@@ -1,5 +1,7 @@
 package beans;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,6 +60,13 @@ public class Order {
 	}
 
 	public void setDateTime(Date dateTime) {
+		/*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD'T'HH:mm:ss.sss'Z'");
+		try {
+			this.dateTime=simpleDateFormat.parse(dateTime.toString());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		this.dateTime = dateTime;
 	}
 

@@ -1,1 +1,49 @@
-[]
+[
+  {
+    "id": "xn7kow6u7g",
+    "articles": [
+      {
+        "name": "Long Island",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(rum, tequila, triple sec, gin, vodka, koka kola, limun)",
+        "image": ".\\resources\\Long_island.jpg",
+        "counter": 1
+      },
+      {
+        "name": "Cesar salata",
+        "price": 790.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "averageGrade": 0.0
+        },
+        "quantity": 305.0,
+        "description": "(miks zelenih salata, piletina, krutoni, paradjz, pančeta, parmezan, dresing)",
+        "image": ".\\resources\\caesar-salad.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-08-240T03:37:53.053Z",
+    "price": 1220.0,
+    "shopper": {
+      "points": 0.0,
+      "username": "korisnik1",
+      "name": "Marko",
+      "surname": "Markovic"
+    },
+    "status": "PROCESSING"
+  }
+]
