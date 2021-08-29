@@ -106,4 +106,14 @@ public class Orders {
 		oldOrder.setStatus(newOrder.getStatus());
 		Serialization();
 	}
+	
+	public ArrayList<Order> getUnassignedOrders(){
+		ArrayList<Order>userOrders=new ArrayList<Order>();
+		for(Order order : orderList) {
+			if(order.getStatus().equals(OrderStatus.WAITING_FOR_DELIVERER)) {
+				userOrders.add(order);
+			}
+		}
+		return userOrders;
+	}
 }

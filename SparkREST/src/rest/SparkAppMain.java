@@ -230,6 +230,11 @@ public class SparkAppMain {
 			return "SUCCESS";
 		});
 		
+		get("/rest/order/getUnassignedOrders", (req, res) -> {
+			res.type("application/json");
+			return gson1.toJson(orderService.getUnassignedOrders());
+		});
+		
 	}
 	
 	private static Cart getCart(Request req) {

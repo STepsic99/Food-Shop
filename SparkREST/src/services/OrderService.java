@@ -23,4 +23,8 @@ public class OrderService {
 	public void changeOrder(Order newOrder) {
 		this.orders.changeOrder(newOrder);
 	}
+	
+	public ArrayList<Order> getUnassignedOrders(){
+		return this.orders.getUnassignedOrders();
+	}
 }

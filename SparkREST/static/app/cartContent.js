@@ -1,8 +1,8 @@
 Vue.component("cartContent", {
 	data: function () {
 		    return {
-			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
-			   cart: {articles:null, user:null, price:null},
+			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null, "cart":{discountPrice:8}},
+			   
 			   backup:[]
 		    }
 	},
@@ -81,8 +81,6 @@ Vue.component("cartContent", {
 	 axios
           .get('/rest/user/getUser')
           .then(response => (this.isLogged(response.data)))	
-       axios
-          .get('/rest/user/getCart')
-          .then(response => (this.cart=response.data))	
+       
     },
 });

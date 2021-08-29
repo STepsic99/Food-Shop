@@ -6,7 +6,8 @@ const PasswordChange = { template: '<passwordChange></passwordChange>'}
 const RestaurantDetails = { template: '<restaurantDetails></restaurantDetails>' }
 const CartContent = { template: '<cartContent></cartContent>' }
 const MyOrder = { template: '<myOrder></myOrder>' }
-
+const DelivererOrder = { template: '<delivererOrder></delivererOrder>' }
+const UnassignedOrder = { template: '<unassignedOrder></unassignedOrder>' }
 
 const router = new VueRouter({
 	  mode: 'hash',
@@ -18,7 +19,10 @@ const router = new VueRouter({
        { path: '/pass', component: PasswordChange },
        { path: '/details/:id', component: RestaurantDetails },
        { path: '/cart', component: CartContent },
-       { path: '/myOrder', component: MyOrder }	  
+       { path: '/myOrder', component: MyOrder },
+	   { path: '/delivererOrder', component: DelivererOrder },
+	   { path: '/unassignedOrder', component: UnassignedOrder }	
+				  
 	  ]
 });
 
