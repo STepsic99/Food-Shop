@@ -12,8 +12,8 @@ import beans.Shopper;
 public class OrderService {
 	private Orders orders=new Orders();
 	
-	public void createOrders(HashMap<String,ArrayList<Article>>orderMap, Shopper shopper) {
-		this.orders.createOrders(orderMap, shopper);
+	public double createOrders(HashMap<String,ArrayList<Article>>orderMap, Shopper shopper) {
+		return this.orders.createOrders(orderMap, shopper);
 	}
 	
 	public Collection<Order> getOrdersByUser(String username){

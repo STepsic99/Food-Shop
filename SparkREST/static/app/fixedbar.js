@@ -102,6 +102,9 @@ Vue.component("fixedbar", {
 		
 		this.$root.$on('counterZero', (text) => {
 			this.user.cart.numberOfItems = parseInt(text);
+			axios
+          .get('/rest/user/getUser')
+          .then(response => (this.isLogged(response.data)))
 		});
 		
 		axios

@@ -203,7 +203,9 @@ public class SparkAppMain {
 				}
 			}
 			Shopper shopper=shopperService.getShopper(cart.getUser().getUsername());
-			orderService.createOrders(orderMap, shopper);
+			double pointsToBeAdded=orderService.createOrders(orderMap, shopper);
+			shopper.setPoints(shopper.getPoints()+pointsToBeAdded);
+			shopperService.editPoints(shopper);
 			shopperService.clearCart(shopper);
 			return "OK";
 		});

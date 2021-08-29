@@ -115,4 +115,28 @@ public class Shoppers {
 		shopper.getCart().clearCart();
 		Serialization();
 	}
+	
+	public void editPoints(Shopper newShopper) {
+		Shopper oldShopper = shoppers.get(newShopper.username);
+		oldShopper.setPoints(newShopper.getPoints());
+		if(oldShopper.getType().getName().equals("Bronza")) {
+			if(oldShopper.getPoints()<3000) {
+				oldShopper.getType().setRequiredPoints(3000-oldShopper.getPoints());
+			} else if(oldShopper.getPoints()<4000) {
+				oldShopper.getType().setName("Srebro");
+				oldShopper.getType().setRequiredPoints(4000-oldShopper.getPoints());
+			} else {
+				oldShopper.getType().setName("Zlato");
+				oldShopper.getType().setRequiredPoints(0);
+			}
+		} else if(oldShopper.getType().getName().equals("Srebro")) {
+			if(oldShopper.getPoints()<4000) {
+				oldShopper.getType().setRequiredPoints(4000-oldShopper.getPoints());
+			} else {
+				oldShopper.getType().setName("Zlato");
+				oldShopper.getType().setRequiredPoints(0);
+			}
+		}
+		Serialization();
+	}
 }

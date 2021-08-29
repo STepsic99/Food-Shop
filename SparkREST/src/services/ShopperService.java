@@ -39,4 +39,8 @@ public class ShopperService {
 	public void clearCart(Shopper shopper) {
 		this.shoppers.clearCart(shopper);
 	}
+	
+	public void editPoints(Shopper newShopper) {
+		this.shoppers.editPoints(newShopper);
+	}
 }

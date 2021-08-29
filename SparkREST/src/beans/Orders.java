@@ -70,7 +70,8 @@ public class Orders {
 		return price;
 	}
 	
-	public void createOrders(HashMap<String,ArrayList<Article>>orderMap, Shopper shopper) {
+	public double createOrders(HashMap<String,ArrayList<Article>>orderMap, Shopper shopper) {
+		double totalPoints=0;
 		 for (Map.Entry element : orderMap.entrySet()) {
 			 Order order=new Order();
 	            String idRestaurant = (String)element.getKey();
@@ -83,8 +84,10 @@ public class Orders {
 	             order.setStatus(OrderStatus.PROCESSING);
 	            orderList.add(order);
 	            orders.put(order.getId(), order);
+	            totalPoints+=(order.getPrice()/1000*133);
 	        }
 		 Serialization();
+		 return totalPoints;
 	}
 	
 	public ArrayList<Order> getOrdersByUser(String username){
