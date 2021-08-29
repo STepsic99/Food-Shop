@@ -20,6 +20,7 @@ import beans.Order;
 import beans.Role;
 import beans.Shopper;
 import beans.User;
+import services.DelivererService;
 import services.OrderService;
 import services.RestaurantService;
 import services.ShopperService;
@@ -36,6 +37,7 @@ public class SparkAppMain {
 	private static UserService userService =new UserService();
 	private static ShopperService shopperService =new ShopperService();
 	private static OrderService orderService = new OrderService();
+	private static DelivererService delivererService = new DelivererService();
 	private static Gson gg=new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 	private static Gson gson1=new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 	
@@ -74,6 +76,9 @@ public class SparkAppMain {
 			switch(us.getRole()) {
 			case SHOPPER:
 				us=shopperService.getShopper(us.getUsername());
+				break;
+			case DELIVERER:
+				us=delivererService.getDeliverer(us.getUsername());
 				break;
 			}
 			Session session=req.session(true);

@@ -1,8 +1,8 @@
 Vue.component("restaurantDetails", {
 	data: function () {
 		    return {
-			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
-			   restaurant: null,
+			  user: {},
+			   restaurant: {"location":{}},
 			   status: ""
 		    }
 	},
@@ -35,7 +35,7 @@ Vue.component("restaurantDetails", {
 	<h2 style="font-size:27px" >{{a.name}}</h2><br>
 	{{a.description}}<br><br>
 	<span style="font-size:20px">{{a.price}} RSD </span><br><br>
-	<span v-if="user">
+	<span v-if="this.user && this.user.role==='SHOPPER'">
 	<input type="number" style="width:80px" size="33" min="1" v-model="a.counter">
 	<button style="margin-left:10px" v-on:click="addToCart(a)">Dodaj u korpu</button>
 	</span>
@@ -78,20 +78,20 @@ Vue.component("restaurantDetails", {
 		}
 		}
 	},
-	mounted () {
+	mounted () {       
 	
-	
-          
-		var s='/rest/restaurant/'+ this.$route.params.id
-        axios
-          .get(s)
+       
+		 axios
+          .get('/rest/user/getUser')
+          .then(response => {this.isLogged(response.data)
+			 axios
+          .get('/rest/restaurant/'+ this.$route.params.id)
           .then(response => {this.restaurant = response.data
 				if(this.restaurant.status=="OPEN")
 				this.status="Radi";
 				else this.status="Ne radi"
 			})
-		 axios
-          .get('/rest/user/getUser')
-          .then(response => (this.isLogged(response.data)))	
+			})	
+			
     },
 });

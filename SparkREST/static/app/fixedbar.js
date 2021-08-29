@@ -1,7 +1,7 @@
 Vue.component("fixedbar", {
 	data: function () {
 		    return {
-			  user: null,
+			  user: {},
 			   error: null,
 			   selectedLink: 0,
 			   visibleLogin: true,
@@ -12,15 +12,15 @@ Vue.component("fixedbar", {
 <div class="topmenu">
 <ul>
   <li><a href="/" v-bind:class="{active : this.selectedLink===0}" v-on:click="openStarterPage">Početna</a></li>
-  <li v-if="visibleLogout" v-on:click="showOrders"><a v-bind:class="{active : this.selectedLink===5}" href="/myOrder">Porudžbine</a></li>
-  <li id="points" v-if="visibleLogout"><a style="pointer-events: none;cursor: default; color:red" href="/myOrder">&nbsp;&nbsp;&nbsp;&nbsp;Rang : {{this.user.type.name}}, {{this.user.points.toFixed(2)}} bodova
+  <li v-if="visibleLogout  && this.user.role==='SHOPPER'" v-on:click="showOrders"><a v-bind:class="{active : this.selectedLink===5}" href="/myOrder">Porudžbine</a></li>
+  <li id="points" v-if="visibleLogout  && this.user.role==='SHOPPER'"><a style="pointer-events: none;cursor: default; color:red" href="/myOrder">&nbsp;&nbsp;&nbsp;&nbsp;Rang : {{this.user.type.name}}, {{this.user.points.toFixed(2)}} bodova
 	<span v-if="this.user.type.name!=='Zlato'">({{this.user.type.requiredPoints.toFixed(2)}} bodova do sledećeg)</span>
 </a></li>
   <li v-if="visibleLogin" style="float:right" v-on:click="openRegistration"><a href="/r" v-bind:class="{active : this.selectedLink===2}">Registruj se</a></li>
   <li v-if="visibleLogin" style="float:right" v-on:click="openLogin"><a  v-bind:class="{active : this.selectedLink===1}" href="/l">Prijavi se</a></li>
   <li v-if="visibleLogout" style="float:right" v-on:click="logOut"><a  href="/">Odjavi se</a></li>
   <li v-if="visibleLogout" style="float:right" v-on:click="checkProfile"><a v-bind:class="{active : this.selectedLink===3}" href="/p">Profil</a></li>
- <li v-if="visibleLogout" style="float:right;" class="probna" v-on:click="showCart"><a v-bind:class="{active : this.selectedLink===4}" href="/cart">
+ <li v-if="visibleLogout && this.user.role==='SHOPPER'" style="float:right;" class="probna" v-on:click="showCart"><a v-bind:class="{active : this.selectedLink===4}" href="/cart">
  <span class="icon-button__badge">{{this.user.cart.numberOfItems}}</span>
  </a></li>
 </ul>
