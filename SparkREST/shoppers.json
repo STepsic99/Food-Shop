@@ -1,1 +1,74 @@
-[{"cart":{"articles":[],"user":{"username":"korisnik1"},"price":0.0,"numberOfItems":0},"points":0.0,"type":{"name":"Bronza","discount":0,"requiredPoints":3000},"username":"korisnik1","password":"sifra1","name":"Marko","surname":"Markovic","gender":"Male","date":"2000-10-12","role":"SHOPPER"},{"cart":{"articles":[],"user":{"username":"korisnik2"},"price":0.0,"numberOfItems":0},"points":0.0,"type":{"name":"Bronza","discount":0,"requiredPoints":3000.0},"username":"korisnik2","password":"sifra2","name":"Petar","surname":"Petarovic","gender":"Male","date":"1999-02-02","role":"SHOPPER"},{"cart":{"articles":[],"user":{"username":"korisnik3"},"price":0.0,"numberOfItems":0},"points":0.0,"type":{"name":"Bronza","discount":0,"requiredPoints":3000.0},"username":"korisnik3","password":"sifra3","name":"Pablo","surname":"Djuric","gender":"Muški","date":"1996-01-30","role":"SHOPPER"}]
+[
+  {
+    "cart": {
+      "articles": [],
+      "user": {
+        "username": "korisnik1"
+      },
+      "price": 0.0,
+      "numberOfItems": 0,
+      "discountPrice": 0.0
+    },
+    "points": 0,
+    "type": {
+      "name": "Bronza",
+      "discount": 0,
+      "requiredPoints": 3000
+    },
+    "username": "korisnik1",
+    "password": "sifra1",
+    "name": "Marko",
+    "surname": "Markovic",
+    "gender": "Male",
+    "date": "2000-10-12",
+    "role": "SHOPPER"
+  },
+  {
+    "cart": {
+      "articles": [],
+      "user": {
+        "username": "korisnik2"
+      },
+      "price": 0.0,
+      "numberOfItems": 0,
+      "discountPrice": 0.0
+    },
+    "points": 0.0,
+    "type": {
+      "name": "Bronza",
+      "discount": 0,
+      "requiredPoints": 3000.0
+    },
+    "username": "korisnik2",
+    "password": "sifra2",
+    "name": "Petar",
+    "surname": "Petarovic",
+    "gender": "Male",
+    "date": "1999-02-02",
+    "role": "SHOPPER"
+  },
+  {
+    "cart": {
+      "articles": [],
+      "user": {
+        "username": "korisnik3"
+      },
+      "price": 0.0,
+      "numberOfItems": 0,
+      "discountPrice": 0.0
+    },
+    "points": 0.0,
+    "type": {
+      "name": "Bronza",
+      "discount": 0,
+      "requiredPoints": 3000.0
+    },
+    "username": "korisnik3",
+    "password": "sifra3",
+    "name": "Pablo",
+    "surname": "Djuric",
+    "gender": "Muški",
+    "date": "1996-01-30",
+    "role": "SHOPPER"
+  }
+]

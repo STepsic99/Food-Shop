@@ -14,7 +14,7 @@ Vue.component("fixedbar", {
   <li><a href="/" v-bind:class="{active : this.selectedLink===0}" v-on:click="openStarterPage">Početna</a></li>
   <li v-if="visibleLogout" v-on:click="showOrders"><a v-bind:class="{active : this.selectedLink===5}" href="/myOrder">Porudžbine</a></li>
   <li id="points" v-if="visibleLogout"><a style="pointer-events: none;cursor: default; color:red" href="/myOrder">&nbsp;&nbsp;&nbsp;&nbsp;Rang : {{this.user.type.name}}, {{this.user.points}} bodova
-	<span>({{this.user.type.requiredPoints}} bodova do sledećeg)</span>
+	<span v-if="this.user.type.name!=='Zlato'">({{this.user.type.requiredPoints}} bodova do sledećeg)</span>
 </a></li>
   <li v-if="visibleLogin" style="float:right" v-on:click="openRegistration"><a href="/r" v-bind:class="{active : this.selectedLink===2}">Registruj se</a></li>
   <li v-if="visibleLogin" style="float:right" v-on:click="openLogin"><a  v-bind:class="{active : this.selectedLink===1}" href="/l">Prijavi se</a></li>
@@ -93,7 +93,10 @@ Vue.component("fixedbar", {
 		});
 		
 		this.$root.$on('counterChangeFirst', (text) => {
-			this.user.cart.numberOfItems -= parseInt(text);
+			//this.user.cart.numberOfItems -= parseInt(text);
+			axios
+          .get('/rest/user/getUser')
+          .then(response => (this.isLogged(response.data)))
 		});
 		
 		this.$root.$on('counterChangeSecond', (text) => {

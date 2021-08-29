@@ -16,7 +16,7 @@ public class Shoppers {
 	
 	private ArrayList<Shopper> shopperList=new ArrayList<Shopper>();
 	private HashMap<String, Shopper> shoppers = new HashMap<String, Shopper>();
-	private Gson gson =new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+	private Gson gson =new GsonBuilder().setDateFormat("yyyy-mm-dd").setPrettyPrinting().create();
 	
 	public Shoppers() {
 		try {
@@ -96,18 +96,21 @@ public class Shoppers {
 	public void addToCart(String username,Article article) {
 		Shopper shopper = shoppers.get(username);
 		shopper.getCart().addArticle(article);
+		shopper.getCart().setDiscountPrice(shopper.getCart().getPrice()*((100-shopper.getType().getDiscount())/100.00));
 		Serialization();
 	}
 	
 	public void removeFromCart(String username,Article article) {
 		Shopper shopper = shoppers.get(username);
 		shopper.getCart().removeArticle(article);
+		shopper.getCart().setDiscountPrice(shopper.getCart().getPrice()*((100-shopper.getType().getDiscount())/100.00));
 		Serialization();
 	}
 	
 	public void changeInCart(String username,Article article) {
 		Shopper shopper = shoppers.get(username);
 		shopper.getCart().changeArticle(article);
+		shopper.getCart().setDiscountPrice(shopper.getCart().getPrice()*((100-shopper.getType().getDiscount())/100.00));
 		Serialization();
 	}
 	
@@ -124,9 +127,11 @@ public class Shoppers {
 				oldShopper.getType().setRequiredPoints(3000-oldShopper.getPoints());
 			} else if(oldShopper.getPoints()<4000) {
 				oldShopper.getType().setName("Srebro");
+				oldShopper.getType().setDiscount(3);
 				oldShopper.getType().setRequiredPoints(4000-oldShopper.getPoints());
 			} else {
 				oldShopper.getType().setName("Zlato");
+				oldShopper.getType().setDiscount(5);
 				oldShopper.getType().setRequiredPoints(0);
 			}
 		} else if(oldShopper.getType().getName().equals("Srebro")) {
@@ -134,6 +139,7 @@ public class Shoppers {
 				oldShopper.getType().setRequiredPoints(4000-oldShopper.getPoints());
 			} else {
 				oldShopper.getType().setName("Zlato");
+				oldShopper.getType().setDiscount(5);
 				oldShopper.getType().setRequiredPoints(0);
 			}
 		}

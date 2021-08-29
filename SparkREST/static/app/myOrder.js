@@ -14,6 +14,7 @@ Vue.component("myOrder", {
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
 <div v-if="showOrders">
 	<h1>Moje porudžbine</h1>
+	<p>*Prikazane su cene sa popustom (3% za srebrne, a 5% za zlatne korisnike)</p>
   	<table style="margin-bottom:50px;text-align:left">
 	<tr v-for="o in orders">
 	<td> 

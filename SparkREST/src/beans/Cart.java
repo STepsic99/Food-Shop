@@ -7,17 +7,19 @@ public class Cart {
 	private User user;
 	private double price;
 	private int numberOfItems;
+	private double discountPrice;
 	
 	public Cart() {
 	
 	}
 
-	public Cart(ArrayList<Article> articles, User user, double price, int numberOfItems) {
+	public Cart(ArrayList<Article> articles, User user, double price, int numberOfItems, double discountPrice) {
 		super();
 		this.articles = articles;
 		this.user = user;
 		this.price = price;
 		this.numberOfItems = numberOfItems;
+		this.discountPrice = discountPrice;
 	}
 
 	public ArrayList<Article> getArticles() {
@@ -51,6 +53,15 @@ public class Cart {
 
 	public void setNumberOfItems(int numberOfItems) {
 		this.numberOfItems = numberOfItems;
+	}
+	
+
+	public double getDiscountPrice() {
+		return discountPrice;
+	}
+
+	public void setDiscountPrice(double discountPrice) {
+		this.discountPrice = discountPrice;
 	}
 
 	public void addArticle(Article article) {
@@ -98,5 +109,6 @@ public class Cart {
 		articles.clear();
 		numberOfItems=0;
 		price=0.0;
+		discountPrice=0.0;
 	}
 }

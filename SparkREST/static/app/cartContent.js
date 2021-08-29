@@ -9,6 +9,7 @@ Vue.component("cartContent", {
 	template: ` 
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 12px 25px 45px; max-width: 500px;">
 	<h1>Sadržaj korpe</h1>
+	<p>*srebrni korisnici imaju popust 3%, a zlatni 5%</p>
 	<table style="margin-bottom:50px">
 	<tr v-for="a in user.cart.articles">
 	<td> 
@@ -24,7 +25,7 @@ Vue.component("cartContent", {
 	</td>
 	</tr>
 	</table>
-	<span style="font-size:30px; text-align: left;">Ukupna cena: {{user.cart.price}}</span>
+	<span style="font-size:30px; text-align: left;">Ukupna cena: {{user.cart.discountPrice}}</span>
     <button style="font-size:25px;margin-left:100px;margin-right:45px" v-on:click="makeOrder">Poruči</button>
 </div>		  
 `
@@ -47,14 +48,9 @@ Vue.component("cartContent", {
 		axios
 			.post('/rest/cart/removeArticle', chosenArticle)
 			.then(response => {
-			for (var i = 0; i < this.user.cart.articles.length; i++){
-			if(this.user.cart.articles[i].name===chosenArticle.name && this.user.cart.articles[i].restaurant.id===chosenArticle.restaurant.id){
-				this.user.cart.price=this.user.cart.price-chosenArticle.price*chosenArticle.counter;
-				this.user.cart.articles.splice(i,1);
-				this.backup.splice(i,1);
-				break;
-				}
-				}
+				axios
+		        .get('/rest/user/getUser')
+		        .then(response => (this.isLogged(response.data)))
 				this.$root.$emit('removeItem', chosenArticle.counter);
 			})
 		
@@ -63,16 +59,10 @@ Vue.component("cartContent", {
 				axios
 			.post('/rest/cart/changeArticle', chosenArticle)
 			.then(response => {
-			for (var i = 0; i < this.user.cart.articles.length; i++){
-			if(this.user.cart.articles[i].name===chosenArticle.name && this.user.cart.articles[i].restaurant.id===chosenArticle.restaurant.id){
-				this.user.cart.price=this.user.cart.price-this.user.cart.articles[i].price*this.backup[i];
-				this.$root.$emit('counterChangeFirst', this.backup[i]);
-				this.user.cart.price=this.user.cart.price+chosenArticle.price*chosenArticle.counter;
-				this.$root.$emit('counterChangeSecond', chosenArticle.counter);
-				this.backup[i]=chosenArticle.counter;
-				break;
-				}
-				}
+				this.$root.$emit('counterChangeFirst', 1);
+			axios
+          .get('/rest/user/getUser')
+          .then(response => (this.isLogged(response.data)))
 			})
 			
 		},
@@ -82,6 +72,7 @@ Vue.component("cartContent", {
 			.post('/rest/order/makeOrder', this.user.cart)	
 			.then(response => {this.user.cart.articles=[]
 								this.user.cart.price=0;
+								this.user.cart.discountPrice=0;
 								this.$root.$emit('counterZero', 0);
 			})
 		}
