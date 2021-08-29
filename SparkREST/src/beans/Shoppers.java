@@ -122,9 +122,11 @@ public class Shoppers {
 	public void editPoints(Shopper newShopper) {
 		Shopper oldShopper = shoppers.get(newShopper.username);
 		oldShopper.setPoints(newShopper.getPoints());
-		if(oldShopper.getType().getName().equals("Bronza")) {
+		
 			if(oldShopper.getPoints()<3000) {
+				oldShopper.getType().setName("Bronza");
 				oldShopper.getType().setRequiredPoints(3000-oldShopper.getPoints());
+				oldShopper.getType().setDiscount(0);
 			} else if(oldShopper.getPoints()<4000) {
 				oldShopper.getType().setName("Srebro");
 				oldShopper.getType().setDiscount(3);
@@ -134,15 +136,7 @@ public class Shoppers {
 				oldShopper.getType().setDiscount(5);
 				oldShopper.getType().setRequiredPoints(0);
 			}
-		} else if(oldShopper.getType().getName().equals("Srebro")) {
-			if(oldShopper.getPoints()<4000) {
-				oldShopper.getType().setRequiredPoints(4000-oldShopper.getPoints());
-			} else {
-				oldShopper.getType().setName("Zlato");
-				oldShopper.getType().setDiscount(5);
-				oldShopper.getType().setRequiredPoints(0);
-			}
-		}
+		
 		Serialization();
 	}
 }

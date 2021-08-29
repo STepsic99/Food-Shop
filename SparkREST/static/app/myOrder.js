@@ -34,7 +34,7 @@ Artikli : 	<table>
 	<p>Vreme: {{o.dateTime.getDate()}}.{{o.dateTime.getMonth()+1}}.{{o.dateTime.getFullYear()}} {{o.dateTime.getHours()}}:{{o.dateTime.getMinutes()}}:{{o.dateTime.getSeconds()}} 
 	</p>
 </p>	Status: {{o.status}} </p>
-	Cena: {{o.price}}
+	Cena: {{o.price.toFixed(2)}} RSD
 	</td>
 	</tr>
 	</table>
@@ -88,7 +88,7 @@ Artikli : 	<table>
 			axios
 			.put('/rest/order/change', order)
 			.then(response=>{
-				
+				this.$root.$emit('counterChangeFirst', 1);
 				
 							axios
 		.get('/rest/order/getOrdersByUser')

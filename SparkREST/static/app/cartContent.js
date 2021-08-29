@@ -25,7 +25,7 @@ Vue.component("cartContent", {
 	</td>
 	</tr>
 	</table>
-	<span style="font-size:30px; text-align: left;">Ukupna cena: {{user.cart.discountPrice}}</span>
+	<span style="font-size:30px; text-align: left;">Ukupna cena: {{user.cart.discountPrice.toFixed(2)}}</span>
     <button style="font-size:25px;margin-left:100px;margin-right:45px" v-on:click="makeOrder">Poruči</button>
 </div>		  
 `

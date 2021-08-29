@@ -218,8 +218,10 @@ public class SparkAppMain {
 		put("/rest/order/change", (req,res) -> {
 			res.type("application/json");
 			Order order = gg.fromJson(req.body(), Order.class);
+			Shopper shopper=shopperService.getShopper(order.getShopper().getUsername());
 			orderService.changeOrder(order);
-			
+			shopper.setPoints(shopper.getPoints()-(order.getPrice()/1000*133*4));
+			shopperService.editPoints(shopper);
 			return "SUCCESS";
 		});
 		

@@ -84,8 +84,8 @@ public class Orders {
 	             order.setStatus(OrderStatus.PROCESSING);
 	            orderList.add(order);
 	            orders.put(order.getId(), order);
-	            totalPoints+=(order.getPrice()/1000*133);
 	            order.setPrice(order.getPrice()*((100-shopper.getType().getDiscount())/100.00));
+	            totalPoints+=(order.getPrice()/1000*133);
 	        }
 		 Serialization();
 		 return totalPoints;
