@@ -77,7 +77,7 @@
       "name": "Marko",
       "surname": "Markovic"
     },
-    "status": "PROCESSING"
+    "status": "WAITING_FOR_DELIVERER"
   },
   {
     "id": "ok6pm3oyha",

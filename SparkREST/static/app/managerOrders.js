@@ -7,17 +7,18 @@ Vue.component("managerOrders", {
 				xx:null,
 				showArticles:false,
 				showOrders:true,
-				orderTemp:null
+				orderTemp:null,
+				nextStatus:""
 		    }
 	},
 	template: ` 
-<div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
+<div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 100px 25px 45px; max-width: 500px;">
 <div v-if="showOrders">
 	<h1>Porudžbine</h1>
   	<table style="margin-bottom:50px;text-align:left">
 	<tr v-for="o in orders">
 	<td> 
-<h2>	Porudžbina #{{o.id}}</h2>
+<h2>	Porudžbina #{{o.id}}<button style="position:relative;top:-22px;left:300px" v-on:click="changeStatus1(o)" v-if="o.status=='Obrada'">Promeni status na: U PRIPREMI</button><button style="position:relative;top:-22px;left:300px" v-on:click="changeStatus2(o)" v-if="o.status=='U pripremi'">Promeni status na: ČEKA DOSTAVLJAČA</button></h2>
 <p>Poručioc: {{o.shopper.name}} {{o.shopper.surname}}</p>
 Artikli : 	<table>
 			<tr v-for="a in o.articles">
@@ -123,7 +124,83 @@ Artikli : 	<table>
 				
 			})
 	
-		}	
+		},
+		changeStatus1 : function(order){
+			order.status="IN_PREPARATION";
+			axios
+			.put('/rest/order/changeManager', order)
+			.then(response=>{
+							axios
+		.get('/rest/order/getOrdersByRestaurant')
+		.then(response => {this.orders=response.data
+	for (let i = 0; i < this.orders.length; i++) {
+				this.xx=new Date(this.orders[i].dateTime);
+				this.orders[i].dateTime=this.xx;
+				switch(this.orders[i].status) {
+				  case "PROCESSING":
+				    this.orders[i].status="Obrada";
+				    break;
+				  case "IN_PREPARATION":
+				    this.orders[i].status="U pripremi";
+				    break;
+ 				  case "WAITING_FOR_DELIVERER":
+				    this.orders[i].status="Čeka dostavljača";
+				    break;
+				  case "IN_TRANSPORT":
+				    this.orders[i].status="U transportu";
+				    break;
+				  case "DELIVERED":
+				    this.orders[i].status="Dostavljena";
+				    break;
+				  case "CANCELED":
+				    this.orders[i].status="Otkazana";
+				    break;
+				  default:
+				}
+			}
+		})
+				
+				
+			})
+		},
+		changeStatus2 : function(order){
+			order.status="WAITING_FOR_DELIVERER";
+			axios
+			.put('/rest/order/changeManager', order)
+			.then(response=>{
+							axios
+		.get('/rest/order/getOrdersByRestaurant')
+		.then(response => {this.orders=response.data
+	for (let i = 0; i < this.orders.length; i++) {
+				this.xx=new Date(this.orders[i].dateTime);
+				this.orders[i].dateTime=this.xx;
+				switch(this.orders[i].status) {
+				  case "PROCESSING":
+				    this.orders[i].status="Obrada";
+				    break;
+				  case "IN_PREPARATION":
+				    this.orders[i].status="U pripremi";
+				    break;
+ 				  case "WAITING_FOR_DELIVERER":
+				    this.orders[i].status="Čeka dostavljača";
+				    break;
+				  case "IN_TRANSPORT":
+				    this.orders[i].status="U transportu";
+				    break;
+				  case "DELIVERED":
+				    this.orders[i].status="Dostavljena";
+				    break;
+				  case "CANCELED":
+				    this.orders[i].status="Otkazana";
+				    break;
+				  default:
+				}
+			}
+		})
+				
+				
+			})
+		}		
 	},
 	mounted () {
              axios

@@ -126,4 +126,18 @@ public class Orders {
 		}
 		return userOrders;
 	}
+	
+	public ArrayList<Shopper> getUsersByRestaurant(String id){
+		ArrayList<Shopper>retVal=new ArrayList<Shopper>();
+		HashMap<String,Shopper>shoppers=new HashMap<String, Shopper>();
+		ArrayList<Order>ordersByRestaurant=getOrdersByRestaurant(id);
+		for(Order order : ordersByRestaurant) {
+			if(shoppers.containsKey(order.getShopper().getUsername())) continue;
+			shoppers.put(order.getShopper().getUsername(),order.getShopper());
+		}
+		for(Shopper shopper : shoppers.values()) {
+			retVal.add(shopper);
+		}
+		return retVal;
+	}
 }

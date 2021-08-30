@@ -31,4 +31,8 @@ public class OrderService {
 	public ArrayList<Order> getOrdersByRestaurant(String id){
 		return this.orders.getOrdersByRestaurant(id);
 	}
+	
+	public ArrayList<Shopper> getUsersByRestaurant(String id){
+		return this.orders.getUsersByRestaurant(id);
+	}
 }

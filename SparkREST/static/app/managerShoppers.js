@@ -3,53 +3,26 @@ Vue.component("managerShoppers", {
 		    return {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
 			   isEditing: false,
-			   isViewing: true
+			   isViewing: true,
+			  users:[]
 		    }
 	},
 	template: ` 
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
-	<h1>Podaci o profilu</h1>
-	<label>Ime:
+	<h1>Kupci restorana</h1>
+	<table style="width:500px; border: 1px solid black">
+	<tr>
+    <th>Ime</th>
+    <th>Prezime</th>
+    <th>Korisničko ime</th>
+  </tr>
+	<tr v-for="u in users">
+	<td>{{u.name}}</td>
+	<td>{{u.surname}}</td>
+	<td>{{u.username}}</td>
+	</tr>
+	</table><br><br>
 	
-	<span v-if="isViewing"> {{user.name}} </span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.name">
-	 </span>
-	</label><br><br>
-	<label>Prezime:
-	<span v-if="isViewing">
-	 {{user.surname}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.surname">
-	 </span>
-	</label><br><br>
-	<label>Pol: 
-	<span v-if="isViewing">
-	{{user.gender}}
-	</span>
-	<span v-if="isEditing"> 
-	<select v-model ="user.gender">
-    <option value="Ženski">Ženski</option>
-    <option value="Muški">Muški</option>
-    <option value="Ne bih da navedem">Ne bih da navedem</option>
-  	</select>
-	 </span>
-	</label><br><br>
-	<label>
-	Datum rođenja: 
-	<span v-if="isViewing">
-	{{user.date}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type = "date" v-model = "user.date">
-	 </span>
-	</label><br><br>
-	<label>Korisničko ime: {{user.username}}</label><br><br>
-	<button v-if="isViewing" v-on:click = "changeMode">Izmeni profil</button><br><br>
-	<button v-if="isViewing" v-on:click = "changePassword">Promeni lozinku</button>
-	<button v-if="isEditing" v-on:click = "saveChanges">Sačuvaj izmene</button>
-	<button v-if="isEditing" v-on:click = "cancelChanges">Odustani</button>
 </div>		  
 `
 	, 
@@ -95,5 +68,9 @@ Vue.component("managerShoppers", {
        axios
           .get('/rest/user/getUser')
           .then(response => (this.isLogged(response.data)))
+
+		axios
+          .get('/rest/order/getUsersByRestaurant')
+          .then(response => (this.users = response.data))
     },
 });

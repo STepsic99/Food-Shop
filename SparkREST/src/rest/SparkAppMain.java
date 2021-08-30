@@ -247,6 +247,19 @@ public class SparkAppMain {
 			return gson1.toJson(orderService.getOrdersByRestaurant(manager.getRestaurant().getId()));
 		});
 		
+		put("/rest/order/changeManager", (req,res) -> {
+			res.type("application/json");
+			Order order = gg.fromJson(req.body(), Order.class);	
+			orderService.changeOrder(order);
+			return "SUCCESS";
+		});
+		
+		get("/rest/order/getUsersByRestaurant", (req, res) -> {
+			res.type("application/json");
+			Manager manager=(Manager)getUser(req);
+			return gson1.toJson(orderService.getUsersByRestaurant(manager.getRestaurant().getId()));
+		});
+		
 	}
 	
 	private static Cart getCart(Request req) {
