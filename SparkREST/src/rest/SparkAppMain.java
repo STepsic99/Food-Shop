@@ -16,6 +16,7 @@ import com.google.gson.GsonBuilder;
 
 import beans.Article;
 import beans.Cart;
+import beans.Manager;
 import beans.Order;
 import beans.Role;
 import beans.Shopper;
@@ -154,7 +155,7 @@ public class SparkAppMain {
 				shopperService.editShopper(us);
 				break;
 			}
-			return "Lozinka uspe�no promenjena";
+			return "Lozinka uspešno promenjena";
 		});
 		
 		
@@ -238,6 +239,12 @@ public class SparkAppMain {
 		get("/rest/order/getUnassignedOrders", (req, res) -> {
 			res.type("application/json");
 			return gson1.toJson(orderService.getUnassignedOrders());
+		});
+		
+		get("/rest/order/getOrdersByRestaurant", (req, res) -> {
+			res.type("application/json");
+			Manager manager=(Manager)getUser(req);
+			return gson1.toJson(orderService.getOrdersByRestaurant(manager.getRestaurant().getId()));
 		});
 		
 	}

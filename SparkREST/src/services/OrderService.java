@@ -27,4 +27,8 @@ public class OrderService {
 	public ArrayList<Order> getUnassignedOrders(){
 		return this.orders.getUnassignedOrders();
 	}
+	
+	public ArrayList<Order> getOrdersByRestaurant(String id){
+		return this.orders.getOrdersByRestaurant(id);
+	}
 }

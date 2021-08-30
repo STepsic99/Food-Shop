@@ -2,55 +2,51 @@ Vue.component("managerRestaurant", {
 	data: function () {
 		    return {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
-			   isEditing: false,
-			   isViewing: true
+			   status: "",
+			   showArticles: true,
+			   showNewArticle:false
 		    }
 	},
 	template: ` 
-<div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
-	<h1>Podaci o profilu</h1> {{this.user.restaurant.name}}
-	<label>Ime:
+<div style="background: rgba(255, 255, 255, 0.8);padding: 10px 115px 25px 45px; max-width: 1200px;margin: auto;">
+	<h1 style="font-size:45px">{{user.restaurant.name}}</h1>
+    <table style=" width: 100%;">
+	<tr>
+	<td> <div class="txtimg">
+	<img  v-bind:src="user.restaurant.imagePath" alt="Restaurant" width="600" height="480"/>
+	</div>
+	</td>
+	<td style=" width: 100%;">
+	<span style="font-size:25px">
+	Lokacija: {{user.restaurant.location.address}} <br><br>
+	Tip restorana: {{user.restaurant.type}} <br><br>
+	Status restorana: {{status}} <br><br>
+	Prosečna ocena: {{user.restaurant.averageGrade}} <br><br>
+	</span>
+	</td>
+	</tr>
+	</table>
+	<div v-if="showArticles">
+	<h2 style="font-size:30px">Artikli <button style="position:relative;top:-5px;left:500px" v-on:click="newArticle">Dodaj artikl</button></h2> 
+	<table style="column-count: 2;display: flex;max-width:100px;">
+	<tr style="display: grid; grid-template-columns: repeat(4, 1fr)" >
+	<td style="padding-left:3em;padding-bottom:5em " v-for="a in user.restaurant.articles">
+	 <div class="txtimg">
+	<img  v-bind:src="a.image" alt="Article" width="250" height="230"/>
+	</div>
+	<h2 style="font-size:27px;margin-bottom:0px" >{{a.name}}</h2>
+	(<span v-if="a.type==='FOOD'">Hrana</span><span v-if="a.type==='DRINK'">Piće</span>, {{a.quantity}}<span v-if="a.type==='FOOD'"> g</span><span v-if="a.type==='DRINK'"> ml</span>)<br><br>
 	
-	<span v-if="isViewing"> {{user.name}} </span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.name">
-	 </span>
-	</label><br><br>
-	<label>Prezime:
-	<span v-if="isViewing">
-	 {{user.surname}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.surname">
-	 </span>
-	</label><br><br>
-	<label>Pol: 
-	<span v-if="isViewing">
-	{{user.gender}}
-	</span>
-	<span v-if="isEditing"> 
-	<select v-model ="user.gender">
-    <option value="Ženski">Ženski</option>
-    <option value="Muški">Muški</option>
-    <option value="Ne bih da navedem">Ne bih da navedem</option>
-  	</select>
-	 </span>
-	</label><br><br>
-	<label>
-	Datum rođenja: 
-	<span v-if="isViewing">
-	{{user.date}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type = "date" v-model = "user.date">
-	 </span>
-	</label><br><br>
-	<label>Korisničko ime: {{user.username}}</label><br><br>
-	<button v-if="isViewing" v-on:click = "changeMode">Izmeni profil</button><br><br>
-	<button v-if="isViewing" v-on:click = "changePassword">Promeni lozinku</button>
-	<button v-if="isEditing" v-on:click = "saveChanges">Sačuvaj izmene</button>
-	<button v-if="isEditing" v-on:click = "cancelChanges">Odustani</button>
-</div>		  
+	{{a.description}}<br><br>
+	<span style="font-size:20px">{{a.price}} RSD </span><br><br>
+	</td>
+	</tr>
+	</table>
+	</div>
+	<div v-if="showNewArticle">
+	<button v-on:click="goBack">Odustani</button>
+	</div>
+</div>	
 `
 	, 
 	methods : {
@@ -60,36 +56,19 @@ Vue.component("managerRestaurant", {
 			this.visibleLogout= false
 			this.visibleLogin= true	
 		}else{
-			this.visibleLogin = false;
-			this.visibleLogout = true;
+			if(this.user.restaurant.status=="OPEN")
+				this.status="Radi";
+				else this.status="Ne radi"
 		}
 		},
-	changeMode : function(){
-		this.isEditing=true;
-		this.isViewing=false;
-		this.backup = [this.user.username, this.user.password, this.user.name, this.user.surname, this.user.gender, this.user.date, this.user.role];
+	newArticle : function(){
+		this.showArticles=false;
+		this.showNewArticle=true;
 	},
-	saveChanges : function(){
-		axios
-			.put('/rest/user/change', this.user)
-			
-		this.isEditing=false;
-		this.isViewing=true;
-	},
-		cancelChanges : function(){
-		this.user.username = this.backup[0];
-    	this.user.password = this.backup[1];
-    	this.user.name = this.backup[2];
-    	this.user.surname = this.backup[3];	
-		this.user.gender = this.backup[4];
-    	this.user.date = this.backup[5];
-    	this.user.role = this.backup[6];	
-		this.isEditing=false;
-		this.isViewing=true;
-	},
-	changePassword : function(){
-		router.push(`/pass`);
-	}
+	goBack : function(){
+		this.showArticles=true;
+		this.showNewArticle=false;
+	}	
 	},
 	mounted () {
        axios

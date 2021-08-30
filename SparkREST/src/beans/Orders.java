@@ -116,4 +116,14 @@ public class Orders {
 		}
 		return userOrders;
 	}
+	
+	public ArrayList<Order> getOrdersByRestaurant(String id){
+		ArrayList<Order>userOrders=new ArrayList<Order>();
+		for(Order order : orderList) {
+			if(order.getRestaurant().getId().equals(id)) {
+				userOrders.add(order);
+			}
+		}
+		return userOrders;
+	}
 }

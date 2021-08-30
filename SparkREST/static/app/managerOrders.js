@@ -2,55 +2,64 @@ Vue.component("managerOrders", {
 	data: function () {
 		    return {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
-			   isEditing: false,
-			   isViewing: true
+			   orders: [],
+			     dates: [],
+				xx:null,
+				showArticles:false,
+				showOrders:true,
+				orderTemp:null
 		    }
 	},
 	template: ` 
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
-	<h1>Podaci o profilu</h1>
-	<label>Ime:
+<div v-if="showOrders">
+	<h1>Porudžbine</h1>
+  	<table style="margin-bottom:50px;text-align:left">
+	<tr v-for="o in orders">
+	<td> 
+<h2>	Porudžbina #{{o.id}}</h2>
+<p>Poručioc: {{o.shopper.name}} {{o.shopper.surname}}</p>
+Artikli : 	<table>
+			<tr v-for="a in o.articles">
+			<td> 
+			{{a.name}} x{{a.counter}}
+			</td>
+			</tr>
+			</table><br>
+	<a href="" v-on:click="moreOfArticles(o)">Više o artiklima</a>
+	</td>
+	<td style="padding-top:70px">
 	
-	<span v-if="isViewing"> {{user.name}} </span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.name">
-	 </span>
-	</label><br><br>
-	<label>Prezime:
-	<span v-if="isViewing">
-	 {{user.surname}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.surname">
-	 </span>
-	</label><br><br>
-	<label>Pol: 
-	<span v-if="isViewing">
-	{{user.gender}}
-	</span>
-	<span v-if="isEditing"> 
-	<select v-model ="user.gender">
-    <option value="Ženski">Ženski</option>
-    <option value="Muški">Muški</option>
-    <option value="Ne bih da navedem">Ne bih da navedem</option>
-  	</select>
-	 </span>
-	</label><br><br>
-	<label>
-	Datum rođenja: 
-	<span v-if="isViewing">
-	{{user.date}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type = "date" v-model = "user.date">
-	 </span>
-	</label><br><br>
-	<label>Korisničko ime: {{user.username}}</label><br><br>
-	<button v-if="isViewing" v-on:click = "changeMode">Izmeni profil</button><br><br>
-	<button v-if="isViewing" v-on:click = "changePassword">Promeni lozinku</button>
-	<button v-if="isEditing" v-on:click = "saveChanges">Sačuvaj izmene</button>
-	<button v-if="isEditing" v-on:click = "cancelChanges">Odustani</button>
-</div>		  
+<p>	Restoran: {{o.restaurant.name}}</p>
+	<p>Vreme: {{o.dateTime.getDate()}}.{{o.dateTime.getMonth()+1}}.{{o.dateTime.getFullYear()}} {{o.dateTime.getHours()}}:{{o.dateTime.getMinutes()}}:{{o.dateTime.getSeconds()}} 
+	</p>
+</p>	Status: {{o.status}} </p>
+	Cena: {{o.price.toFixed(2)}} RSD
+	</td>
+	</tr>
+	</table>
+</div>	
+<div v-if="showArticles">
+<h2>	Porudžbina #{{orderTemp.id}}</h2>
+<table style="margin-bottom:50px">
+	<tr v-for="a in orderTemp.articles">
+	<td> 
+	<img  v-bind:src="a.image" alt="Artikl" width="200" height="180"/>
+	</td>
+	<td style="display: block;
+  vertical-align: top; height: 220px; padding-left:60px" >
+	<h2>{{a.name}}</h2>
+	<p style="font-size:18px">{{a.price}} RSD </p>
+	{{a.description}}<br><br>
+	Količina:&nbsp;{{a.counter}}
+	
+	
+	</td>
+	</tr>
+	</table>
+<button v-on:click="goBack">Nazad</button>
+</div>
+</div>		  	  
 `
 	, 
 	methods : {
@@ -64,36 +73,91 @@ Vue.component("managerOrders", {
 			this.visibleLogout = true;
 		}
 		},
-	changeMode : function(){
-		this.isEditing=true;
-		this.isViewing=false;
-		this.backup = [this.user.username, this.user.password, this.user.name, this.user.surname, this.user.gender, this.user.date, this.user.role];
-	},
-	saveChanges : function(){
-		axios
-			.put('/rest/user/change', this.user)
-			
-		this.isEditing=false;
-		this.isViewing=true;
-	},
-		cancelChanges : function(){
-		this.user.username = this.backup[0];
-    	this.user.password = this.backup[1];
-    	this.user.name = this.backup[2];
-    	this.user.surname = this.backup[3];	
-		this.user.gender = this.backup[4];
-    	this.user.date = this.backup[5];
-    	this.user.role = this.backup[6];	
-		this.isEditing=false;
-		this.isViewing=true;
-	},
-	changePassword : function(){
-		router.push(`/pass`);
-	}
+	moreOfArticles : function(or){
+		event.preventDefault();
+			this.showArticles=true;
+			this.showOrders=false;
+			this.orderTemp=or;
+		},
+		goBack : function(){
+			this.showArticles=false;
+			this.showOrders=true;
+		},
+		cancelOrder : function(order){
+			order.status="CANCELED";
+			axios
+			.put('/rest/order/change', order)
+			.then(response=>{
+				this.$root.$emit('counterChangeFirst', 1);
+				
+							axios
+		.get('/rest/order/getOrdersByUser')
+		.then(response => {this.orders=response.data
+	for (let i = 0; i < this.orders.length; i++) {
+				this.xx=new Date(this.orders[i].dateTime);
+				this.orders[i].dateTime=this.xx;
+				switch(this.orders[i].status) {
+				  case "PROCESSING":
+				    this.orders[i].status="Obrada";
+				    break;
+				  case "IN_PREPARATION":
+				    this.orders[i].status="U pripremi";
+				    break;
+ 				  case "WAITING_FOR_DELIVERER":
+				    this.orders[i].status="Čeka dostavljača";
+				    break;
+				  case "IN_TRANSPORT":
+				    this.orders[i].status="U transportu";
+				    break;
+				  case "DELIVERED":
+				    this.orders[i].status="Dostavljena";
+				    break;
+				  case "CANCELED":
+				    this.orders[i].status="Otkazana";
+				    break;
+				  default:
+				}
+			}
+		})
+				
+				
+			})
+	
+		}	
 	},
 	mounted () {
-       axios
+             axios
           .get('/rest/user/getUser')
-          .then(response => (this.isLogged(response.data)))
+          .then(response => (this.isLogged(response.data)))	
+
+	axios
+		.get('/rest/order/getOrdersByRestaurant')
+		.then(response => {this.orders=response.data
+	for (let i = 0; i < this.orders.length; i++) {
+				this.xx=new Date(this.orders[i].dateTime);
+				this.orders[i].dateTime=this.xx;
+				switch(this.orders[i].status) {
+				  case "PROCESSING":
+				    this.orders[i].status="Obrada";
+				    break;
+				  case "IN_PREPARATION":
+				    this.orders[i].status="U pripremi";
+				    break;
+ 				  case "WAITING_FOR_DELIVERER":
+				    this.orders[i].status="Čeka dostavljača";
+				    break;
+				  case "IN_TRANSPORT":
+				    this.orders[i].status="U transportu";
+				    break;
+				  case "DELIVERED":
+				    this.orders[i].status="Dostavljena";
+				    break;
+				  case "CANCELED":
+				    this.orders[i].status="Otkazana";
+				    break;
+				  default:
+				}
+			}
+		})
     },
 });
