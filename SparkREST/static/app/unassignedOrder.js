@@ -7,7 +7,8 @@ Vue.component("unassignedOrder", {
 				xx:null,
 				showArticles:false,
 				showOrders:true,
-				orderTemp:null
+				orderTemp:null,
+				soughtOrder:false
 		    }
 	},
 	template: ` 
@@ -26,9 +27,12 @@ Artikli : 	<table>
 			</tr>
 			</table><br>
 	<a href="" v-on:click="moreOfArticles(o)">Više o artiklima</a>
+	<p>Kupac: {{o.shopper.name}} {{o.shopper.surname}}</p>
 	</td>
-	<td style="padding-top:70px">
-	<button style="margin-left:90px;margin-bottom:8px" v-if="o.status==='Obrada'" v-on:click="cancelOrder(o)">Otkaži porudžbinu</button>
+	<td style="padding-top:0px">
+	<span style="margin-left:90px;margin-bottom:8px;margin-top:18px">
+	<button v-if="soughtOrder===false"  v-on:click="seekOrder(o)">Zatraži porudžbinu</button>
+	</span>
 <p>	Restoran: {{o.restaurant.name}}</p>
 	<p>Vreme: {{o.dateTime.getDate()}}.{{o.dateTime.getMonth()+1}}.{{o.dateTime.getFullYear()}} {{o.dateTime.getHours()}}:{{o.dateTime.getMinutes()}}:{{o.dateTime.getSeconds()}} 
 	</p>
@@ -122,6 +126,9 @@ Artikli : 	<table>
 				
 			})
 	
+		},
+		seekOrder : function(){
+			this.soughtOrder=true;
 		}	
 	},
 	mounted () {

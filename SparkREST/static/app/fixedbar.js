@@ -12,6 +12,9 @@ Vue.component("fixedbar", {
 <div class="topmenu">
 <ul>
   <li><a href="/" v-bind:class="{active : this.selectedLink===0}" v-on:click="openStarterPage">Početna</a></li>
+  <li v-if="visibleLogout  && user.role=='MANAGER'" v-on:click="showManagerRestaurant"><a v-bind:class="{active : this.selectedLink===8}" href="/managerRestaurant">Moj Restoran</a></li>
+  <li v-if="visibleLogout  && user.role=='MANAGER'" v-on:click="showManagerOrders"><a v-bind:class="{active : this.selectedLink===9}" href="/managerOrders">Porudžbine restorana</a></li>
+  <li v-if="visibleLogout  && user.role=='MANAGER'" v-on:click="showManagerShoppers"><a v-bind:class="{active : this.selectedLink===10}" href="/managerShoppers">Kupci restorana</a></li>
   <li v-if="visibleLogout  && user.role=='DELIVERER'" v-on:click="showDelivererOrders"><a v-bind:class="{active : this.selectedLink===6}" href="/delivererOrder">Moje porudžbine</a></li>
   <li v-if="visibleLogout  && user.role=='DELIVERER'" v-on:click="showUnassignedOrders"><a v-bind:class="{active : this.selectedLink===7}" href="/unassignedOrder">Nedodeljene porudžbine</a></li>
   <li v-if="visibleLogout  && user.role=='SHOPPER'" v-on:click="showOrders"><a v-bind:class="{active : this.selectedLink===5}" href="/myOrder">Porudžbine</a></li>
@@ -25,6 +28,7 @@ Vue.component("fixedbar", {
  <li v-if="visibleLogout && user.role=='SHOPPER'" style="float:right;" class="probna" v-on:click="showCart"><a v-bind:class="{active : this.selectedLink===4}" href="/cart">
  <span class="icon-button__badge">{{this.user.cart.numberOfItems}}</span>
  </a></li>
+<li v-if="visibleLogout && user.role=='MANAGER'" style="float:right" v-on:click="showManagerRequests"><a v-bind:class="{active : this.selectedLink===11}" href="/managerRequests">Zahtevi</a></li>
 </ul>
 </div>		  
 `
@@ -84,6 +88,26 @@ Vue.component("fixedbar", {
 			event.preventDefault();
 			this.selectedLink=7;
 			router.push(`/unassignedOrder`);
+		},
+		showManagerRestaurant : function(){
+			event.preventDefault();
+			this.selectedLink=8;
+			router.push(`/managerRestaurant`);
+		},
+		showManagerOrders : function(){
+			event.preventDefault();
+			this.selectedLink=9;
+			router.push(`/managerOrders`);
+		},
+		showManagerShoppers : function(){
+			event.preventDefault();
+			this.selectedLink=10;
+			router.push(`/managerShoppers`);
+		},
+		showManagerRequests : function(){
+			event.preventDefault();
+			this.selectedLink=11;
+			router.push(`/managerRequests`);
 		}
 	},
 	mounted () {

@@ -1,1 +1,148 @@
-[]
+[
+  {
+    "id": "ipfjbcok8j",
+    "articles": [
+      {
+        "name": "Long Island",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(rum, tequila, triple sec, gin, vodka, koka kola, limun)",
+        "image": ".\\resources\\Long_island.jpg",
+        "counter": 1
+      },
+      {
+        "name": "Tequila sunrise",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": " (tequila, grenadine, đus)",
+        "image": ".\\resources\\Tequila-Sunrise.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-08-30T00:04:29.668+0200",
+    "price": 860.0,
+    "shopper": {
+      "points": 0.0,
+      "username": "korisnik1",
+      "name": "Marko",
+      "surname": "Markovic"
+    },
+    "status": "WAITING_FOR_DELIVERER"
+  },
+  {
+    "id": "bmpnryc1a4",
+    "articles": [
+      {
+        "name": "Pileitna Mediteraneo",
+        "price": 890.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "averageGrade": 0.0
+        },
+        "quantity": 500.0,
+        "description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
+        "image": ".\\resources\\mediterranean-chicken2.jpg",
+        "counter": 3
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-08-30T00:04:46.499+0200",
+    "price": 2670.0,
+    "shopper": {
+      "points": 0.0,
+      "username": "korisnik1",
+      "name": "Marko",
+      "surname": "Markovic"
+    },
+    "status": "PROCESSING"
+  },
+  {
+    "id": "ok6pm3oyha",
+    "articles": [
+      {
+        "name": "Udon Nudle Sa Piletinom",
+        "price": 750.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "3",
+          "name": "JANGCE",
+          "averageGrade": 0.0
+        },
+        "quantity": 550.0,
+        "description": "Udon nudle sa povrcem i piletinom seckanom na rezance u blagom sosu",
+        "image": ".\\resources\\udon-nudle-sa-piletinom.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "3",
+      "name": "JANGCE",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-08-30T00:04:46.499+0200",
+    "price": 750.0,
+    "shopper": {
+      "points": 0.0,
+      "username": "korisnik1",
+      "name": "Marko",
+      "surname": "Markovic"
+    },
+    "status": "WAITING_FOR_DELIVERER"
+  },
+  {
+    "id": "wffgv6xi3j",
+    "articles": [
+      {
+        "name": "Špagete Bolognese",
+        "price": 790.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "averageGrade": 0.0
+        },
+        "quantity": 500.0,
+        "description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
+        "image": ".\\resources\\Spaghetti-Bolognese.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-08-30T00:04:59.285+0200",
+    "price": 790.0,
+    "shopper": {
+      "points": 0.0,
+      "username": "korisnik1",
+      "name": "Marko",
+      "surname": "Markovic"
+    },
+    "status": "WAITING_FOR_DELIVERER"
+  }
+]
