@@ -209,7 +209,7 @@ Vue.component("food-shop", {
 								let restaurantBackup=this.restaurants[i]
 								this.restaurants.splice(i,1);
 								this.restaurants.unshift(restaurantBackup);
-								i++;
+								
 									
 									} 
 							}

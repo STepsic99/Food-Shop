@@ -35,7 +35,7 @@ Vue.component("restaurantDetails", {
 	<h2 style="font-size:27px" >{{a.name}}</h2><br>
 	{{a.description}}<br><br>
 	<span style="font-size:20px">{{a.price}} RSD </span><br><br>
-	<span v-if="user && user.role=='SHOPPER'">
+	<span v-if="user && user.role=='SHOPPER' && status=='Radi'">
 	<input type="number" style="width:80px" size="33" min="1" v-model="a.counter">
 	<button style="margin-left:10px" v-on:click="addToCart(a)">Dodaj u korpu</button>
 	</span>

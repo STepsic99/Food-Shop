@@ -3,7 +3,7 @@
 "name": "Olimp",
 "type": "Primorski",
 "articles": null,
-"status": "OPEN",
+"status": "CLOSED",
 "location": {"address": "Slovenska obala 6, Budva, 85310", "latitude":42.28229728905753, "longitude":18.838425915340757},
 "imagePath": ".\\resources\\Restaurant1.jpg",
 "averageGrade":2.5
@@ -71,7 +71,7 @@
 "image":".\\resources\\Tequila-Sunrise.jpg",
 "counter":1
 }],
-"status": "CLOSED",
+"status": "OPEN",
 "location": {"address": "Nebojšina 8, Beograd, 11000", "latitude":44.79471191576135, "longitude":20.466935084659248},
 "imagePath": ".\\resources\\italian.jpg",
 "averageGrade":4.5
