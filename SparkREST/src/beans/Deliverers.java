@@ -46,4 +46,22 @@ public class Deliverers {
 	public Deliverer getDeliverer(String username) {
 		return deliverers.get(username);
 	}
+	
+	public void addOrder(String username, Order order) {
+		Deliverer deliverer=deliverers.get(username);
+		deliverer.getOrders().add(order);
+		Serialization();
+	}
+	
+	public void changeOrder(String username,Order newOrder) {
+		Deliverer deliverer=deliverers.get(username);
+		for(int i=0;i<deliverer.getOrders().size();i++) {
+			if(deliverer.getOrders().get(i).getId().equals(newOrder.getId())) {
+				deliverer.getOrders().get(i).setStatus(OrderStatus.DELIVERED);
+				break;	
+			}
+		}
+		Serialization();
+	}
+	
 }

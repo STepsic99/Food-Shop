@@ -44,7 +44,8 @@
       "name": "Marko",
       "surname": "Markovic"
     },
-    "status": "WAITING_FOR_DELIVERER"
+    "status": "DELIVERED",
+    "requests": []
   },
   {
     "id": "bmpnryc1a4",
@@ -77,7 +78,8 @@
       "name": "Marko",
       "surname": "Markovic"
     },
-    "status": "WAITING_FOR_DELIVERER"
+    "status": "WAITING_FOR_DELIVERER",
+    "requests": []
   },
   {
     "id": "ok6pm3oyha",
@@ -110,7 +112,10 @@
       "name": "Marko",
       "surname": "Markovic"
     },
-    "status": "WAITING_FOR_DELIVERER"
+    "status": "WAITING_FOR_DELIVERER",
+    "requests": [
+      "dostavljac1"
+    ]
   },
   {
     "id": "wffgv6xi3j",
@@ -143,6 +148,7 @@
       "name": "Marko",
       "surname": "Markovic"
     },
-    "status": "WAITING_FOR_DELIVERER"
+    "status": "PROCESSING",
+    "requests": []
   }
 ]

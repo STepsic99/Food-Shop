@@ -14,11 +14,11 @@ Vue.component("delivererOrder", {
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
 <div v-if="showOrders">
 	<h1>Moje porudžbine</h1>
-	<p>*Prikazane su cene sa popustom (3% za srebrne, a 5% za zlatne korisnike)</p>
   	<table style="margin-bottom:50px;text-align:left">
-	<tr v-for="o in orders">
+	<tr v-for="o in user.orders">
 	<td> 
-<h2>	Porudžbina #{{o.id}}</h2>
+<h2>	Porudžbina #{{o.id}}<button style="position:relative;top:-22px;left:300px" v-on:click="changeStatus(o)" v-if="o.status=='U transportu'">Promeni status na: DOSTAVLJENA</button></h2>
+<p>Poručioc: {{o.shopper.name}} {{o.shopper.surname}}</p>
 Artikli : 	<table>
 			<tr v-for="a in o.articles">
 			<td> 
@@ -29,7 +29,6 @@ Artikli : 	<table>
 	<a href="" v-on:click="moreOfArticles(o)">Više o artiklima</a>
 	</td>
 	<td style="padding-top:70px">
-	<button style="margin-left:90px;margin-bottom:8px" v-if="o.status==='Obrada'" v-on:click="cancelOrder(o)">Otkaži porudžbinu</button>
 <p>	Restoran: {{o.restaurant.name}}</p>
 	<p>Vreme: {{o.dateTime.getDate()}}.{{o.dateTime.getMonth()+1}}.{{o.dateTime.getFullYear()}} {{o.dateTime.getHours()}}:{{o.dateTime.getMinutes()}}:{{o.dateTime.getSeconds()}} 
 	</p>
@@ -83,81 +82,47 @@ Artikli : 	<table>
 			this.showArticles=false;
 			this.showOrders=true;
 		},
-		cancelOrder : function(order){
-			order.status="CANCELED";
+		changeStatus : function(order){
+				order.status="DELIVERED";
 			axios
-			.put('/rest/order/change', order)
-			.then(response=>{
-				this.$root.$emit('counterChangeFirst', 1);
-				
-							axios
-		.get('/rest/order/getOrdersByUser')
-		.then(response => {this.orders=response.data
-	for (let i = 0; i < this.orders.length; i++) {
-				this.xx=new Date(this.orders[i].dateTime);
-				this.orders[i].dateTime=this.xx;
-				switch(this.orders[i].status) {
-				  case "PROCESSING":
-				    this.orders[i].status="Obrada";
-				    break;
-				  case "IN_PREPARATION":
-				    this.orders[i].status="U pripremi";
-				    break;
- 				  case "WAITING_FOR_DELIVERER":
-				    this.orders[i].status="Čeka dostavljača";
-				    break;
-				  case "IN_TRANSPORT":
-				    this.orders[i].status="U transportu";
-				    break;
-				  case "DELIVERED":
-				    this.orders[i].status="Dostavljena";
-				    break;
-				  case "CANCELED":
-				    this.orders[i].status="Otkazana";
-				    break;
-				  default:
-				}
-			}
-		})
-				
-				
+			.put('/rest/order/changeDeliverer', order)
+			.then(response => {
+				order.status="Dostavljena";
 			})
-	
 		}	
 	},
 	mounted () {
       axios
           .get('/rest/user/getUser')
-          .then(response => (this.isLogged(response.data)))	
-
-	axios
-		.get('/rest/order/getOrdersByUser')
-		.then(response => {this.orders=response.data
-	for (let i = 0; i < this.orders.length; i++) {
-				this.xx=new Date(this.orders[i].dateTime);
-				this.orders[i].dateTime=this.xx;
-				switch(this.orders[i].status) {
+          .then(response => {
+				this.user=response.data;
+				for (let i = 0; i < this.user.orders.length; i++) {
+				this.xx=new Date(this.user.orders[i].dateTime);
+				this.user.orders[i].dateTime=this.xx;
+				switch(this.user.orders[i].status) {
 				  case "PROCESSING":
-				    this.orders[i].status="Obrada";
+				    this.user.orders[i].status="Obrada";
 				    break;
 				  case "IN_PREPARATION":
-				    this.orders[i].status="U pripremi";
+				    this.user.orders[i].status="U pripremi";
 				    break;
  				  case "WAITING_FOR_DELIVERER":
-				    this.orders[i].status="Čeka dostavljača";
+				    this.user.orders[i].status="Čeka dostavljača";
 				    break;
 				  case "IN_TRANSPORT":
-				    this.orders[i].status="U transportu";
+				    this.user.orders[i].status="U transportu";
 				    break;
 				  case "DELIVERED":
-				    this.orders[i].status="Dostavljena";
+				    this.user.orders[i].status="Dostavljena";
 				    break;
 				  case "CANCELED":
-				    this.orders[i].status="Otkazana";
+				    this.user.orders[i].status="Otkazana";
 				    break;
 				  default:
 				}
 			}
-		})
+		})	
+
+
     },
 });

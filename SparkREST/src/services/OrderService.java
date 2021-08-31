@@ -35,4 +35,12 @@ public class OrderService {
 	public ArrayList<Shopper> getUsersByRestaurant(String id){
 		return this.orders.getUsersByRestaurant(id);
 	}
+	
+	public ArrayList<Order> getRequestedOrdersByRestaurant(String id){
+		return this.orders.getOrdersByRestaurant(id);
+	}
+	
+	public Order getOrder(String id) {
+		return this.orders.getOrder(id);
+	}
 }

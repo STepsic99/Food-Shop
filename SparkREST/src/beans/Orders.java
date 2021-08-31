@@ -104,6 +104,7 @@ public class Orders {
 	public void changeOrder(Order newOrder) {
 		Order oldOrder=orders.get(newOrder.getId());
 		oldOrder.setStatus(newOrder.getStatus());
+		oldOrder.setRequests(newOrder.getRequests());
 		Serialization();
 	}
 	
@@ -139,5 +140,19 @@ public class Orders {
 			retVal.add(shopper);
 		}
 		return retVal;
+	}
+	
+	public ArrayList<Order> getRequestedOrdersByRestaurant(String id){
+		ArrayList<Order>userOrders=new ArrayList<Order>();
+		for(Order order : orderList) {
+			if(order.getRestaurant().getId().equals(id) && !order.getRequests().isEmpty()) {
+				userOrders.add(order);
+			}
+		}
+		return userOrders;
+	}
+	
+	public Order getOrder(String id) {
+		return orders.get(id);
 	}
 }

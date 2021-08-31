@@ -46,4 +46,13 @@ public class Managers {
 	public Manager getManager(String username) {
 		return managers.get(username);
 	}
+	
+	public Manager getManagerByRestaurant(String id) {
+		for(Manager manager:managerList) {
+			if(manager.getRestaurant().getId().equals(id)) return manager;
+		}
+		return null;
+	}
+	
+	
 }

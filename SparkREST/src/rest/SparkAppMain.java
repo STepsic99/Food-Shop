@@ -11,13 +11,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import beans.Article;
 import beans.Cart;
+import beans.DeliveryRequests;
 import beans.Manager;
 import beans.Order;
+import beans.OrderStatus;
 import beans.Role;
 import beans.Shopper;
 import beans.User;
@@ -260,6 +263,54 @@ public class SparkAppMain {
 			return gson1.toJson(orderService.getUsersByRestaurant(manager.getRestaurant().getId()));
 		});
 		
+		put("/rest/order/requestOrder", (req,res) -> {
+			res.type("application/json");
+			Order order = gg.fromJson(req.body(), Order.class);
+			order.getRequests().add(getUser(req).getUsername());
+			orderService.changeOrder(order);
+			return "SUCCESS";
+		});
+		
+		get("/rest/order/requestedOrders", (req, res) -> {
+			res.type("application/json");
+			Manager manager=(Manager)getUser(req);
+			ArrayList<DeliveryRequests>deliveryRequests=new ArrayList<DeliveryRequests>();
+			ArrayList<Order>orders=orderService.getRequestedOrdersByRestaurant(manager.getRestaurant().getId());
+			for(Order order:orders) {
+				for(String username:order.getRequests()) {
+					deliveryRequests.add(new DeliveryRequests(delivererService.getDeliverer(username), order.getId()));
+				}
+			}
+			return gson1.toJson(deliveryRequests);
+		});
+		
+		post("/rest/order/approveRequest", (req, res) -> {
+			res.type("application/json");
+			DeliveryRequests deliveryRequest = gg.fromJson(req.body(), DeliveryRequests.class);
+			Order order=orderService.getOrder(deliveryRequest.getIdOrder());
+			order.setStatus(OrderStatus.IN_TRANSPORT);
+			order.setRequests(new ArrayList<String>());
+			orderService.changeOrder(order);
+			delivererService.addOrder(deliveryRequest.getDeliverer().getUsername(), order);
+			return "OK";
+		});
+		
+		post("/rest/order/refuseRequest", (req, res) -> {
+			res.type("application/json");
+			DeliveryRequests deliveryRequest = gg.fromJson(req.body(), DeliveryRequests.class);
+			Order order=orderService.getOrder(deliveryRequest.getIdOrder());
+			order.setRequests(new ArrayList<String>());
+			orderService.changeOrder(order);
+			return "OK";
+		});
+		
+		put("/rest/order/changeDeliverer", (req,res) -> {
+			res.type("application/json");
+			Order order = gg.fromJson(req.body(), Order.class);	
+			orderService.changeOrder(order);
+			delivererService.changeOrder(getUser(req).getUsername(), order);
+			return "SUCCESS";
+		});
 	}
 	
 	private static Cart getCart(Request req) {

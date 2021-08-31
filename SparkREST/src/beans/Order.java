@@ -14,6 +14,8 @@ public class Order {
 	private double price;
 	private Shopper shopper;
 	private OrderStatus status;
+	private ArrayList<String>requests=new ArrayList<String>();
+	private transient Boolean requestedByMe;
 	
 	public Order() {
 		super();
@@ -92,6 +94,22 @@ public class Order {
 
 	public void setShopper(Shopper shopper) {
 		this.shopper = shopper;
+	}
+
+	public ArrayList<String> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(ArrayList<String> requests) {
+		this.requests = requests;
+	}
+
+	public Boolean getRequestedByMe() {
+		return requestedByMe;
+	}
+
+	public void setRequestedByMe(Boolean requestedByMe) {
+		this.requestedByMe = requestedByMe;
 	}
 	
 	

@@ -31,7 +31,8 @@ Artikli : 	<table>
 	</td>
 	<td style="padding-top:0px">
 	<span style="margin-left:90px;margin-bottom:8px;margin-top:18px">
-	<button v-if="soughtOrder===false"  v-on:click="seekOrder(o)">Zatraži porudžbinu</button>
+	<button v-if="o.requestedByMe==false"  v-on:click="seekOrder(o)">Zatraži porudžbinu</button>
+	<span v-if="o.requestedByMe==true">Zahtev je poslat</span>
 	</span>
 <p>	Restoran: {{o.restaurant.name}}</p>
 	<p>Vreme: {{o.dateTime.getDate()}}.{{o.dateTime.getMonth()+1}}.{{o.dateTime.getFullYear()}} {{o.dateTime.getHours()}}:{{o.dateTime.getMinutes()}}:{{o.dateTime.getSeconds()}} 
@@ -127,19 +128,25 @@ Artikli : 	<table>
 			})
 	
 		},
-		seekOrder : function(){
-			this.soughtOrder=true;
+		seekOrder : function(order){
+			order.status="WAITING_FOR_DELIVERER";
+			axios
+			.put('/rest/order/requestOrder', order)
+			.then(response =>{order.requestedByMe=true
+			order.status="Čeka dostavljača";
+			})
 		}	
 	},
 	mounted () {
       axios
           .get('/rest/user/getUser')
-          .then(response => (this.isLogged(response.data)))	
-
+          .then(response => {
+			this.user=response.data;
 	axios
 		.get('/rest/order/getUnassignedOrders')
 		.then(response => {this.orders=response.data
 	for (let i = 0; i < this.orders.length; i++) {
+				this.orders[i].requestedByMe=false;
 				this.xx=new Date(this.orders[i].dateTime);
 				this.orders[i].dateTime=this.xx;
 				switch(this.orders[i].status) {
@@ -163,7 +170,12 @@ Artikli : 	<table>
 				    break;
 				  default:
 				}
+				for (let j = 0; j < this.orders[i].requests.length; j++){
+					if(this.orders[i].requests[j]==this.user.username) this.orders[i].requestedByMe=true;
+				}
 			}
+		})
+		
 		})
     },
 });
