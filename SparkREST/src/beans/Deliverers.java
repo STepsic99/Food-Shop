@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
@@ -16,7 +17,7 @@ public class Deliverers {
 	
 	private ArrayList<Deliverer> delivererList=new ArrayList<Deliverer>();
 	private HashMap<String, Deliverer> deliverers = new HashMap<String, Deliverer>();
-	private Gson gson =new GsonBuilder().setDateFormat("yyyy-mm-dd").setPrettyPrinting().create();
+	private Gson gson =new GsonBuilder().registerTypeAdapter(Date.class, new DateDeserializer()).setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").setPrettyPrinting().create();
 	
 	public Deliverers() {
 		try {

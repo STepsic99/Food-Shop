@@ -2,7 +2,7 @@
   {
     "orders": [
       {
-        "id": "ipfjbcok8j",
+        "id": "tuicdm0goq",
         "articles": [
           {
             "name": "Long Island",
@@ -11,6 +11,7 @@
             "restaurant": {
               "id": "2",
               "name": "Amici",
+              "type": "Italijanski",
               "averageGrade": 0.0
             },
             "quantity": 200.0,
@@ -25,6 +26,7 @@
             "restaurant": {
               "id": "2",
               "name": "Amici",
+              "type": "Italijanski",
               "averageGrade": 0.0
             },
             "quantity": 200.0,
@@ -38,7 +40,7 @@
           "name": "Amici",
           "averageGrade": 0.0
         },
-        "dateTime": "2021-04-30",
+        "dateTime": "2021-08-24T21:01:08.998+0200",
         "price": 860.0,
         "shopper": {
           "points": 0.0,
@@ -48,6 +50,41 @@
         },
         "status": "DELIVERED",
         "requests": []
+      },
+      {
+        "id": "u1bfdw68vx",
+        "articles": [
+          {
+            "name": "Blue Lagoon",
+            "price": 430.0,
+            "type": "DRINK",
+            "restaurant": {
+              "id": "2",
+              "name": "Amici",
+              "type": "Italijanski",
+              "averageGrade": 0.0
+            },
+            "quantity": 200.0,
+            "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+            "image": ".\\resources\\blue-lagoon.jpg",
+            "counter": 3
+          }
+        ],
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "averageGrade": 0.0
+        },
+        "dateTime": "2021-08-31T21:01:16.014+0200",
+        "price": 1290.0,
+        "shopper": {
+          "points": 0.0,
+          "username": "korisnik1",
+          "name": "Marko",
+          "surname": "Markovic"
+        },
+        "status": "IN_TRANSPORT",
+        "requests": []
       }
     ],
     "username": "dostavljac1",
@@ -55,7 +92,7 @@
     "name": "Tomi",
     "surname": "Tomić",
     "gender": "Male",
-    "date": "2000-10-12",
+    "date": "2000-04-30T00:04:29.668+0200",
     "role": "DELIVERER"
   }
 ]

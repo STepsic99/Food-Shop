@@ -9,11 +9,11 @@
       "numberOfItems": 0,
       "discountPrice": 0.0
     },
-    "points": 674.3100000000001,
+    "points": 585.2,
     "type": {
       "name": "Bronza",
       "discount": 0,
-      "requiredPoints": 2325.69
+      "requiredPoints": 2414.8
     },
     "username": "korisnik1",
     "password": "sifra1",
@@ -33,11 +33,11 @@
       "numberOfItems": 0,
       "discountPrice": 0.0
     },
-    "points": 0.0,
+    "points": 433.58000000000004,
     "type": {
       "name": "Bronza",
       "discount": 0,
-      "requiredPoints": 3000.0
+      "requiredPoints": 2566.42
     },
     "username": "korisnik2",
     "password": "sifra2",

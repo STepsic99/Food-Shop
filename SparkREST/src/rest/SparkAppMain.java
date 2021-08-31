@@ -125,7 +125,7 @@ public class SparkAppMain {
 				return gg.toJson(user);
 			}
 			return null;*/
-			return gg.toJson(user);
+			return gson1.toJson(user);
 		});
 		
 		get("/rest/user/isLoggedIn", (req,res) -> {
@@ -286,7 +286,7 @@ public class SparkAppMain {
 		
 		post("/rest/order/approveRequest", (req, res) -> {
 			res.type("application/json");
-			DeliveryRequests deliveryRequest = gg.fromJson(req.body(), DeliveryRequests.class);
+			DeliveryRequests deliveryRequest = gson1.fromJson(req.body(), DeliveryRequests.class);
 			Order order=orderService.getOrder(deliveryRequest.getIdOrder());
 			order.setStatus(OrderStatus.IN_TRANSPORT);
 			order.setRequests(new ArrayList<String>());

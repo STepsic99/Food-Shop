@@ -1,6 +1,41 @@
 [
   {
-    "id": "ipfjbcok8j",
+    "id": "jeh5ak4z58",
+    "articles": [
+      {
+        "name": "Udon Nudle Sa Piletinom",
+        "price": 750.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "3",
+          "name": "JANGCE",
+          "type": "Kineski",
+          "averageGrade": 0.0
+        },
+        "quantity": 550.0,
+        "description": "Udon nudle sa povrcem i piletinom seckanom na rezance u blagom sosu",
+        "image": ".\\resources\\udon-nudle-sa-piletinom.jpg",
+        "counter": 3
+      }
+    ],
+    "restaurant": {
+      "id": "3",
+      "name": "JANGCE",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-08-31T21:01:02.734+0200",
+    "price": 2250.0,
+    "shopper": {
+      "points": 0.0,
+      "username": "korisnik1",
+      "name": "Marko",
+      "surname": "Markovic"
+    },
+    "status": "PROCESSING",
+    "requests": []
+  },
+  {
+    "id": "tuicdm0goq",
     "articles": [
       {
         "name": "Long Island",
@@ -9,6 +44,7 @@
         "restaurant": {
           "id": "2",
           "name": "Amici",
+          "type": "Italijanski",
           "averageGrade": 0.0
         },
         "quantity": 200.0,
@@ -23,6 +59,7 @@
         "restaurant": {
           "id": "2",
           "name": "Amici",
+          "type": "Italijanski",
           "averageGrade": 0.0
         },
         "quantity": 200.0,
@@ -36,7 +73,7 @@
       "name": "Amici",
       "averageGrade": 0.0
     },
-    "dateTime": "2021-08-30T00:04:29.668+0200",
+    "dateTime": "2021-08-24T21:01:08.998+0200",
     "price": 860.0,
     "shopper": {
       "points": 0.0,
@@ -48,20 +85,21 @@
     "requests": []
   },
   {
-    "id": "bmpnryc1a4",
+    "id": "u1bfdw68vx",
     "articles": [
       {
-        "name": "Pileitna Mediteraneo",
-        "price": 890.0,
-        "type": "FOOD",
+        "name": "Blue Lagoon",
+        "price": 430.0,
+        "type": "DRINK",
         "restaurant": {
           "id": "2",
           "name": "Amici",
+          "type": "Italijanski",
           "averageGrade": 0.0
         },
-        "quantity": 500.0,
-        "description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
-        "image": ".\\resources\\mediterranean-chicken2.jpg",
+        "quantity": 200.0,
+        "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+        "image": ".\\resources\\blue-lagoon.jpg",
         "counter": 3
       }
     ],
@@ -70,68 +108,48 @@
       "name": "Amici",
       "averageGrade": 0.0
     },
-    "dateTime": "2021-08-30T00:04:46.499+0200",
-    "price": 2670.0,
+    "dateTime": "2021-08-31T21:01:16.014+0200",
+    "price": 1290.0,
     "shopper": {
       "points": 0.0,
       "username": "korisnik1",
       "name": "Marko",
       "surname": "Markovic"
     },
-    "status": "WAITING_FOR_DELIVERER",
+    "status": "IN_TRANSPORT",
     "requests": []
   },
   {
-    "id": "ok6pm3oyha",
+    "id": "0m1s18c4zo",
     "articles": [
       {
-        "name": "Udon Nudle Sa Piletinom",
-        "price": 750.0,
+        "name": "Pileitna Mediteraneo",
+        "price": 890.0,
         "type": "FOOD",
         "restaurant": {
-          "id": "3",
-          "name": "JANGCE",
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
           "averageGrade": 0.0
         },
-        "quantity": 550.0,
-        "description": "Udon nudle sa povrcem i piletinom seckanom na rezance u blagom sosu",
-        "image": ".\\resources\\udon-nudle-sa-piletinom.jpg",
+        "quantity": 500.0,
+        "description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
+        "image": ".\\resources\\mediterranean-chicken2.jpg",
         "counter": 1
-      }
-    ],
-    "restaurant": {
-      "id": "3",
-      "name": "JANGCE",
-      "averageGrade": 0.0
-    },
-    "dateTime": "2021-08-30T00:04:46.499+0200",
-    "price": 750.0,
-    "shopper": {
-      "points": 0.0,
-      "username": "korisnik1",
-      "name": "Marko",
-      "surname": "Markovic"
-    },
-    "status": "WAITING_FOR_DELIVERER",
-    "requests": [
-      "dostavljac1"
-    ]
-  },
-  {
-    "id": "wffgv6xi3j",
-    "articles": [
+      },
       {
-        "name": "Špagete Bolognese",
+        "name": "Cesar salata",
         "price": 790.0,
         "type": "FOOD",
         "restaurant": {
           "id": "2",
           "name": "Amici",
+          "type": "Italijanski",
           "averageGrade": 0.0
         },
-        "quantity": 500.0,
-        "description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
-        "image": ".\\resources\\Spaghetti-Bolognese.jpg",
+        "quantity": 305.0,
+        "description": "(miks zelenih salata, piletina, krutoni, paradjz, pančeta, parmezan, dresing)",
+        "image": ".\\resources\\caesar-salad.jpg",
         "counter": 1
       }
     ],
@@ -140,15 +158,52 @@
       "name": "Amici",
       "averageGrade": 0.0
     },
-    "dateTime": "2021-08-30T00:04:59.285+0200",
-    "price": 790.0,
+    "dateTime": "2021-08-31T21:01:54.406+0200",
+    "price": 1680.0,
     "shopper": {
       "points": 0.0,
-      "username": "korisnik1",
-      "name": "Marko",
-      "surname": "Markovic"
+      "username": "korisnik2",
+      "name": "Petar",
+      "surname": "Petarovic"
     },
-    "status": "PROCESSING",
+    "status": "WAITING_FOR_DELIVERER",
+    "requests": [
+      "dostavljac1"
+    ]
+  },
+  {
+    "id": "0y5f2qfbgy",
+    "articles": [
+      {
+        "name": "Špagete Bolognese",
+        "price": 790.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 500.0,
+        "description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
+        "image": ".\\resources\\Spaghetti-Bolognese.jpg",
+        "counter": 2
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-08-27T22:04:05.024+0200",
+    "price": 1580.0,
+    "shopper": {
+      "points": 0.0,
+      "username": "korisnik2",
+      "name": "Petar",
+      "surname": "Petarovic"
+    },
+    "status": "WAITING_FOR_DELIVERER",
     "requests": []
   }
 ]
