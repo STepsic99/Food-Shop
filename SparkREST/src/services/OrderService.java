@@ -43,4 +43,8 @@ public class OrderService {
 	public Order getOrder(String id) {
 		return this.orders.getOrder(id);
 	}
+	
+	public Boolean canUserComment(String username, String restaurantId) {
+		return this.orders.canUserComment(username,restaurantId);
+	}
 }

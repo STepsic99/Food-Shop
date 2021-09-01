@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 
 import beans.Article;
 import beans.Cart;
+import beans.Comment;
 import beans.DeliveryRequests;
 import beans.Manager;
 import beans.Order;
@@ -24,6 +25,7 @@ import beans.OrderStatus;
 import beans.Role;
 import beans.Shopper;
 import beans.User;
+import services.CommentService;
 import services.DelivererService;
 import services.ManagerService;
 import services.OrderService;
@@ -44,6 +46,7 @@ public class SparkAppMain {
 	private static OrderService orderService = new OrderService();
 	private static DelivererService delivererService = new DelivererService();
 	private static ManagerService managerService = new ManagerService();
+	private static CommentService commentService = new CommentService();
 	private static Gson gg=new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 	private static Gson gson1=new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 	
@@ -311,6 +314,27 @@ public class SparkAppMain {
 			delivererService.changeOrder(getUser(req).getUsername(), order);
 			return "SUCCESS";
 		});
+		
+		get("/rest/restaurant/canComment/:id", (req, res) -> {
+			
+			String id = req.params("id");
+			return orderService.canUserComment(getUser(req).getUsername(), id);
+		});
+		
+		post("/rest/comment/addComment", (req, res) -> {
+			res.type("application/json");
+			Comment comment = gg.fromJson(req.body(), Comment.class);
+			comment.setShopper((Shopper)getUser(req));
+			commentService.addComment(comment);
+			return "OK";
+		});
+		
+		get("/rest/comment/getCommentRequests", (req, res) -> {
+			res.type("application/json");
+			Manager manager=(Manager)getUser(req);
+			return commentService.getCommentRequests(manager.getRestaurant().getId());
+		});
+		
 	}
 	
 	private static Cart getCart(Request req) {

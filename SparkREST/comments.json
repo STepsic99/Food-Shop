@@ -1,0 +1,272 @@
+[
+  {
+    "id": "1",
+    "shopper": {
+      "cart": {
+        "articles": [],
+        "user": {
+          "username": "korisnik1"
+        },
+        "price": 0.0,
+        "numberOfItems": 0,
+        "discountPrice": 0.0
+      },
+      "points": 585.2,
+      "type": {
+        "name": "Bronza",
+        "discount": 0,
+        "requiredPoints": 2414.8
+      },
+      "username": "korisnik1",
+      "password": "sifra1",
+      "name": "Marko",
+      "surname": "Markovic",
+      "gender": "Male",
+      "date": "2000-01-12T00:10:00.000+0100",
+      "role": "SHOPPER"
+    },
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "type": "Italijanski",
+      "articles": [
+        {
+          "name": "Špagete Bolognese",
+          "price": 790.0,
+          "type": "FOOD",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 500.0,
+          "description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
+          "image": ".\\resources\\Spaghetti-Bolognese.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Pileitna Mediteraneo",
+          "price": 890.0,
+          "type": "FOOD",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 500.0,
+          "description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
+          "image": ".\\resources\\mediterranean-chicken2.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Cesar salata",
+          "price": 790.0,
+          "type": "FOOD",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 305.0,
+          "description": "(miks zelenih salata, piletina, krutoni, paradjz, pančeta, parmezan, dresing)",
+          "image": ".\\resources\\caesar-salad.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Blue Lagoon",
+          "price": 430.0,
+          "type": "DRINK",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 200.0,
+          "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+          "image": ".\\resources\\blue-lagoon.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Long Island",
+          "price": 430.0,
+          "type": "DRINK",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 200.0,
+          "description": "(rum, tequila, triple sec, gin, vodka, koka kola, limun)",
+          "image": ".\\resources\\Long_island.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Tequila sunrise",
+          "price": 430.0,
+          "type": "DRINK",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 200.0,
+          "description": " (tequila, grenadine, đus)",
+          "image": ".\\resources\\Tequila-Sunrise.jpg",
+          "counter": 1
+        }
+      ],
+      "status": "OPEN",
+      "location": {
+        "longitude": 20.466935084659248,
+        "latitude": 44.79471191576135,
+        "address": "Nebojšina 8, Beograd, 11000"
+      },
+      "imagePath": ".\\resources\\italian.jpg",
+      "averageGrade": 4.5
+    },
+    "content": "Sve top :)",
+    "grade": 5,
+    "status": "PENDING"
+  },
+  {
+    "id": "2",
+    "shopper": {
+      "cart": {
+        "articles": [],
+        "user": {
+          "username": "korisnik1"
+        },
+        "price": 0.0,
+        "numberOfItems": 0,
+        "discountPrice": 0.0
+      },
+      "points": 585.2,
+      "type": {
+        "name": "Bronza",
+        "discount": 0,
+        "requiredPoints": 2414.8
+      },
+      "username": "korisnik1",
+      "password": "sifra1",
+      "name": "Marko",
+      "surname": "Markovic",
+      "gender": "Male",
+      "date": "2000-01-12T00:10:00.000+0100",
+      "role": "SHOPPER"
+    },
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "type": "Italijanski",
+      "articles": [
+        {
+          "name": "Špagete Bolognese",
+          "price": 790.0,
+          "type": "FOOD",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 500.0,
+          "description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
+          "image": ".\\resources\\Spaghetti-Bolognese.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Pileitna Mediteraneo",
+          "price": 890.0,
+          "type": "FOOD",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 500.0,
+          "description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
+          "image": ".\\resources\\mediterranean-chicken2.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Cesar salata",
+          "price": 790.0,
+          "type": "FOOD",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 305.0,
+          "description": "(miks zelenih salata, piletina, krutoni, paradjz, pančeta, parmezan, dresing)",
+          "image": ".\\resources\\caesar-salad.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Blue Lagoon",
+          "price": 430.0,
+          "type": "DRINK",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 200.0,
+          "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+          "image": ".\\resources\\blue-lagoon.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Long Island",
+          "price": 430.0,
+          "type": "DRINK",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 200.0,
+          "description": "(rum, tequila, triple sec, gin, vodka, koka kola, limun)",
+          "image": ".\\resources\\Long_island.jpg",
+          "counter": 1
+        },
+        {
+          "name": "Tequila sunrise",
+          "price": 430.0,
+          "type": "DRINK",
+          "restaurant": {
+            "id": "2",
+            "name": "Amici",
+            "type": "Italijanski",
+            "averageGrade": 0.0
+          },
+          "quantity": 200.0,
+          "description": " (tequila, grenadine, đus)",
+          "image": ".\\resources\\Tequila-Sunrise.jpg",
+          "counter": 1
+        }
+      ],
+      "status": "OPEN",
+      "location": {
+        "longitude": 20.466935084659248,
+        "latitude": 44.79471191576135,
+        "address": "Nebojšina 8, Beograd, 11000"
+      },
+      "imagePath": ".\\resources\\italian.jpg",
+      "averageGrade": 4.5
+    },
+    "content": "Nis ne valja :(",
+    "grade": 1,
+    "status": "PENDING"
+  }
+]

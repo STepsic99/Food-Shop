@@ -155,4 +155,11 @@ public class Orders {
 	public Order getOrder(String id) {
 		return orders.get(id);
 	}
+	
+	public Boolean canUserComment(String username, String restaurantId) {
+		for(Order order : orderList) {
+			if(order.getShopper().getUsername().equals(username) && order.getStatus().equals(OrderStatus.DELIVERED) && order.getRestaurant().getId().equals(restaurantId)) return true;
+		}
+		return false;
+	}
 }

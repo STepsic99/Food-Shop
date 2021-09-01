@@ -3,7 +3,9 @@ Vue.component("restaurantDetails", {
 		    return {
 			  user: {},
 			   restaurant: {"location":{}},
-			   status: ""
+			   status: "",
+			   canComment:null,
+			   comment:{content:null,grade:3,restaurant:null}
 		    }
 	},
 	template: ` 
@@ -42,6 +44,25 @@ Vue.component("restaurantDetails", {
 	</td>
 	</tr>
 	</table>
+	<div style="text-align:left;font-size:1.4em">Komentari:</div><br>
+	<div v-if="this.canComment">
+	<span style="font-size:1.2em">Ostavite komentar:</span><br><br>
+	<textarea v-model="comment.content" style="width:500px;height:100px">
+	</textarea><br>
+	Ocena:
+	<input v-model="comment.grade" type="radio" name="gradeR" value=1>
+<label>1</label>
+<input v-model="comment.grade" type="radio" name="gradeR" value=2>
+<label>2</label>
+<input v-model="comment.grade" type="radio" name="gradeR" value=3>
+<label>3</label>
+<input v-model="comment.grade" type="radio" name="gradeR" value=4>
+<label>4</label>
+<input v-model="comment.grade" type="radio" name="gradeR" value=5>
+<label>5</label>
+	<br><br>
+	<button v-on:click="sendComment">Pošalji komentar</button>
+	</div>
 </div>		  
 `
 	, 
@@ -76,6 +97,15 @@ Vue.component("restaurantDetails", {
 			this.visibleLogin = false;
 			this.visibleLogout = true;
 		}
+		},
+		sendComment : function(){
+			this.comment.restaurant=this.restaurant;
+			axios
+			.post('/rest/comment/addComment', this.comment)
+			.then(response =>{ toast("Komentar je uspešno poslat.")
+					this.comment.content=null;
+					this.comment.grade=3;
+			})
 		}
 	},
 	mounted () {       
@@ -90,6 +120,9 @@ Vue.component("restaurantDetails", {
 				if(this.restaurant.status=="OPEN")
 				this.status="Radi";
 				else this.status="Ne radi"
+				 axios
+          .get('/rest/restaurant/canComment/'+ this.$route.params.id)
+          .then(response => (this.canComment=response.data))
 			})
 			})	
 			
