@@ -5,7 +5,8 @@ Vue.component("restaurantDetails", {
 			   restaurant: {"location":{}},
 			   status: "",
 			   canComment:null,
-			   comment:{content:null,grade:3,restaurant:null}
+			   comment:{content:null,grade:3,restaurant:null},
+			   resComments:[]
 		    }
 	},
 	template: ` 
@@ -45,6 +46,12 @@ Vue.component("restaurantDetails", {
 	</tr>
 	</table>
 	<div style="text-align:left;font-size:1.4em">Komentari:</div><br>
+	<table style="margin-left: auto;
+  margin-right: auto;border-collapse: collapse;border: 1px solid black;width:800px">
+	<tr v-for="comm in resComments" style="border-bottom: 1px solid black;">
+	<td v-bind:class="{rejectedComment:comm.status=='REJECTED'}"  v-if="comm.status=='APPROVED' || user.role=='MANAGER' || user.role=='ADMINISTRATOR'"><div style="text-align:left;float:left">{{comm.shopper.username}}</div><div style="text-align:right;">Ocena:{{comm.grade}}/5</div><div v-if="comm.status=='REJECTED'" style="position:relative;top:-15px;color:red">ODBIJEN KOMENTAR<br></div>{{comm.content}}<br></td>
+	</tr>
+	</table><br><br>
 	<div v-if="this.canComment">
 	<span style="font-size:1.2em">Ostavite komentar:</span><br><br>
 	<textarea v-model="comment.content" style="width:500px;height:100px">
@@ -122,7 +129,11 @@ Vue.component("restaurantDetails", {
 				else this.status="Ne radi"
 				 axios
           .get('/rest/restaurant/canComment/'+ this.$route.params.id)
-          .then(response => (this.canComment=response.data))
+          .then(response => {this.canComment=response.data
+				 axios
+          .get('/rest/restaurant/comments/'+ this.$route.params.id)
+          .then(response => (this.resComments=response.data))
+			})
 			})
 			})	
 			

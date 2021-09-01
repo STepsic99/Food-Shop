@@ -332,7 +332,20 @@ public class SparkAppMain {
 		get("/rest/comment/getCommentRequests", (req, res) -> {
 			res.type("application/json");
 			Manager manager=(Manager)getUser(req);
-			return commentService.getCommentRequests(manager.getRestaurant().getId());
+			return gson1.toJson(commentService.getCommentRequests(manager.getRestaurant().getId()));
+		});
+		
+		put("/rest/comment/changeStatus", (req,res) -> {
+			res.type("application/json");
+			Comment comment = gg.fromJson(req.body(), Comment.class);
+			commentService.changeStatus(comment);
+			return "SUCCESS";
+		});
+		
+		get("/rest/restaurant/comments/:id", (req, res) -> {
+			res.type("application/json");
+			String id = req.params("id");
+			return gson1.toJson(commentService.getComments(id));
 		});
 		
 	}

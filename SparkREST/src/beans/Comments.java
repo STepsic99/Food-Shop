@@ -64,8 +64,22 @@ public class Comments {
 	public ArrayList<Comment> getCommentRequests(String restaurantId) {
 		ArrayList<Comment>requestedComments=new ArrayList<Comment>();
 		for(Comment comment:commentList) {
-			if(comment.getRestaurant().getId().equals(restaurantId)) requestedComments.add(comment);
+			if(comment.getRestaurant().getId().equals(restaurantId) && comment.getStatus().equals(CommentStatus.PENDING)) requestedComments.add(comment);
 		}
 		return requestedComments;
+	}
+	
+	public void changeStatus(Comment comment) {
+		Comment oldComment=comments.get(comment.getId());
+		oldComment.setStatus(comment.getStatus());
+		Serialization();
+	}
+	
+	public ArrayList<Comment> getComments(String restaurantId){
+		ArrayList<Comment>restaurantComments=new ArrayList<Comment>();
+		for(Comment comment:commentList) {
+			if(comment.getRestaurant().getId().equals(restaurantId)) restaurantComments.add(comment);
+		}
+		return restaurantComments;
 	}
 }

@@ -16,4 +16,12 @@ public class CommentService {
 	public ArrayList<Comment> getCommentRequests(String restaurantId){
 		return this.comments.getCommentRequests(restaurantId);
 	}
+	
+	public void changeStatus(Comment comment) {
+		this.comments.changeStatus(comment);
+	}
+	
+	public ArrayList<Comment> getComments(String restaurantId){
+		return this.comments.getComments(restaurantId);
+	}
 }

@@ -132,7 +132,7 @@
     },
     "content": "Sve top :)",
     "grade": 5,
-    "status": "PENDING"
+    "status": "APPROVED"
   },
   {
     "id": "2",
@@ -267,6 +267,6 @@
     },
     "content": "Nis ne valja :(",
     "grade": 1,
-    "status": "PENDING"
+    "status": "REJECTED"
   }
 ]
