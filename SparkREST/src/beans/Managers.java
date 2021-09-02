@@ -54,5 +54,8 @@ public class Managers {
 		return null;
 	}
 	
+	public ArrayList<Manager> getAll(){
+		return managerList;
+	}
 	
 }

@@ -65,4 +65,7 @@ public class Deliverers {
 		Serialization();
 	}
 	
+	public ArrayList<Deliverer> getAll(){
+		return delivererList;
+	}
 }

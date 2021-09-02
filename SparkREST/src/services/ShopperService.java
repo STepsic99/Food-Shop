@@ -1,5 +1,7 @@
 package services;
 
+import java.util.ArrayList;
+
 import beans.Article;
 import beans.Shopper;
 import beans.Shoppers;
@@ -42,5 +44,9 @@ public class ShopperService {
 	
 	public void editPoints(Shopper newShopper) {
 		this.shoppers.editPoints(newShopper);
+	}
+	
+	public ArrayList<Shopper> getAll(){
+		return this.shoppers.getAll();
 	}
 }

@@ -1,5 +1,7 @@
 package services;
 
+import java.util.ArrayList;
+
 import beans.Deliverer;
 import beans.Deliverers;
 import beans.Order;
@@ -18,5 +20,9 @@ public class DelivererService {
 	
 	public void changeOrder(String username,Order newOrder) {
 		this.deliverers.changeOrder(username, newOrder);
+	}
+	
+	public ArrayList<Deliverer> getAll(){
+		return this.deliverers.getAll();
 	}
 }

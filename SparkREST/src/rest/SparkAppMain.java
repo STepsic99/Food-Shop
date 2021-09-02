@@ -25,6 +25,7 @@ import beans.OrderStatus;
 import beans.Role;
 import beans.Shopper;
 import beans.User;
+import services.AdministratorService;
 import services.CommentService;
 import services.DelivererService;
 import services.ManagerService;
@@ -47,6 +48,7 @@ public class SparkAppMain {
 	private static DelivererService delivererService = new DelivererService();
 	private static ManagerService managerService = new ManagerService();
 	private static CommentService commentService = new CommentService();
+	private static AdministratorService administratorService = new AdministratorService();
 	private static Gson gg=new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
 	private static Gson gson1=new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 	
@@ -91,6 +93,9 @@ public class SparkAppMain {
 				break;
 			case MANAGER:
 				us=managerService.getManager(us.getUsername());
+				break;
+			case ADMINISTRATOR:
+				us=administratorService.getAdministrator(us.getUsername());
 				break;
 			}
 			Session session=req.session(true);
@@ -346,6 +351,15 @@ public class SparkAppMain {
 			res.type("application/json");
 			String id = req.params("id");
 			return gson1.toJson(commentService.getComments(id));
+		});
+		
+		get("/rest/users/registredUsers", (req, res) -> {
+			res.type("application/json");
+			ArrayList<User>registeredUsers=new ArrayList<User>();
+			registeredUsers.addAll(shopperService.getAll());
+			registeredUsers.addAll(managerService.getAll());
+			registeredUsers.addAll(delivererService.getAll());
+			return gson1.toJson(registeredUsers);
 		});
 		
 	}

@@ -139,4 +139,8 @@ public class Shoppers {
 		
 		Serialization();
 	}
+	
+	public ArrayList<Shopper> getAll(){
+		return shopperList;
+	}
 }
