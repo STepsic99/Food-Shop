@@ -9,7 +9,8 @@ public class Shopper extends User{
 	private double points;
 	private ShopperType type;
 	private ArrayList<Date>cancelDates=new ArrayList<Date>();
-	private boolean isShady=false;
+	private boolean isBlocked;
+
 	
 	public Shopper() {
 		super();
@@ -27,15 +28,15 @@ public class Shopper extends User{
 		this.type = type;
 	}
 
-	public Shopper(ArrayList<Order> orders, Cart cart, double points, ShopperType type, ArrayList<Date> cancelDates,
-			boolean isShady) {
+	public Shopper(ArrayList<Order> orders, Cart cart, double points, ShopperType type, ArrayList<Date> cancelDates, boolean isBlocked) {
 		super();
 		this.orders = orders;
 		this.cart = cart;
 		this.points = points;
 		this.type = type;
 		this.cancelDates = cancelDates;
-		this.isShady = isShady;
+		this.isBlocked = isBlocked;
+		
 	}
 
 	public ArrayList<Order> getOrders() {
@@ -78,13 +79,15 @@ public class Shopper extends User{
 		this.cancelDates = cancelDates;
 	}
 
-	public boolean isShady() {
-		return isShady;
+	public boolean isBlocked() {
+		return isBlocked;
 	}
 
-	public void setShady(boolean isShady) {
-		this.isShady = isShady;
+	public void setBlocked(boolean isBlocked) {
+		this.isBlocked = isBlocked;
 	}
+
+	
 	
 	
 }

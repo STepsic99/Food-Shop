@@ -27,6 +27,8 @@
     "price": 2250.0,
     "shopper": {
       "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
       "username": "korisnik1",
       "name": "Marko",
       "surname": "Markovic"
@@ -77,6 +79,8 @@
     "price": 860.0,
     "shopper": {
       "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
       "username": "korisnik1",
       "name": "Marko",
       "surname": "Markovic"
@@ -112,6 +116,8 @@
     "price": 1290.0,
     "shopper": {
       "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
       "username": "korisnik1",
       "name": "Marko",
       "surname": "Markovic"
@@ -162,6 +168,8 @@
     "price": 1680.0,
     "shopper": {
       "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
       "username": "korisnik2",
       "name": "Petar",
       "surname": "Petarovic"
@@ -199,11 +207,272 @@
     "price": 1580.0,
     "shopper": {
       "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
       "username": "korisnik2",
       "name": "Petar",
       "surname": "Petarovic"
     },
     "status": "WAITING_FOR_DELIVERER",
+    "requests": []
+  },
+  {
+    "id": "rpn0p7w28h",
+    "articles": [
+      {
+        "name": "Blue Lagoon",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+        "image": ".\\resources\\blue-lagoon.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-09-03T04:40:48.635+0200",
+    "price": 430.0,
+    "shopper": {
+      "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
+      "username": "korisnik3",
+      "name": "Pablo",
+      "surname": "Djuric"
+    },
+    "status": "CANCELED",
+    "requests": []
+  },
+  {
+    "id": "jpd7rlqqaf",
+    "articles": [
+      {
+        "name": "Blue Lagoon",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+        "image": ".\\resources\\blue-lagoon.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-09-03T04:41:22.291+0200",
+    "price": 430.0,
+    "shopper": {
+      "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
+      "username": "korisnik3",
+      "name": "Pablo",
+      "surname": "Djuric"
+    },
+    "status": "CANCELED",
+    "requests": []
+  },
+  {
+    "id": "wg2f6ncfq0",
+    "articles": [
+      {
+        "name": "Blue Lagoon",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+        "image": ".\\resources\\blue-lagoon.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-09-03T04:41:27.803+0200",
+    "price": 430.0,
+    "shopper": {
+      "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
+      "username": "korisnik3",
+      "name": "Pablo",
+      "surname": "Djuric"
+    },
+    "status": "CANCELED",
+    "requests": []
+  },
+  {
+    "id": "dtd7npkec0",
+    "articles": [
+      {
+        "name": "Blue Lagoon",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+        "image": ".\\resources\\blue-lagoon.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-09-03T04:41:33.403+0200",
+    "price": 430.0,
+    "shopper": {
+      "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
+      "username": "korisnik3",
+      "name": "Pablo",
+      "surname": "Djuric"
+    },
+    "status": "CANCELED",
+    "requests": []
+  },
+  {
+    "id": "i4n5ol9ck2",
+    "articles": [
+      {
+        "name": "Blue Lagoon",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+        "image": ".\\resources\\blue-lagoon.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-09-03T04:41:38.986+0200",
+    "price": 430.0,
+    "shopper": {
+      "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
+      "username": "korisnik3",
+      "name": "Pablo",
+      "surname": "Djuric"
+    },
+    "status": "CANCELED",
+    "requests": []
+  },
+  {
+    "id": "flzdukkax5",
+    "articles": [
+      {
+        "name": "Blue Lagoon",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+        "image": ".\\resources\\blue-lagoon.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-09-03T04:41:47.491+0200",
+    "price": 430.0,
+    "shopper": {
+      "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
+      "username": "korisnik3",
+      "name": "Pablo",
+      "surname": "Djuric"
+    },
+    "status": "CANCELED",
+    "requests": []
+  },
+  {
+    "id": "xolwszfg5f",
+    "articles": [
+      {
+        "name": "Cesar salata",
+        "price": 790.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 305.0,
+        "description": "(miks zelenih salata, piletina, krutoni, paradjz, pančeta, parmezan, dresing)",
+        "image": ".\\resources\\caesar-salad.jpg",
+        "counter": 1
+      }
+    ],
+    "restaurant": {
+      "id": "2",
+      "name": "Amici",
+      "averageGrade": 0.0
+    },
+    "dateTime": "2021-09-03T04:42:38.171+0200",
+    "price": 790.0,
+    "shopper": {
+      "points": 0.0,
+      "cancelDates": [],
+      "isShady": false,
+      "username": "korisnik3",
+      "name": "Pablo",
+      "surname": "Djuric"
+    },
+    "status": "CANCELED",
     "requests": []
   }
 ]

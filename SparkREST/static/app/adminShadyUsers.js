@@ -3,53 +3,30 @@ Vue.component("adminShadyUsers", {
 		    return {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
 			   isEditing: false,
-			   isViewing: true
+			   isViewing: true,
+			   shoppers:[]
 		    }
 	},
 	template: ` 
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
-	<h1>Podaci o profilu</h1>
-	<label>Ime:
-	
-	<span v-if="isViewing"> {{user.name}} </span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.name">
-	 </span>
-	</label><br><br>
-	<label>Prezime:
-	<span v-if="isViewing">
-	 {{user.surname}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.surname">
-	 </span>
-	</label><br><br>
-	<label>Pol: 
-	<span v-if="isViewing">
-	{{user.gender}}
-	</span>
-	<span v-if="isEditing"> 
-	<select v-model ="user.gender">
-    <option value="Ženski">Ženski</option>
-    <option value="Muški">Muški</option>
-    <option value="Ne bih da navedem">Ne bih da navedem</option>
-  	</select>
-	 </span>
-	</label><br><br>
-	<label>
-	Datum rođenja: 
-	<span v-if="isViewing">
-	{{user.date}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type = "date" v-model = "user.date">
-	 </span>
-	</label><br><br>
-	<label>Korisničko ime: {{user.username}}</label><br><br>
-	<button v-if="isViewing" v-on:click = "changeMode">Izmeni profil</button><br><br>
-	<button v-if="isViewing" v-on:click = "changePassword">Promeni lozinku</button>
-	<button v-if="isEditing" v-on:click = "saveChanges">Sačuvaj izmene</button>
-	<button v-if="isEditing" v-on:click = "cancelChanges">Odustani</button>
+	<h1>Sumnjivi korisnici</h1>
+	<table style="margin-left: auto;
+  margin-right: auto;width:500px;margin-top:4em">
+	<tr v-for="s in shoppers">
+	<td style="padding-bottom: 4em;text-align:left">Korisničko ime: {{s.username}}<br>
+	Ime: {{s.name}}<br>
+	Prezime: {{s.surname}}<br>
+	Poeni: {{s.points.toFixed(2)}}
+	</td>
+	<td style="padding-bottom: 4em;text-align:left">
+	Datum rođenja: {{s.date.getDate()}}.{{s.date.getMonth()+1}}.{{s.date.getFullYear()}}<br>
+	Pol: {{s.gender}}<br>
+	Uloga: {{s.role}}<br>
+	Tip: {{s.type.name}}</td>
+	</td>
+	<td><button style="position: relative;top:-25px" v-on:click="blockUser(s)">BLOKIRAJ</button></td>
+	</tr>
+	</table>
 </div>		  
 `
 	, 
@@ -89,11 +66,35 @@ Vue.component("adminShadyUsers", {
 	},
 	changePassword : function(){
 		router.push(`/pass`);
+	},
+	blockUser : function(shopper){
+		shopper.role='SHOPPER'
+		axios
+		.post('/rest/user/block',shopper)
+		.then(response=>{toast("Korisnik je uspešno blokiran.")
+			axios
+		  .get('/rest/users/getShadyUsers')
+		  .then(response => {this.shoppers=response.data
+					for(let i=0;i<this.shoppers.length;i++){
+						this.shoppers[i].date=new Date(this.shoppers[i].date);
+						this.shoppers[i].role='Kupac';
+					}
+				})
+		})
 	}
 	},
 	mounted () {
        axios
           .get('/rest/user/getUser')
           .then(response => (this.isLogged(response.data)))
+
+	  axios
+		  .get('/rest/users/getShadyUsers')
+		  .then(response => {this.shoppers=response.data
+					for(let i=0;i<this.shoppers.length;i++){
+						this.shoppers[i].date=new Date(this.shoppers[i].date);
+						this.shoppers[i].role='Kupac';
+					}
+				})
     },
 });

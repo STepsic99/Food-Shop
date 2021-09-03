@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,7 +53,9 @@ public class Shoppers {
 	}
 	
 	public Shopper getShopper(String username) {
-		return shoppers.get(username);
+		Shopper shopper=shoppers.get(username);
+		if(shopper.isBlocked()) return null;
+		return shopper;
 	}
 	
 	public void deleteShopper(String username) {
@@ -141,7 +144,39 @@ public class Shoppers {
 		Serialization();
 	}
 	
+	public void updateCancellationTime(Shopper newShopper) {
+		Shopper oldShopper = shoppers.get(newShopper.username);
+		oldShopper.setCancelDates(newShopper.getCancelDates());
+		if(oldShopper.getCancelDates().size()>6) {
+			//long diffInMillies = Math.abs(oldShopper.getCancelDates().get(0).getTime() - (new Date()).getTime());
+		   // long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+		   // System.out.println(diff);
+			oldShopper.getCancelDates().remove(0);
+		}
+		Serialization();
+	}
+	
 	public ArrayList<Shopper> getAll(){
 		return shopperList;
+	}
+	
+	public ArrayList<Shopper> getShadyShoppers(){
+		ArrayList<Shopper>retVal=new ArrayList<Shopper>();
+		for(Shopper shopper:shopperList) {
+			if(shopper.getCancelDates().size()==6 && shopper.isBlocked()==false) {
+				long diffInMillies = Math.abs(shopper.getCancelDates().get(0).getTime() - (new Date()).getTime());
+				long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+				if(diff<31) {
+					retVal.add(shopper);
+				}
+			}
+		}
+		return retVal;
+	}
+	
+	public void blockShopper(String username) {
+		Shopper tmpShopper=shoppers.get(username);
+		tmpShopper.setBlocked(true);
+		Serialization();
 	}
 }

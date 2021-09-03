@@ -31,6 +31,8 @@ Vue.component("login", {
 			.then(response => {
 				if(response.data==="ERROR"){
 					 this.error="Uneli ste neodgovarajuće korisničko ime ili lozinku.";
+				} else if(response.data==="BLOCKED"){
+					this.error="Nalog vam je blokiran.";
 				}
 				else{
 					this.$root.$emit('prijavljivanje', 0);

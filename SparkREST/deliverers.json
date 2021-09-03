@@ -93,6 +93,7 @@
     "surname": "Tomić",
     "gender": "Muški",
     "date": "2000-04-30T00:04:29.668+0200",
-    "role": "DELIVERER"
+    "role": "DELIVERER",
+    "isBlocked":false
   }
 ]

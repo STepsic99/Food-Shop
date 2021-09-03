@@ -49,4 +49,16 @@ public class ShopperService {
 	public ArrayList<Shopper> getAll(){
 		return this.shoppers.getAll();
 	}
+	
+	public void updateCancellationTime(Shopper newShopper) {
+		this.shoppers.updateCancellationTime(newShopper);
+	}
+	
+	public ArrayList<Shopper> getShadyShoppers(){
+		return this.shoppers.getShadyShoppers();
+	}
+	
+	public void blockShopper(String username) {
+		this.shoppers.blockShopper(username);
+	}
 }

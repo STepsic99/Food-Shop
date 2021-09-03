@@ -100,6 +100,7 @@ public class SparkAppMain {
 				us=administratorService.getAdministrator(us.getUsername());
 				break;
 			}
+			if(us==null) return "BLOCKED";
 			Session session=req.session(true);
 			User sessionUser = session.attribute("user");
 			if(sessionUser == null) {
@@ -151,8 +152,6 @@ public class SparkAppMain {
 		put("/rest/user/change", (req,res) -> {
 			res.type("application/json");
 			User us = gg.fromJson(req.body(), User.class);
-			System.out.println(us.getDate().getMonth());
-			System.out.println(us.getDate());
 			switch(us.getRole()) {
 			case SHOPPER:
 				shopperService.editShopper(us);
@@ -248,6 +247,8 @@ public class SparkAppMain {
 			orderService.changeOrder(order);
 			shopper.setPoints(shopper.getPoints()-(order.getPrice()/1000*133*4));
 			shopperService.editPoints(shopper);
+			shopper.getCancelDates().add(new Date());
+			shopperService.updateCancellationTime(shopper);
 			return "SUCCESS";
 		});
 		
@@ -364,6 +365,28 @@ public class SparkAppMain {
 			registeredUsers.addAll(managerService.getAll());
 			registeredUsers.addAll(delivererService.getAll());
 			return gson1.toJson(registeredUsers);
+		});
+		
+		get("/rest/users/getShadyUsers", (req, res) -> {
+			res.type("application/json");
+			return gson1.toJson(shopperService.getShadyShoppers());
+		});
+		
+		post("/rest/user/block", (req, res) -> {
+			res.type("application/json");
+			User us = gg.fromJson(req.body(), User.class);
+			switch(us.getRole()) {
+			case SHOPPER:
+				shopperService.blockShopper(us.getUsername());
+				break;
+			case DELIVERER:
+				
+				break;
+			case MANAGER:
+				
+				break;
+			}
+			return "OK";
 		});
 		
 	}
