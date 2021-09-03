@@ -34,4 +34,8 @@ public class DelivererService {
 	public void editDeliverer(User user) {
 		this.deliverers.editDeliverer(user);
 	}
+	
+	public void addDeliverer(Deliverer deliverer) {
+		this.deliverers.addDeliverer(deliverer);
+	}
 }

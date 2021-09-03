@@ -3,53 +3,56 @@ Vue.component("adminAddUser", {
 		    return {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
 			   isEditing: false,
-			   isViewing: true
+			   isViewing: true,
+			   error: null,
+			   newUser:{}
 		    }
 	},
 	template: ` 
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
-	<h1>Podaci o profilu</h1>
-	<label>Ime:
-	
-	<span v-if="isViewing"> {{user.name}} </span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.name">
-	 </span>
-	</label><br><br>
-	<label>Prezime:
-	<span v-if="isViewing">
-	 {{user.surname}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.surname">
-	 </span>
-	</label><br><br>
-	<label>Pol: 
-	<span v-if="isViewing">
-	{{user.gender}}
-	</span>
-	<span v-if="isEditing"> 
-	<select v-model ="user.gender">
+	<h1>Dodaj korisnika</h1>
+	<p v-if="error">
+    <b>Molim Vas, ispravite navedeno:</b>
+      <div style="color:red">{{ error }}</div>
+  </p>
+	<form class="formUser">
+	<p>
+	<label>Ime:</label>
+	<input type = "text" v-model = "newUser.name">
+	</p>
+	<p>
+	<label>Prezime:</label>
+	<input type = "text" v-model = "newUser.surname">
+	</p>
+	<p>
+	<label>Pol:</label>
+	<select v-model ="newUser.gender">
     <option value="Ženski">Ženski</option>
     <option value="Muški">Muški</option>
     <option value="Ne bih da navedem">Ne bih da navedem</option>
   	</select>
-	 </span>
-	</label><br><br>
-	<label>
-	Datum rođenja: 
-	<span v-if="isViewing">
-	{{user.date}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type = "date" v-model = "user.date">
-	 </span>
-	</label><br><br>
-	<label>Korisničko ime: {{user.username}}</label><br><br>
-	<button v-if="isViewing" v-on:click = "changeMode">Izmeni profil</button><br><br>
-	<button v-if="isViewing" v-on:click = "changePassword">Promeni lozinku</button>
-	<button v-if="isEditing" v-on:click = "saveChanges">Sačuvaj izmene</button>
-	<button v-if="isEditing" v-on:click = "cancelChanges">Odustani</button>
+	</p>
+	<p>
+	<label>Datum rodjenja:</label>
+	<input type = "date" v-model = "newUser.date">
+	</p>
+	<p>
+	<label>Uloga: </label>
+	<select v-model ="newUser.role">
+	<option value="MANAGER">Menadžer</option>
+	<option value="DELIVERER">Dostavljač</option>
+	</select>
+	</p>
+	<p>
+	<label>Korisničko ime:</label>
+	<input type = "text" v-model = "newUser.username">
+	</p>
+	<p>
+	<label>Lozinka:</label>
+	<input type = "password" v-model = "newUser.password">
+	</p><br>
+	<input type = "submit" v-on:click="addUser" value = "Dodaj korisnika">
+	</form>
 </div>		  
 `
 	, 
@@ -64,32 +67,29 @@ Vue.component("adminAddUser", {
 			this.visibleLogout = true;
 		}
 		},
-	changeMode : function(){
-		this.isEditing=true;
-		this.isViewing=false;
-		this.backup = [this.user.username, this.user.password, this.user.name, this.user.surname, this.user.gender, this.user.date, this.user.role];
-	},
-	saveChanges : function(){
+	
+	addUser : function(){
+		event.preventDefault();
+		if(!this.newUser.name || !this.newUser.surname || !this.newUser.username || !this.newUser.password || !this.newUser.gender || !this.newUser.date || !this.newUser.role ){
+			this.error="";
+		    this.error='Nisu sva polja popunjena.';
+			return;
+		}
 		axios
-			.put('/rest/user/change', this.user)
-			
-		this.isEditing=false;
-		this.isViewing=true;
-	},
-		cancelChanges : function(){
-		this.user.username = this.backup[0];
-    	this.user.password = this.backup[1];
-    	this.user.name = this.backup[2];
-    	this.user.surname = this.backup[3];	
-		this.user.gender = this.backup[4];
-    	this.user.date = this.backup[5];
-    	this.user.role = this.backup[6];	
-		this.isEditing=false;
-		this.isViewing=true;
-	},
-	changePassword : function(){
-		router.push(`/pass`);
+			.post('rest/user/addByAdmin', this.newUser)
+			.then(response => {
+				if(response.data==="USERNAMEERROR"){
+					this.error="";
+					this.error='Korisnicko ime je zauzeto. Izaberite drugo.';
+				}else{
+					toast("Korisnik je uspešno kreiran.");
+					this.newUser={};
+					this.error=null;
+				}
+				
+			})
 	}
+
 	},
 	mounted () {
        axios

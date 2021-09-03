@@ -20,6 +20,7 @@ import com.google.gson.GsonBuilder;
 import beans.Article;
 import beans.Cart;
 import beans.Comment;
+import beans.Deliverer;
 import beans.DeliveryRequests;
 import beans.Manager;
 import beans.Order;
@@ -396,6 +397,25 @@ public class SparkAppMain {
 				break;
 			}
 			return "OK";
+		});
+		
+		post("rest/user/addByAdmin", (req, res) -> {
+			res.type("application/json");
+			User us = gg.fromJson(req.body(), User.class);
+			if(userService.usernameExists(us.getUsername())) return "USERNAMEERROR";
+			switch(us.getRole()) {
+			case DELIVERER:
+				delivererService.addDeliverer(new Deliverer(us));
+				break;
+			case MANAGER:
+				managerService.addManager(new Manager(us));
+				break;
+			default:
+					break;
+			}
+			userService.addUser(new User(us.getUsername(),us.getPassword(),us.getRole()));
+			
+			return "SUCCESS";
 		});
 		
 	}

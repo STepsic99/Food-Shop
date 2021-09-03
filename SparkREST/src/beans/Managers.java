@@ -76,4 +76,10 @@ public class Managers {
 		Serialization();
 	}
 	
+	public void addManager(Manager manager) {
+		managerList.add(manager);
+		managers.put(manager.username,manager);
+		Serialization();
+	}
+	
 }

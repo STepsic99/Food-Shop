@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class Deliverer extends User{
 	private ArrayList<Order>orders=new ArrayList<Order>();
 	private boolean isBlocked;
+	
+	public Deliverer(User user) {
+		super(user.username,user.password,user.name,user.surname,user.gender,user.date,user.role);
+	}
 
 	public ArrayList<Order> getOrders() {
 		return orders;

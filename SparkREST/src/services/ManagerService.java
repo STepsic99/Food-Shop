@@ -24,4 +24,8 @@ public class ManagerService {
 	public void editManager(User user) {
 		this.managers.editManager(user);
 	}
+	
+	public void addManager(Manager manager) {
+		this.managers.addManager(manager);
+	}
 }

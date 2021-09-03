@@ -86,4 +86,10 @@ public class Deliverers {
 		deliverer.password=user.password;
 		Serialization();
 	}
+	
+	public void addDeliverer(Deliverer deliverer) {
+		delivererList.add(deliverer);
+		deliverers.put(deliverer.username,deliverer);
+		Serialization();
+	}
 }

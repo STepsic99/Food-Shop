@@ -99,5 +99,16 @@
     "gender": "Muški",
     "date": "2000-06-30T00:00:00.000+0200",
     "role": "DELIVERER"
+  },
+  {
+    "orders": [],
+    "isBlocked": false,
+    "username": "dostavljac2",
+    "password": "sifra2",
+    "name": "Andrej",
+    "surname": "Andrić",
+    "gender": "Muški",
+    "date": "1998-02-03T00:00:00.000+0100",
+    "role": "DELIVERER"
   }
 ]

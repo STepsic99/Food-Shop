@@ -4,6 +4,9 @@ public class Manager extends User{
 	private Restaurant restaurant;
 	private boolean isBlocked;
 
+	public Manager(User user) {
+		super(user.username,user.password,user.name,user.surname,user.gender,user.date,user.role);
+	}
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
