@@ -2,6 +2,7 @@ package services;
 
 import beans.Administrator;
 import beans.Administrators;
+import beans.User;
 
 public class AdministratorService {
 	
@@ -9,5 +10,9 @@ public class AdministratorService {
 	
 	public Administrator getAdministrator(String username) {
 		return this.administrators.getAdministrator(username);
+	}
+	
+	public void editAdministrator(User user) {
+		this.administrators.editAdministrator(user);
 	}
 }

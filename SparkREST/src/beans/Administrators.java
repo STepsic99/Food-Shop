@@ -48,4 +48,14 @@ public class Administrators {
 		return administrators.get(username);
 	}
 	
+	public void editAdministrator(User user) {
+		Administrator administrator = administrators.get(user.username);
+		administrator.name=user.name;
+		administrator.surname=user.surname;
+		administrator.gender=user.gender;
+		administrator.date=user.date;
+		administrator.password=user.password;
+		Serialization();
+	}
+	
 }

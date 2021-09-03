@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import beans.Deliverer;
 import beans.Deliverers;
 import beans.Order;
+import beans.User;
 
 
 public class DelivererService {
@@ -24,5 +25,13 @@ public class DelivererService {
 	
 	public ArrayList<Deliverer> getAll(){
 		return this.deliverers.getAll();
+	}
+	
+	public void blockDeliverer(String username) {
+		this.deliverers.blockDeliverer(username);
+	}
+	
+	public void editDeliverer(User user) {
+		this.deliverers.editDeliverer(user);
 	}
 }

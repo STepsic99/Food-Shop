@@ -45,7 +45,9 @@ public class Deliverers {
 	}
 	
 	public Deliverer getDeliverer(String username) {
-		return deliverers.get(username);
+		Deliverer deliverer=deliverers.get(username);
+		if(deliverer.isBlocked()) return null;
+		return deliverer;
 	}
 	
 	public void addOrder(String username, Order order) {
@@ -67,5 +69,21 @@ public class Deliverers {
 	
 	public ArrayList<Deliverer> getAll(){
 		return delivererList;
+	}
+	
+	public void blockDeliverer(String username) {
+		Deliverer deliverer=deliverers.get(username);
+		deliverer.setBlocked(true);
+		Serialization();
+	}
+	
+	public void editDeliverer(User user) {
+		Deliverer deliverer = deliverers.get(user.username);
+		deliverer.name=user.name;
+		deliverer.surname=user.surname;
+		deliverer.gender=user.gender;
+		deliverer.date=user.date;
+		deliverer.password=user.password;
+		Serialization();
 	}
 }

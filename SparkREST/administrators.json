@@ -1,1 +1,11 @@
-[{"username":"admin1","password":"sifra1", "name":"Milja", "surname":"Miljković", "gender":"Ženski", "date":"1999-04-30T00:04:29.668+0200","role":"ADMINISTRATOR"}]
+[
+  {
+    "username": "admin1",
+    "password": "sifra1",
+    "name": "Milja",
+    "surname": "Miljković",
+    "gender": "Ženski",
+    "date": "1999-07-01T00:00:00.000+0200",
+    "role": "ADMINISTRATOR"
+  }
+]

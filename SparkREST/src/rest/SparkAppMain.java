@@ -156,6 +156,15 @@ public class SparkAppMain {
 			case SHOPPER:
 				shopperService.editShopper(us);
 				break;
+			case MANAGER:
+				managerService.editManager(us);
+				break;
+			case ADMINISTRATOR:
+				administratorService.editAdministrator(us);
+				break;
+			case DELIVERER:
+				delivererService.editDeliverer(us);
+				break;
 			}
 			return "SUCCESS";
 		});
@@ -380,10 +389,10 @@ public class SparkAppMain {
 				shopperService.blockShopper(us.getUsername());
 				break;
 			case DELIVERER:
-				
+				delivererService.blockDeliverer(us.getUsername());
 				break;
 			case MANAGER:
-				
+				managerService.blockManager(us.getUsername());
 				break;
 			}
 			return "OK";

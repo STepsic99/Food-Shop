@@ -77,6 +77,10 @@ Rang kupca:
 	Uloga: {{u.role}}<br>
 	<span v-if="u.role=='Kupac'">Tip: {{u.type.name}}</span></td>
 	</td>
+	<td><span style="position:relative;top:-25px" v-if="u.isBlocked==false"><button v-on:click="blockUser(u)">BLOKIRAJ</button></span>
+	<span style="position:relative;top:-25px" v-else>Korisnik je blokiran</span>
+	
+	<td>
 	</tr>
 	</table>
 </div>		  
@@ -235,6 +239,47 @@ Rang kupca:
 		openFilters : function(){
 			event.preventDefault();
 			this.showFilters=!this.showFilters;
+		},
+		blockUser : function(us){
+				switch(us.role){
+					case 'Kupac':
+						us.role='SHOPPER';
+						break;
+					case 'Menadžer':
+						us.role='MANAGER';
+						break;	
+					case 'Dostavljač':
+						us.role='DELIVERER';
+						break;			
+				}
+			axios
+			.post('/rest/user/block',us)
+			.then(response=>{
+		  axios
+		.get('/rest/users/registredUsers')
+		.then(response=>{this.users=response.data
+			for(let i=0;i<this.users.length;i++){
+				this.users[i].date=new Date(this.users[i].date)
+				switch(this.users[i].role){
+					case 'SHOPPER':
+						this.users[i].role='Kupac';
+						break;
+					case 'MANAGER':
+						this.users[i].role='Menadžer';
+						break;
+					case 'ADMINISTRATOR':
+						this.users[i].role='Administrator';
+						break;		
+					case 'DELIVERER':
+						this.users[i].role='Dostavljač';
+						break;			
+				}
+				
+			}
+		
+		
+		})
+		})
 		}
 	},
 	mounted () {

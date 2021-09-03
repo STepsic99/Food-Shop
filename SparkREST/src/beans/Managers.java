@@ -16,7 +16,7 @@ public class Managers {
 	
 	private ArrayList<Manager> managerList=new ArrayList<Manager>();
 	private HashMap<String, Manager> managers = new HashMap<String, Manager>();
-	private Gson gson =new GsonBuilder().setDateFormat("yyyy-mm-dd").setPrettyPrinting().create();
+	private Gson gson =new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").setPrettyPrinting().create();
 	
 	public Managers() {
 		try {
@@ -44,7 +44,9 @@ public class Managers {
 	}
 	
 	public Manager getManager(String username) {
-		return managers.get(username);
+		Manager manager=managers.get(username);
+		if(manager.isBlocked()) return null;
+		return manager;
 	}
 	
 	public Manager getManagerByRestaurant(String id) {
@@ -56,6 +58,22 @@ public class Managers {
 	
 	public ArrayList<Manager> getAll(){
 		return managerList;
+	}
+	
+	public void blockManager(String username) {
+		Manager manager=managers.get(username);
+		manager.setBlocked(true);
+		Serialization();
+	}
+	
+	public void editManager(User user) {
+		Manager manager = managers.get(user.username);
+		manager.name=user.name;
+		manager.surname=user.surname;
+		manager.gender=user.gender;
+		manager.date=user.date;
+		manager.password=user.password;
+		Serialization();
 	}
 	
 }

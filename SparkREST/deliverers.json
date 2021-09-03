@@ -44,6 +44,8 @@
         "price": 860.0,
         "shopper": {
           "points": 0.0,
+          "cancelDates": [],
+          "isBlocked": false,
           "username": "korisnik1",
           "name": "Marko",
           "surname": "Markovic"
@@ -79,6 +81,8 @@
         "price": 1290.0,
         "shopper": {
           "points": 0.0,
+          "cancelDates": [],
+          "isBlocked": false,
           "username": "korisnik1",
           "name": "Marko",
           "surname": "Markovic"
@@ -87,13 +91,13 @@
         "requests": []
       }
     ],
+    "isBlocked": false,
     "username": "dostavljac1",
     "password": "sifra1",
     "name": "Tomi",
     "surname": "Tomić",
     "gender": "Muški",
-    "date": "2000-04-30T00:04:29.668+0200",
-    "role": "DELIVERER",
-    "isBlocked":false
+    "date": "2000-06-30T00:00:00.000+0200",
+    "role": "DELIVERER"
   }
 ]

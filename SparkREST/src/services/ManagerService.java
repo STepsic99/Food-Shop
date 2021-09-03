@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import beans.Manager;
 import beans.Managers;
+import beans.User;
 
 public class ManagerService {
 	private Managers managers=new Managers();
@@ -14,5 +15,13 @@ public class ManagerService {
 	
 	public ArrayList<Manager> getAll(){
 		return this.managers.getAll();
+	}
+	
+	public void blockManager(String username) {
+		this.managers.blockManager(username);
+	}
+	
+	public void editManager(User user) {
+		this.managers.editManager(user);
 	}
 }
