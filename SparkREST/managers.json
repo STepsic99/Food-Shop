@@ -1,4 +1,4 @@
-[{"username":"menadzer1","password":"sifra1", "name":"Persida", "surname":"Persić", "gender":"Female", "date":"2000-10-12","role":"MANAGER","restaurant":{"id": "2",
+[{"username":"menadzer1","password":"sifra1", "name":"Persida", "surname":"Persić", "gender":"Ženski", "date":"2000-10-12","role":"MANAGER","restaurant":{"id": "2",
 "name": "Amici",
 "type": "Italijanski",
 "articles": [{

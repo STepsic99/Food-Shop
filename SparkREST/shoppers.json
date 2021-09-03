@@ -15,12 +15,14 @@
       "discount": 0,
       "requiredPoints": 2414.8
     },
+    "cancelDates": [],
+    "isShady": false,
     "username": "korisnik1",
     "password": "sifra1",
     "name": "Marko",
     "surname": "Markovic",
-    "gender": "Male",
-    "date": "2000-10-12",
+    "gender": "Muški",
+    "date": "1999-10-08T00:00:00.000+0200",
     "role": "SHOPPER"
   },
   {
@@ -39,12 +41,14 @@
       "discount": 0,
       "requiredPoints": 2566.42
     },
+    "cancelDates": [],
+    "isShady": false,
     "username": "korisnik2",
     "password": "sifra2",
     "name": "Petar",
     "surname": "Petarovic",
-    "gender": "Male",
-    "date": "1999-02-02",
+    "gender": "Muški",
+    "date": "1999-02-01T23:04:29.668+0100",
     "role": "SHOPPER"
   },
   {
@@ -63,12 +67,14 @@
       "discount": 0,
       "requiredPoints": 3000.0
     },
+    "cancelDates": [],
+    "isShady": false,
     "username": "korisnik3",
     "password": "sifra3",
     "name": "Pablo",
     "surname": "Djuric",
     "gender": "Muški",
-    "date": "1996-01-30",
+    "date": "1996-01-29T23:04:29.668+0100",
     "role": "SHOPPER"
   }
 ]

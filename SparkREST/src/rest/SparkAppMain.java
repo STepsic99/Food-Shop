@@ -8,7 +8,9 @@ import static spark.Spark.put;
 import static spark.Spark.delete;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -49,7 +51,7 @@ public class SparkAppMain {
 	private static ManagerService managerService = new ManagerService();
 	private static CommentService commentService = new CommentService();
 	private static AdministratorService administratorService = new AdministratorService();
-	private static Gson gg=new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+	private static Gson gg=new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	private static Gson gson1=new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 	
 	public static void main(String[] args) throws Exception {
@@ -149,6 +151,8 @@ public class SparkAppMain {
 		put("/rest/user/change", (req,res) -> {
 			res.type("application/json");
 			User us = gg.fromJson(req.body(), User.class);
+			System.out.println(us.getDate().getMonth());
+			System.out.println(us.getDate());
 			switch(us.getRole()) {
 			case SHOPPER:
 				shopperService.editShopper(us);

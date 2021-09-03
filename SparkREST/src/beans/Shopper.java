@@ -1,12 +1,15 @@
 package beans;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Shopper extends User{
 	private ArrayList<Order>orders;
 	private Cart cart;
 	private double points;
 	private ShopperType type;
+	private ArrayList<Date>cancelDates=new ArrayList<Date>();
+	private boolean isShady=false;
 	
 	public Shopper() {
 		super();
@@ -22,6 +25,17 @@ public class Shopper extends User{
 		this.cart = cart;
 		this.points = points;
 		this.type = type;
+	}
+
+	public Shopper(ArrayList<Order> orders, Cart cart, double points, ShopperType type, ArrayList<Date> cancelDates,
+			boolean isShady) {
+		super();
+		this.orders = orders;
+		this.cart = cart;
+		this.points = points;
+		this.type = type;
+		this.cancelDates = cancelDates;
+		this.isShady = isShady;
 	}
 
 	public ArrayList<Order> getOrders() {
@@ -54,6 +68,22 @@ public class Shopper extends User{
 
 	public void setType(ShopperType type) {
 		this.type = type;
+	}
+
+	public ArrayList<Date> getCancelDates() {
+		return cancelDates;
+	}
+
+	public void setCancelDates(ArrayList<Date> cancelDates) {
+		this.cancelDates = cancelDates;
+	}
+
+	public boolean isShady() {
+		return isShady;
+	}
+
+	public void setShady(boolean isShady) {
+		this.isShady = isShady;
 	}
 	
 	

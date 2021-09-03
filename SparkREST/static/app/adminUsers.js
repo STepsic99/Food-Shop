@@ -141,17 +141,7 @@ Rang kupca:
 						this.users[i].role='Dostavljač';
 						break;			
 				}
-				switch(this.users[i].gender){
-					case 'Male':
-						this.users[i].gender='Muški';
-						break;
-					case 'Female':
-						this.users[i].gender='Ženski';
-						break;
-					case 'Rather not tell':
-						this.users[i].gender='Nije naveden';
-						break;		
-				}	
+				
 			}
 			
 			this.searchByAgain(response.data);
@@ -271,17 +261,7 @@ Rang kupca:
 						this.users[i].role='Dostavljač';
 						break;			
 				}
-				switch(this.users[i].gender){
-					case 'Male':
-						this.users[i].gender='Muški';
-						break;
-					case 'Female':
-						this.users[i].gender='Ženski';
-						break;
-					case 'Rather not tell':
-						this.users[i].gender='Nije naveden';
-						break;		
-				}	
+				
 			}
 		
 		

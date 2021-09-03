@@ -3,7 +3,9 @@ Vue.component("profile", {
 		    return {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
 			   isEditing: false,
-			   isViewing: true
+			   isViewing: true,
+			   dateModified: null,
+			   dateM:new Date()
 		    }
 	},
 	template: ` 
@@ -39,10 +41,10 @@ Vue.component("profile", {
 	<label>
 	Datum rođenja: 
 	<span v-if="isViewing">
-	{{user.date}}
+	{{dateM.getDate()}}.{{dateM.getMonth()+1}}.{{dateM.getFullYear()}}.
 	</span>
 	<span v-if="isEditing"> 
-	<input type = "date" v-model = "user.date">
+	<input type = "date" v-model = "dateModified">
 	 </span>
 	</label><br><br>
 	<label>Korisničko ime: {{user.username}}</label><br><br>
@@ -62,6 +64,17 @@ Vue.component("profile", {
 		}else{
 			this.visibleLogin = false;
 			this.visibleLogout = true;
+			 this.dateM=new Date(this.user.date)
+       		 month = '' + (this.dateM.getMonth() + 1),
+       		 day = '' + this.dateM.getDate(),
+       		 year = this.dateM.getFullYear();
+
+			if (month.length < 2) 
+       		 month = '0' + month;
+   			 if (day.length < 2) 
+        	 day = '0' + day;
+			
+			this.dateModified= [year, month, day].join('-');
 		}
 		},
 	changeMode : function(){
@@ -70,11 +83,20 @@ Vue.component("profile", {
 		this.backup = [this.user.username, this.user.password, this.user.name, this.user.surname, this.user.gender, this.user.date, this.user.role];
 	},
 	saveChanges : function(){
+		this.user.date=this.dateModified;
 		axios
 			.put('/rest/user/change', this.user)
-			
-		this.isEditing=false;
+			.then(response=>{
+				 axios
+          .get('/rest/user/getUser')
+          .then(response => {this.isLogged(response.data)
+					this.isEditing=false;
 		this.isViewing=true;
+				})
+				
+			})
+			
+		
 	},
 		cancelChanges : function(){
 		this.user.username = this.backup[0];
