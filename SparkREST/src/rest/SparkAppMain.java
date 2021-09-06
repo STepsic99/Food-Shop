@@ -418,6 +418,12 @@ public class SparkAppMain {
 			return "SUCCESS";
 		});
 		
+		get("/rest/user/freeManagers", (req, res) -> {
+			res.type("application/json");
+			return gson1.toJson(managerService.getFreeManagers());
+		});
+		
+		
 	}
 	
 	private static Cart getCart(Request req) {

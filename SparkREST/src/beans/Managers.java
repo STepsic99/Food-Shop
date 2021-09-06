@@ -82,4 +82,12 @@ public class Managers {
 		Serialization();
 	}
 	
+	public ArrayList<Manager> getFreeManagers(){
+		ArrayList<Manager>retVal=new ArrayList<Manager>();
+		for(Manager manager : managerList) {
+			if(manager.getRestaurant()==null) retVal.add(manager);
+		}
+		return retVal;
+	}
+	
 }

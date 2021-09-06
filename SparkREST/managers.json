@@ -107,5 +107,26 @@
     "gender": "Ženski",
     "date": "2000-10-10T00:00:00.000+0200",
     "role": "MANAGER"
+  },
+   {
+    "isBlocked": false,
+    "username": "menadzer2",
+    "password": "sifra2",
+    "name": "Slavko",
+    "surname": "Slavković",
+    "gender": "Muški",
+    "date": "1998-02-24T00:00:00.000+0100",
+    "role": "MANAGER"
+  },
+  {
+    "isBlocked": false,
+    "username": "menadzer3",
+    "password": "sifra3",
+    "name": "Julija",
+    "surname": "Julić",
+    "gender": "Ženski",
+    "date": "1995-07-06T00:00:00.000+0200",
+    "role": "MANAGER"
   }
+ 
 ]

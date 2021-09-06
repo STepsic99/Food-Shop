@@ -69,7 +69,7 @@ Rang kupca:
 	Ime: {{u.name}}<br>
 	Prezime: {{u.surname}}<br>
 	<span v-if="u.role=='Kupac'">Poeni: {{u.points.toFixed(2)}}</span>
-	<span v-if="u.role=='Menadžer'">Restoran: {{u.restaurant.name}}</span>
+	<span v-if="u.role=='Menadžer' && u.restaurant">Restoran: {{u.restaurant.name}}</span>
 	</td>
 	<td style="padding-bottom: 4em;text-align:left">
 	Datum rođenja: {{u.date.getDate()}}.{{u.date.getMonth()+1}}.{{u.date.getFullYear()}}<br>
@@ -80,7 +80,7 @@ Rang kupca:
 	<td><span style="position:relative;top:-25px" v-if="u.isBlocked==false"><button v-on:click="blockUser(u)">BLOKIRAJ</button></span>
 	<span style="position:relative;top:-25px" v-else>Korisnik je blokiran</span>
 	
-	<td>
+	</td>
 	</tr>
 	</table>
 </div>		  

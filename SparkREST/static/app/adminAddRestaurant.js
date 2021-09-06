@@ -3,53 +3,73 @@ Vue.component("adminAddRestaurant", {
 		    return {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
 			   isEditing: false,
-			   isViewing: true
+			   isViewing: true,
+			   newRestaurant:{name:null,type:null,location:null},
+			   freeManagers:[],
+			    error: null,
+			   newUser:{}
 		    }
 	},
 	template: ` 
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
-	<h1>Podaci o profilu</h1>
-	<label>Ime:
-	
-	<span v-if="isViewing"> {{user.name}} </span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.name">
-	 </span>
-	</label><br><br>
-	<label>Prezime:
-	<span v-if="isViewing">
-	 {{user.surname}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type="text" v-model="user.surname">
-	 </span>
-	</label><br><br>
-	<label>Pol: 
-	<span v-if="isViewing">
-	{{user.gender}}
-	</span>
-	<span v-if="isEditing"> 
-	<select v-model ="user.gender">
+	<h1>Dodaj restoran</h1>
+	<label>Naziv:</label>
+	<input type="text" v-model="newRestaurant.name">
+	<br><br>
+	<label>Lokacija:</label>
+	<input type="text" v-model="newRestaurant.location">
+	<br><br>
+	<label>Tip:</label>
+	<select v-model ="newRestaurant.type">
+    <option value="Primorski">Primorski</option>
+    <option value="Italijanski">Italijanski</option>
+    <option value="Kineski">Kineski</option>
+  	</select><br><br>
+	<label v-if="freeManagers.length!=0">Raspoloživi menadžeri:</label>
+	<select v-if="freeManagers.length!=0">
+	<option v-for="m in freeManagers">
+    {{ m.username }}
+  </option>
+	</select>
+	<div v-else>
+	<h3>Dodavanje menadžera restorana</h3><br>
+	<p v-if="error">
+    <b>Molim Vas, ispravite navedeno:</b>
+      <div style="color:red">{{ error }}</div>
+  </p>
+	<form class="formUser">
+	<p>
+	<label>Ime:</label>
+	<input type = "text" v-model = "newUser.name">
+	</p>
+	<p>
+	<label>Prezime:</label>
+	<input type = "text" v-model = "newUser.surname">
+	</p>
+	<p>
+	<label>Pol:</label>
+	<select v-model ="newUser.gender">
     <option value="Ženski">Ženski</option>
     <option value="Muški">Muški</option>
     <option value="Ne bih da navedem">Ne bih da navedem</option>
   	</select>
-	 </span>
-	</label><br><br>
-	<label>
-	Datum rođenja: 
-	<span v-if="isViewing">
-	{{user.date}}
-	</span>
-	<span v-if="isEditing"> 
-	<input type = "date" v-model = "user.date">
-	 </span>
-	</label><br><br>
-	<label>Korisničko ime: {{user.username}}</label><br><br>
-	<button v-if="isViewing" v-on:click = "changeMode">Izmeni profil</button><br><br>
-	<button v-if="isViewing" v-on:click = "changePassword">Promeni lozinku</button>
-	<button v-if="isEditing" v-on:click = "saveChanges">Sačuvaj izmene</button>
-	<button v-if="isEditing" v-on:click = "cancelChanges">Odustani</button>
+	</p>
+	<p>
+	<label>Datum rodjenja:</label>
+	<input type = "date" v-model = "newUser.date">
+	</p>
+	<p>
+	<label>Korisničko ime:</label>
+	<input type = "text" v-model = "newUser.username">
+	</p>
+	<p>
+	<label>Lozinka:</label>
+	<input type = "password" v-model = "newUser.password">
+	</p><br>
+	</form>
+	</div>
+	<br><br>
+	<button v-on:click="addRestaurant">Dodaj restoran</button>
 </div>		  
 `
 	, 
@@ -89,11 +109,18 @@ Vue.component("adminAddRestaurant", {
 	},
 	changePassword : function(){
 		router.push(`/pass`);
+	},
+	addRestaurant : function(){
+		console.log("A")
 	}
 	},
 	mounted () {
        axios
           .get('/rest/user/getUser')
           .then(response => (this.isLogged(response.data)))
+
+	 axios
+		.get('/rest/user/freeManagers')
+		.then(response => (this.freeManagers=response.data))
     },
 });

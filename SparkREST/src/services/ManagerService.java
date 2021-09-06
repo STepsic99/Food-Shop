@@ -28,4 +28,8 @@ public class ManagerService {
 	public void addManager(Manager manager) {
 		this.managers.addManager(manager);
 	}
+	
+	public ArrayList<Manager> getFreeManagers(){
+		return this.managers.getFreeManagers();
+	}
 }
