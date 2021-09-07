@@ -1,10 +1,14 @@
 Vue.component("managerRestaurant", {
 	data: function () {
 		    return {
-			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
+			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null,restaurant:{name:null,location:{address:null}}},
 			   status: "",
 			   showArticles: true,
-			   showNewArticle:false
+			   showNewArticle:false,
+			   testPic:null,
+				newArticle:{name:null,price:null,type:null,quantity:null,description:null,image:null},
+				image:null,
+				error:null
 		    }
 	},
 	template: ` 
@@ -27,7 +31,7 @@ Vue.component("managerRestaurant", {
 	</tr>
 	</table>
 	<div v-if="showArticles">
-	<h2 style="font-size:30px">Artikli <button style="position:relative;top:-5px;left:500px" v-on:click="newArticle">Dodaj artikl</button></h2> 
+	<h2 style="font-size:30px">Artikli <button style="position:relative;top:-5px;left:500px" v-on:click="newArticleFunc">Dodaj artikl</button></h2> 
 	<table style="column-count: 2;display: flex;max-width:100px;">
 	<tr style="display: grid; grid-template-columns: repeat(4, 1fr)" >
 	<td style="padding-left:3em;padding-bottom:5em " v-for="a in user.restaurant.articles">
@@ -44,7 +48,43 @@ Vue.component("managerRestaurant", {
 	</table>
 	</div>
 	<div v-if="showNewArticle">
-	<button v-on:click="goBack">Odustani</button>
+	<h2>Novi artikl</h2>
+	<div v-if="error" style="color:red">{{error}}</div>
+	<table style=" margin-left: auto;
+  margin-right: auto;">
+	<tr>
+	<td>Naziv:</td>
+	<td><input type="text" v-model="newArticle.name"></td>
+	</tr>
+	<tr>
+	<td>Cena:</td>
+	<td><input type="text" v-model="newArticle.price"></td>
+	</tr>
+	<tr>
+	<td>Tip:</td>
+	<td><select v-model="newArticle.type">
+	<option value="FOOD">Jelo</option>
+	<option value="DRINK">Piće</option>
+	</select>
+	</td>
+	</tr>
+	<tr>
+	<td>Slika:</td>
+	<td><input type="file" v-on:change="addImage"></td>
+	</tr>
+	<tr>
+	<td>Opis:</td>
+	<td><input type="text" v-model="newArticle.description"></td>
+	</tr>
+	<tr>
+	<td>Količina:</td>
+	<td><input type="text" v-model="newArticle.quantity"></td>
+	</tr>
+	<tr>
+	<td colspan="2" style="padding-top:20px"><button style="margin-right:25px" v-on:click="addArticle">Dodaj artikl</button><button v-on:click="goBack">Odustani</button></td>
+	</tr>
+	</table>
+	
 	</div>
 </div>	
 `
@@ -59,15 +99,47 @@ Vue.component("managerRestaurant", {
 			if(this.user.restaurant.status=="OPEN")
 				this.status="Radi";
 				else this.status="Ne radi"
+			this.showArticles=true;
+			this.showNewArticle=false;	
 		}
 		},
-	newArticle : function(){
+	newArticleFunc : function(){
 		this.showArticles=false;
 		this.showNewArticle=true;
 	},
 	goBack : function(){
 		this.showArticles=true;
 		this.showNewArticle=false;
+	},
+	addImage : function(e){
+		  const file = e.target.files[0];
+            this.createBase64Image(file);
+	},
+	createBase64Image(file){
+            const reader= new FileReader();
+            reader.onload = (e) =>{
+            	let img = e.target.result;
+                this.image=img
+            }
+            reader.readAsDataURL(file);
+    },
+	addArticle : function(){
+		for(let i=0;i<this.user.restaurant.articles.length;i++){
+			if(this.user.restaurant.articles[i].name==this.newArticle.name){
+				this.error="Već postoji artikl sa istim imenom.";
+				return;
+			}
+		}
+		this.newArticle.image=this.image;
+		axios
+		.post('rest/manager/addArticle',this.newArticle)
+		.then(response=>{
+			toast("Uspešno dodat artikl")
+			axios
+          .get('/rest/user/getUser')
+          .then(response => (this.isLogged(response.data)))
+		})
+		
 	}	
 	},
 	mounted () {

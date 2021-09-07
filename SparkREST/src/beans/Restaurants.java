@@ -57,4 +57,10 @@ public class Restaurants {
 		restaurants.put(restaurant.getId(),restaurant);
 		Serialization();
 	}
+	
+	public void addArticle(Article article,String id) {
+		Restaurant restaurant=restaurants.get(id);
+		restaurant.getArticles().add(article);
+		Serialization();
+	}
 }

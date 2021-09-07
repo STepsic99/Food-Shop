@@ -481,6 +481,29 @@ public class SparkAppMain {
 			return "SUCCESS";
 		});
 		
+		post("rest/manager/addArticle", (req, res) -> {
+			res.type("application/json");
+			Article article=gson1.fromJson(req.body(), Article.class);
+			Manager manager=(Manager)getUser(req);
+			Restaurant restaurant=restaurantService.getRestaurant(manager.getRestaurant().getId());
+			
+			String parts[] = article.getImage().split(",");
+			String path = "./static/resources/res" + manager.getRestaurant().getId()+article.getName()+".jpg";
+			byte[] data = Base64.getDecoder().decode(parts[1]);
+			try (OutputStream stream = new FileOutputStream(path)) {
+			    stream.write(data);
+			}
+			
+			article.setRestaurant(new Restaurant(restaurant.getId(),restaurant.getName(),restaurant.getType()));
+			article.setCounter(1);
+			article.setImage("./resources/res" + manager.getRestaurant().getId()+article.getName()+".jpg");
+			
+			
+			
+			restaurantService.addArticle(article, manager.getRestaurant().getId());
+			return "SUCCESS";
+		});
+		
 	}
 	
 	private static String generateRestaurantID() {

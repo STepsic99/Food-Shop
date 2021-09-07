@@ -107,16 +107,6 @@
     "gender": "Ženski",
     "date": "2000-10-10T00:00:00.000+0200",
     "role": "MANAGER"
-  },
-  {
-    
-    "isBlocked": false,
-    "username": "menadzer2",
-    "password": "sifra2",
-    "name": "NekoI",
-    "surname": "NekoP",
-    "gender": "Ne bih da navedem",
-    "date": "2003-07-10T00:00:00.000+0200",
-    "role": "MANAGER"
   }
+ 
 ]
