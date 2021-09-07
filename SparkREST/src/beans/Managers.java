@@ -90,4 +90,10 @@ public class Managers {
 		return retVal;
 	}
 	
+	public void addRestaurantToManager(Manager resManager) {
+		Manager manager=managers.get(resManager.username);
+		manager.setRestaurant(new Restaurant(resManager.getRestaurant().getId()));
+		Serialization();
+	}
+	
 }

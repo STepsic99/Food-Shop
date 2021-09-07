@@ -32,4 +32,8 @@ public class ManagerService {
 	public ArrayList<Manager> getFreeManagers(){
 		return this.managers.getFreeManagers();
 	}
+	
+	public void addRestaurantToManager(Manager resManager) {
+		this.managers.addRestaurantToManager(resManager);
+	}
 }

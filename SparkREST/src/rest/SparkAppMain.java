@@ -8,10 +8,13 @@ import static spark.Spark.put;
 import static spark.Spark.delete;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Base64;
+import java.io.OutputStream;
 
 
 import com.google.gson.Gson;
@@ -25,6 +28,8 @@ import beans.DeliveryRequests;
 import beans.Manager;
 import beans.Order;
 import beans.OrderStatus;
+import beans.Restaurant;
+import beans.RestaurantStatus;
 import beans.Role;
 import beans.Shopper;
 import beans.User;
@@ -107,6 +112,10 @@ public class SparkAppMain {
 			if(sessionUser == null) {
 				sessionUser = us;
 				session.attribute("user", sessionUser);
+			}else {
+				
+				sessionUser = us;
+				session.attribute("user", sessionUser);
 			}
 			if(us.getRole()==Role.SHOPPER) {
 			Cart sessionCart = session.attribute("cart"); 
@@ -133,6 +142,11 @@ public class SparkAppMain {
 			res.type("application/json");
 			Session session = req.session(true);
 			User user = session.attribute("user");
+			if(user!=null && user.getRole()!=null && user.getRole().equals(Role.MANAGER)) {
+				Manager manager=(Manager)user;
+				manager.setRestaurant(restaurantService.getRestaurant(manager.getRestaurant().getId()));
+				return gson1.toJson(manager);
+			}
 		/*	if(user != null) {
 				return gg.toJson(user);
 			}
@@ -423,7 +437,68 @@ public class SparkAppMain {
 			return gson1.toJson(managerService.getFreeManagers());
 		});
 		
+		post("rest/restaurant/add", (req, res) -> {
+			res.type("application/json");
+			
+			Restaurant restaurant=gg.fromJson(req.body(),Restaurant.class);
+			restaurant.setId(generateRestaurantID());
+			restaurant.setStatus(RestaurantStatus.OPEN);
+			
+			String parts[] = restaurant.getImagePath().split(",");
+			String path = "./static/resources/res" + restaurant.getId()+".jpg";
+			byte[] data = Base64.getDecoder().decode(parts[1]);
+			try (OutputStream stream = new FileOutputStream(path)) {
+			    stream.write(data);
+			}
+			
+			restaurant.setImagePath("./resources/res" + restaurant.getId()+".jpg");
+			restaurantService.addRestaurant(restaurant);
+			return "SUCCESS";
+		});
 		
+		get("/rest/manager/resId", (req, res) -> {
+			res.type("application/json");
+			String s=generateRestaurantID();
+			return s;
+		});
+		
+		post("rest/manager/addRestaurant", (req, res) -> {
+			res.type("application/json");
+			Manager manager=gson1.fromJson(req.body(), Manager.class);
+			managerService.addRestaurantToManager(manager);
+			return "SUCCESS";
+		});
+		
+		post("rest/manager/addManagerWithRestaurant", (req, res) -> {
+			res.type("application/json");
+			Manager manager=gg.fromJson(req.body(), Manager.class);
+			manager.setRole(Role.MANAGER);
+			manager.setBlocked(false);
+			if(userService.usernameExists(manager.getUsername())) return "USERNAMEERROR";
+				managerService.addManager(manager);
+			
+			userService.addUser(new User(manager.getUsername(),manager.getPassword(),manager.getRole()));
+			return "SUCCESS";
+		});
+		
+	}
+	
+	private static String generateRestaurantID() {
+		String id="1";
+		boolean con=true;
+		ArrayList<Restaurant>restaurants=(ArrayList<Restaurant>) restaurantService.getRestaurants();
+		while(con) {
+			con=false;
+		for(int i=0;i<restaurants.size();i++) {
+			if(restaurants.get(i).getId().equals(id)) {
+				int x=Integer.parseInt(id);
+				id=String.valueOf(++x);
+				con=true;
+				break;
+			}
+		}
+		}
+		return id;
 	}
 	
 	private static Cart getCart(Request req) {

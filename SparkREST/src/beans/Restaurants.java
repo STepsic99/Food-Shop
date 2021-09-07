@@ -3,6 +3,7 @@ package beans;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Restaurants {
 	
 	private ArrayList<Restaurant> restaurantList=new ArrayList<Restaurant>();
 	private HashMap<String, Restaurant> restaurants = new HashMap<String, Restaurant>();
-	private Gson gson =new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
+	private Gson gson =new GsonBuilder().setDateFormat("yyyy-mm-dd").setPrettyPrinting().create();
 	
 	public Restaurants() {
 		try {
@@ -32,11 +33,28 @@ public class Restaurants {
 		}
 	}
 	
+	public void Serialization() {
+		Writer fileWriter;
+		try {
+			fileWriter = Files.newBufferedWriter(Paths.get(".\\restaurants.json"));
+			gson.toJson(restaurantList, fileWriter);
+			fileWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
+	
 	public ArrayList<Restaurant> getRestaurantList() {
 		return restaurantList;
 	}
 	
 	public Restaurant getRestaurant(String id) {
 		return restaurants.get(id);
+	}
+	
+	public void addRestaurant(Restaurant restaurant) {
+		restaurantList.add(restaurant);
+		restaurants.put(restaurant.getId(),restaurant);
+		Serialization();
 	}
 }

@@ -15,4 +15,8 @@ public class RestaurantService {
 	public Restaurant getRestaurant(String id) {
 		return this.restaurants.getRestaurant(id);
 	}
+	
+	public void addRestaurant(Restaurant restaurant) {
+		this.restaurants.addRestaurant(restaurant);
+	}
 }

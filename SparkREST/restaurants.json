@@ -1,96 +1,150 @@
 [
-{"id": "1",
-"name": "Olimp",
-"type": "Primorski",
-"articles": null,
-"status": "CLOSED",
-"location": {"address": "Slovenska obala 6, Budva, 85310", "latitude":42.28229728905753, "longitude":18.838425915340757},
-"imagePath": ".\\resources\\Restaurant1.jpg",
-"averageGrade":2.5
-},
-{"id": "2",
-"name": "Amici",
-"type": "Italijanski",
-"articles": [{
-"name": "Špagete Bolognese",
-"price": 790,
-"type": "FOOD",
-"restaurant": {"id": "2","name": "Amici","type": "Italijanski"},
-"quantity": 500,
-"description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
-"image":".\\resources\\Spaghetti-Bolognese.jpg",
-"counter":1
-},
-{
-"name": "Pileitna Mediteraneo",
-"price": 890,
-"type": "FOOD",
-"restaurant": {"id": "2","name": "Amici","type": "Italijanski"},
-"quantity": 500,
-"description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
-"image":".\\resources\\mediterranean-chicken2.jpg",
-"counter":1
-},
-{
-"name": "Cesar salata",
-"price": 790,
-"type": "FOOD",
-"restaurant": {"id": "2","name": "Amici","type": "Italijanski"},
-"quantity": 305,
-"description": "(miks zelenih salata, piletina, krutoni, paradjz, pančeta, parmezan, dresing)",
-"image":".\\resources\\caesar-salad.jpg",
-"counter":1
-},
-{
-"name": "Blue Lagoon",
-"price": 430,
-"type": "DRINK",
-"restaurant": {"id": "2","name": "Amici","type": "Italijanski"},
-"quantity": 200,
-"description": "(smirnoff, sprite, blue curacao, sok od limuna)",
-"image":".\\resources\\blue-lagoon.jpg",
-"counter":1
-},
-{
-"name": "Long Island",
-"price": 430,
-"type": "DRINK",
-"restaurant": {"id": "2","name": "Amici","type": "Italijanski"},
-"quantity": 200,
-"description": "(rum, tequila, triple sec, gin, vodka, koka kola, limun)",
-"image":".\\resources\\Long_island.jpg",
-"counter":1
-},
-{
-"name": "Tequila sunrise",
-"price": 430,
-"type": "DRINK",
-"restaurant": {"id": "2","name": "Amici","type": "Italijanski"},
-"quantity": 200,
-"description": " (tequila, grenadine, đus)",
-"image":".\\resources\\Tequila-Sunrise.jpg",
-"counter":1
-}],
-"status": "OPEN",
-"location": {"address": "Nebojšina 8, Beograd, 11000", "latitude":44.79471191576135, "longitude":20.466935084659248},
-"imagePath": ".\\resources\\italian.jpg",
-"averageGrade":4.5
-},
-{"id": "3",
-"name": "JANGCE",
-"type": "Kineski",
-"articles": [{
-"name": "Udon Nudle Sa Piletinom",
-"price": 750,
-"type": "FOOD",
-"restaurant": {"id": "3","name": "JANGCE","type": "Kineski"},
-"quantity": 550,
-"description": "Udon nudle sa povrcem i piletinom seckanom na rezance u blagom sosu",
-"image":".\\resources\\udon-nudle-sa-piletinom.jpg",
-"counter":1
-}],
-"status": "OPEN",
-"location": {"address": "Trifkovićev trg 2,  Novi Sad, 21000", "latitude":19.844307426995137, "longitude":45.257170687032094},
-"imagePath": ".\\resources\\chinese.jpg",
-"averageGrade":3.5
-}]
+  {
+    "id": "1",
+    "name": "Olimp",
+    "type": "Primorski",
+    "status": "CLOSED",
+    "location": {
+      "longitude": 18.838425915340757,
+      "latitude": 42.28229728905753,
+      "address": "Slovenska obala 6, Budva, 85310"
+    },
+    "imagePath": ".\\resources\\Restaurant1.jpg",
+    "averageGrade": 2.5
+  },
+  {
+    "id": "2",
+    "name": "Amici",
+    "type": "Italijanski",
+    "articles": [
+      {
+        "name": "Špagete Bolognese",
+        "price": 790.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 500.0,
+        "description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
+        "image": ".\\resources\\Spaghetti-Bolognese.jpg",
+        "counter": 1
+      },
+      {
+        "name": "Pileitna Mediteraneo",
+        "price": 890.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 500.0,
+        "description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
+        "image": ".\\resources\\mediterranean-chicken2.jpg",
+        "counter": 1
+      },
+      {
+        "name": "Cesar salata",
+        "price": 790.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 305.0,
+        "description": "(miks zelenih salata, piletina, krutoni, paradjz, pančeta, parmezan, dresing)",
+        "image": ".\\resources\\caesar-salad.jpg",
+        "counter": 1
+      },
+      {
+        "name": "Blue Lagoon",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(smirnoff, sprite, blue curacao, sok od limuna)",
+        "image": ".\\resources\\blue-lagoon.jpg",
+        "counter": 1
+      },
+      {
+        "name": "Long Island",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": "(rum, tequila, triple sec, gin, vodka, koka kola, limun)",
+        "image": ".\\resources\\Long_island.jpg",
+        "counter": 1
+      },
+      {
+        "name": "Tequila sunrise",
+        "price": 430.0,
+        "type": "DRINK",
+        "restaurant": {
+          "id": "2",
+          "name": "Amici",
+          "type": "Italijanski",
+          "averageGrade": 0.0
+        },
+        "quantity": 200.0,
+        "description": " (tequila, grenadine, đus)",
+        "image": ".\\resources\\Tequila-Sunrise.jpg",
+        "counter": 1
+      }
+    ],
+    "status": "OPEN",
+    "location": {
+      "longitude": 20.466935084659248,
+      "latitude": 44.79471191576135,
+      "address": "Nebojšina 8, Beograd, 11000"
+    },
+    "imagePath": ".\\resources\\italian.jpg",
+    "averageGrade": 4.5
+  },
+  {
+    "id": "3",
+    "name": "JANGCE",
+    "type": "Kineski",
+    "articles": [
+      {
+        "name": "Udon Nudle Sa Piletinom",
+        "price": 750.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "3",
+          "name": "JANGCE",
+          "type": "Kineski",
+          "averageGrade": 0.0
+        },
+        "quantity": 550.0,
+        "description": "Udon nudle sa povrcem i piletinom seckanom na rezance u blagom sosu",
+        "image": ".\\resources\\udon-nudle-sa-piletinom.jpg",
+        "counter": 1
+      }
+    ],
+    "status": "OPEN",
+    "location": {
+      "longitude": 45.257170687032094,
+      "latitude": 19.844307426995137,
+      "address": "Trifkovićev trg 2,  Novi Sad, 21000"
+    },
+    "imagePath": ".\\resources\\chinese.jpg",
+    "averageGrade": 3.5
+  }
+]

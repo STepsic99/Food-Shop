@@ -27,6 +27,14 @@ public class Restaurant {
 		this.name = name;
 	}
 
+	
+
+
+	public Restaurant(String id) {
+		super();
+		this.id = id;
+	}
+
 
 
 

@@ -4,10 +4,15 @@ Vue.component("adminAddRestaurant", {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
 			   isEditing: false,
 			   isViewing: true,
-			   newRestaurant:{name:null,type:null,location:null},
+			   newRestaurant:{name:null,type:null,location:{address:null},imagePath:null},
 			   freeManagers:[],
 			    error: null,
-			   newUser:{}
+			   newUser:{username:null, password:null, name:null, surname:null, gender:null, date:null, role: null, restaurant:{id:null},isBlocked:null},
+				image:null,
+				selectedManager:null,
+				newID:null,
+				chosenManager:{username:null, password:null, name:null, surname:null, gender:null, date:null, role: null, restaurant:{id:null},isBlocked:null},
+				testPic:null
 		    }
 	},
 	template: ` 
@@ -17,7 +22,7 @@ Vue.component("adminAddRestaurant", {
 	<input type="text" v-model="newRestaurant.name">
 	<br><br>
 	<label>Lokacija:</label>
-	<input type="text" v-model="newRestaurant.location">
+	<input type="text" v-model="newRestaurant.location.address">
 	<br><br>
 	<label>Tip:</label>
 	<select v-model ="newRestaurant.type">
@@ -25,8 +30,11 @@ Vue.component("adminAddRestaurant", {
     <option value="Italijanski">Italijanski</option>
     <option value="Kineski">Kineski</option>
   	</select><br><br>
+	<label>Slika:</label>
+	<input type="file" v-on:change="addImage" v-model="testPic">
+	<br><br>
 	<label v-if="freeManagers.length!=0">Raspoloživi menadžeri:</label>
-	<select v-if="freeManagers.length!=0">
+	<select v-if="freeManagers.length!=0" v-model="selectedManager">
 	<option v-for="m in freeManagers">
     {{ m.username }}
   </option>
@@ -110,9 +118,79 @@ Vue.component("adminAddRestaurant", {
 	changePassword : function(){
 		router.push(`/pass`);
 	},
-	addRestaurant : function(){
-		console.log("A")
-	}
+	addImage : function(e){
+		  const file = e.target.files[0];
+            this.createBase64Image(file);
+	},
+	  createBase64Image(file){
+            const reader= new FileReader();
+            reader.onload = (e) =>{
+            	let img = e.target.result;
+                this.image=img
+            }
+            reader.readAsDataURL(file);
+        },
+		addRestaurant : function(){
+			this.newRestaurant.imagePath=this.image;
+			var isNew=false;
+		if(this.newUser.username)	{isNew=true;
+										this.newUser.restaurant.id=this.newID;
+											}
+		else{
+			for(let i=0;i<this.freeManagers.length;i++){
+				if(this.freeManagers[i].username==this.selectedManager){
+					this.chosenManager.username=this.freeManagers[i].username;
+					this.chosenManager.password=this.freeManagers[i].password;
+					this.chosenManager.name=this.freeManagers[i].name;
+					this.chosenManager.surname=this.freeManagers[i].surname;
+					this.chosenManager.gender=this.freeManagers[i].gender;
+					this.chosenManager.date=this.freeManagers[i].date;
+					this.chosenManager.role=this.freeManagers[i].role;
+					this.chosenManager.isBlocked=this.freeManagers[i].isBlocked;
+					this.chosenManager.restaurant.id=this.newID;
+				}
+			}
+		}
+		
+		
+		axios
+		.post('rest/restaurant/add',this.newRestaurant)
+		.then(response=>{
+				if(!isNew){
+					axios
+					.post('rest/manager/addRestaurant',this.chosenManager)
+					.then(response=>{
+						toast("Uspešno kreiran restoran.");
+						this.newRestaurant={name:null,type:null,location:{address:null},imagePath:null};
+						this.selectedManager=null;
+						this.testPic=null;
+						axios
+		.get('/rest/user/freeManagers')
+		.then(response => (this.freeManagers=response.data))
+		
+	axios
+		.get('/rest/manager/resId')
+		.then(response=>(this.newID=response.data))	
+					})
+				}else{
+					axios
+					.post('rest/manager/addManagerWithRestaurant',this.newUser)
+					.then(response=>{
+						toast("Uspešno kreiran restoran.");
+						this.newRestaurant={name:null,type:null,location:{address:null},imagePath:null};
+						this.newUser={username:null, password:null, name:null, surname:null, gender:null, date:null, role: null, restaurant:{id:null},isBlocked:null};
+						this.testPic=null;
+						axios
+		.get('/rest/user/freeManagers')
+		.then(response => (this.freeManagers=response.data))
+		
+	axios
+		.get('/rest/manager/resId')
+		.then(response=>(this.newID=response.data))	
+					})
+				}
+		})
+	},
 	},
 	mounted () {
        axios
@@ -122,5 +200,9 @@ Vue.component("adminAddRestaurant", {
 	 axios
 		.get('/rest/user/freeManagers')
 		.then(response => (this.freeManagers=response.data))
+		
+	axios
+		.get('/rest/manager/resId')
+		.then(response=>(this.newID=response.data))	
     },
 });
