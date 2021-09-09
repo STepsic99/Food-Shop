@@ -6,7 +6,9 @@ Vue.component("restaurantDetails", {
 			   status: "",
 			   canComment:null,
 			   comment:{content:null,grade:3,restaurant:null},
-			   resComments:[]
+			   resComments:[],
+			   mapComp:{}
+			   
 		    }
 	},
 	template: ` 
@@ -19,7 +21,8 @@ Vue.component("restaurantDetails", {
 	</div>
 	</td>
 	<td style=" width: 100%;">
-	<span style="font-size:25px">
+	<span style="font-size:25px;">
+	<div id="mapT" style="margin-left:10px;width: 100%; height: 250px;"></div>
 	Lokacija: {{this.restaurant.location.address}} <br><br>
 	Tip restorana: {{this.restaurant.type}} <br><br>
 	Status restorana: {{this.status}} <br><br>
@@ -72,7 +75,7 @@ Vue.component("restaurantDetails", {
 	</div>
 </div>		  
 `
-	, 
+  ,
 	methods : {
 		logIn : function () {
 			event.preventDefault();
@@ -113,7 +116,38 @@ Vue.component("restaurantDetails", {
 					this.comment.content=null;
 					this.comment.grade=3;
 			})
-		}
+		},
+		
+		loadMap: function () {
+			
+				this.mapComp = new ol.Map({
+				target: 'mapT',
+				layers: [
+				  new ol.layer.Tile({
+					source: new ol.source.OSM()
+				  })
+				
+				],
+				view: new ol.View({
+				  center: ol.proj.fromLonLat([this.restaurant.location.longitude, this.restaurant.location.latitude]), 
+				  zoom: 16
+				})
+			  });
+	
+			this.mapComp.on('singleclick', function (evt) {
+    console.log(evt.coordinate);
+
+    
+    console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
+	  var coords = ol.proj.toLonLat(evt.coordinate);
+  		 fetch('http://nominatim.openstreetmap.org/reverse?format=json&lon=' + coords[0] + '&lat=' + coords[1]+"&accept-language=sr-Latn")
+     .then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            console.log(json);
+        });
+});
+		}	
 	},
 	mounted () {       
 	
@@ -132,7 +166,9 @@ Vue.component("restaurantDetails", {
           .then(response => {this.canComment=response.data
 				 axios
           .get('/rest/restaurant/comments/'+ this.$route.params.id)
-          .then(response => (this.resComments=response.data))
+          .then(response => {this.resComments=response.data
+					this.loadMap();
+				})
 			})
 			})
 			})	
