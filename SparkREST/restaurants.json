@@ -29,7 +29,7 @@
         },
         "quantity": 500.0,
         "description": "(pelat, juneće mlevono meso, c. vino, m. ulje, c. luk, b. luk)",
-        "image": ".\\resources\\Spaghetti-Bolognese.jpg",
+        "image": "./resources/Spaghetti-Bolognese.jpg",
         "counter": 1
       },
       {
@@ -44,7 +44,7 @@
         },
         "quantity": 500.0,
         "description": "(piletina, b. vino,pesto, čeri, masline, kapar, krompir)",
-        "image": ".\\resources\\mediterranean-chicken2.jpg",
+        "image": "./resources/mediterranean-chicken2.jpg",
         "counter": 1
       },
       {
@@ -107,7 +107,6 @@
         "image": ".\\resources\\Tequila-Sunrise.jpg",
         "counter": 1
       }
-      
     ],
     "status": "OPEN",
     "location": {

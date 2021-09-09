@@ -63,4 +63,21 @@ public class Restaurants {
 		restaurant.getArticles().add(article);
 		Serialization();
 	}
+	
+	public void changeArticle(Article article,String id) {
+		Restaurant restaurant=restaurants.get(id);
+		//for(Article a: restaurant.getArticles()) {
+		//	if(a.getName().equals(article.getName())) {
+		//		a=article;
+		//	}
+	//	}
+		for(int i=0;i<restaurant.getArticles().size();i++) {
+			if(restaurant.getArticles().get(i).getName().equals(article.getName())) {
+				restaurant.getArticles().add(i,article);
+				restaurant.getArticles().remove(i+1);
+				break;
+			}
+		}
+		Serialization();
+	}
 }

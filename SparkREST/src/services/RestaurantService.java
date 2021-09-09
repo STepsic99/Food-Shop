@@ -24,4 +24,8 @@ public class RestaurantService {
 	public void addArticle(Article article,String id) {
 		this.restaurants.addArticle(article, id);
 	}
+	
+	public void changeArticle(Article article,String id) {
+		this.restaurants.changeArticle(article, id);
+	}
 }

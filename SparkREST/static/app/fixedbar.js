@@ -9,7 +9,7 @@ Vue.component("fixedbar", {
 		    }
 	},
 	template: ` 	
-<div class="topmenu">
+<div class="topmenu" style=" position:relative;z-index: 100;">
 <ul>
   <li><a href="/" v-bind:class="{active : this.selectedLink===0}" v-on:click="openStarterPage">Početna</a></li>
   <li v-if="visibleLogout  && user.role=='ADMINISTRATOR'" v-on:click="showAdminAddRestaurant"><a v-bind:class="{active : this.selectedLink===12}" href="/adminAddRestaurant">Dodaj restoran</a></li>
