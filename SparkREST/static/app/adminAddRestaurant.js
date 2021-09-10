@@ -4,7 +4,7 @@ Vue.component("adminAddRestaurant", {
 			  user: {username:null, password:null, name:null, surname:null, gender:null, date:null, role: null},
 			   isEditing: false,
 			   isViewing: true,
-			   newRestaurant:{name:null,type:null,location:{address:null},imagePath:null},
+			   newRestaurant:{name:null,type:null,location:{address:null,longitude:null,latitude:null},imagePath:null},
 			   freeManagers:[],
 			    error: null,
 			   newUser:{username:null, password:null, name:null, surname:null, gender:null, date:null, role: null, restaurant:{id:null},isBlocked:null},
@@ -12,7 +12,12 @@ Vue.component("adminAddRestaurant", {
 				selectedManager:null,
 				newID:null,
 				chosenManager:{username:null, password:null, name:null, surname:null, gender:null, date:null, role: null, restaurant:{id:null},isBlocked:null},
-				testPic:null
+				testPic:null,
+				placesAutocomplete:null,
+				houseNumber:null
+				
+				
+				
 		    }
 	},
 	template: ` 
@@ -21,9 +26,13 @@ Vue.component("adminAddRestaurant", {
 	<label>Naziv:</label>
 	<input type="text" v-model="newRestaurant.name">
 	<br><br>
-	<label>Lokacija:</label>
-	<input type="text" v-model="newRestaurant.location.address">
+	<label>Unesite ulicu:</label>
+	<input type="search" id="searchedAddress" style="height:30px"/>
 	<br><br>
+	Ulica:<input type="text"  id="street" > Broj:<input type="text" v-model="houseNumber"><br><br>
+	Mesto:<input type="text"  id="town"> Poštanski broj:<input type="text" id="postCode"><br><br>
+	Geografska širina:<input type="text" id="ltd" style="width:50px"> Geografska dužina:<input type="text" id="lng"  style="width:50px"><br><br>
+	<br>
 	<label>Tip:</label>
 	<select v-model ="newRestaurant.type">
     <option value="Primorski">Primorski</option>
@@ -131,6 +140,10 @@ Vue.component("adminAddRestaurant", {
             reader.readAsDataURL(file);
         },
 		addRestaurant : function(){
+			this.newRestaurant.location.address=document.querySelector('#street').value+" "+this.houseNumber+", "+document.querySelector('#town').value+", "+document.querySelector('#postCode').value; 
+			this.newRestaurant.location.longitude=document.querySelector('#lng').value;
+			this.newRestaurant.location.latitude=document.querySelector('#ltd').value;
+			
 			this.newRestaurant.imagePath=this.image;
 			var isNew=false;
 		if(this.newUser.username)	{isNew=true;
@@ -190,7 +203,7 @@ Vue.component("adminAddRestaurant", {
 					})
 				}
 		})
-	},
+	}
 	},
 	mounted () {
        axios
@@ -204,5 +217,26 @@ Vue.component("adminAddRestaurant", {
 	axios
 		.get('/rest/manager/resId')
 		.then(response=>(this.newID=response.data))	
+		
+	  this.placesAutocomplete = places({
+      appId: 'plQ4P1ZY8JUZ',
+      apiKey: 'bc14d56a6d158cbec4cdf98c18aced26',
+      container: document.querySelector('#searchedAddress'),
+      templates: {
+        value: function(suggestion) {
+          return suggestion.name;
+        }
+      }
+    }).configure({
+	countries: ['rs'],
+      type: 'address'
+    });
+    this.placesAutocomplete.on('change', function resultSelected(e) {
+	document.querySelector('#street').value = e.suggestion.value || '';
+	document.querySelector('#town').value = e.suggestion.city || '';
+	document.querySelector('#postCode').value = e.suggestion.postcode || '';
+	document.querySelector('#lng').value = e.suggestion.latlng.lng || '';
+	document.querySelector('#ltd').value = e.suggestion.latlng.lat || '';
+    });
     },
 });
