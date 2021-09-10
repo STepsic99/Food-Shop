@@ -5,8 +5,8 @@
     "type": "Primorski",
     "status": "CLOSED",
     "location": {
-      "longitude": 18.838425915340757,
-      "latitude": 42.28229728905753,
+      "longitude": 18.83846,
+      "latitude": 42.28163,
       "address": "Slovenska obala 6, Budva, 85310"
     },
     "imagePath": ".\\resources\\Restaurant1.jpg",
@@ -110,8 +110,8 @@
     ],
     "status": "OPEN",
     "location": {
-      "longitude": 20.466935084659248,
-      "latitude": 44.79471191576135,
+      "longitude": 20.46708,
+      "latitude": 44.79410,
       "address": "Nebojšina 8, Beograd, 11000"
     },
     "imagePath": ".\\resources\\italian.jpg",

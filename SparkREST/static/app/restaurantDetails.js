@@ -119,14 +119,31 @@ Vue.component("restaurantDetails", {
 		},
 		
 		loadMap: function () {
-			
+				
+				const iconFeature = new ol.Feature({
+					geometry: new ol.geom.Point(ol.proj.fromLonLat([this.restaurant.location.longitude, this.restaurant.location.latitude])),
+					name: 'restoran',
+				  });
+		
 				this.mapComp = new ol.Map({
 				target: 'mapT',
 				layers: [
 				  new ol.layer.Tile({
 					source: new ol.source.OSM()
-				  })
-				
+				  }),
+				  new ol.layer.Vector({
+					source: new ol.source.Vector({
+					  features: [iconFeature]
+					}),
+					style: new ol.style.Style({
+					  image: new ol.style.Icon({
+						anchor: [0.5, 46],
+						anchorXUnits: 'fraction',
+						anchorYUnits: 'pixels',
+						src: '/../resources/icons-marker.png'
+					  })
+					})
+				  })	
 				],
 				view: new ol.View({
 				  center: ol.proj.fromLonLat([this.restaurant.location.longitude, this.restaurant.location.latitude]), 
