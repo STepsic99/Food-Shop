@@ -9,11 +9,11 @@
       "numberOfItems": 0,
       "discountPrice": 0.0
     },
-    "points": 0,
+    "points": 0.0,
     "type": {
       "name": "Bronza",
       "discount": 0,
-      "requiredPoints": 3000
+      "requiredPoints": 3000.0
     },
     "cancelDates": [],
     "isBlocked": false,
