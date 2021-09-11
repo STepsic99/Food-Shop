@@ -23,6 +23,9 @@ Vue.component("adminAddRestaurant", {
 	template: ` 
 <div style="background: rgba(255, 255, 255, 0.8);margin: auto;padding: 10px 50px 25px 45px; max-width: 500px;">
 	<h1>Dodaj restoran</h1>
+	<p v-if="error">
+      <div style="color:red">{{ error }}</div>
+  </p>
 	<label>Naziv:</label>
 	<input type="text" v-model="newRestaurant.name">
 	<br><br>
@@ -50,10 +53,6 @@ Vue.component("adminAddRestaurant", {
 	</select>
 	<div v-else>
 	<h3>Dodavanje menadžera restorana</h3><br>
-	<p v-if="error">
-    <b>Molim Vas, ispravite navedeno:</b>
-      <div style="color:red">{{ error }}</div>
-  </p>
 	<form class="formUser">
 	<p>
 	<label>Ime:</label>
@@ -140,6 +139,14 @@ Vue.component("adminAddRestaurant", {
             reader.readAsDataURL(file);
         },
 		addRestaurant : function(){
+			
+			if(!document.querySelector('#street').value || !this.houseNumber || !document.querySelector('#town').value || !document.querySelector('#postCode').value || !document.querySelector('#lng').value || !document.querySelector('#ltd').value || !this.newRestaurant.name || !this.newRestaurant.type || !this.image){
+				this.error="Nisu sva polja popunjena.";
+				return;
+			}
+			
+			
+			
 			this.newRestaurant.location.address=document.querySelector('#street').value+" "+this.houseNumber+", "+document.querySelector('#town').value+", "+document.querySelector('#postCode').value; 
 			this.newRestaurant.location.longitude=document.querySelector('#lng').value;
 			this.newRestaurant.location.latitude=document.querySelector('#ltd').value;
@@ -150,6 +157,12 @@ Vue.component("adminAddRestaurant", {
 										this.newUser.restaurant.id=this.newID;
 											}
 		else{
+			
+			if(!this.selectedManager){
+				this.error="Niste odabrali menadžera.";
+				return;
+			}
+			
 			for(let i=0;i<this.freeManagers.length;i++){
 				if(this.freeManagers[i].username==this.selectedManager){
 					this.chosenManager.username=this.freeManagers[i].username;
@@ -165,8 +178,22 @@ Vue.component("adminAddRestaurant", {
 			}
 		}
 		
+		if(isNew && (!this.newUser.username || !this.newUser.password || !this.newUser.name || !this.newUser.surname || !this.newUser.gender || !this.newUser.date)){
+				this.error="Nisu sva polja popunjena.";
+				return;
+			}
 		
-		axios
+		if(isNew){
+			axios
+			.post('/rest/username/exists',this.newUser)
+			.then(response=>{
+				if(response.data==="USERNAMEERROR"){
+					 this.error="Korisničko ime je zauzeto.";
+				return;
+						}
+						
+						
+						axios
 		.post('rest/restaurant/add',this.newRestaurant)
 		.then(response=>{
 				if(!isNew){
@@ -177,6 +204,7 @@ Vue.component("adminAddRestaurant", {
 						this.newRestaurant={name:null,type:null,location:{address:null},imagePath:null};
 						this.selectedManager=null;
 						this.testPic=null;
+						this.error=null;
 						axios
 		.get('/rest/user/freeManagers')
 		.then(response => (this.freeManagers=response.data))
@@ -189,10 +217,49 @@ Vue.component("adminAddRestaurant", {
 					axios
 					.post('rest/manager/addManagerWithRestaurant',this.newUser)
 					.then(response=>{
+						
 						toast("Uspešno kreiran restoran.");
 						this.newRestaurant={name:null,type:null,location:{address:null},imagePath:null};
 						this.newUser={username:null, password:null, name:null, surname:null, gender:null, date:null, role: null, restaurant:{id:null},isBlocked:null};
 						this.testPic=null;
+						this.error=null;
+						axios
+		.get('/rest/user/freeManagers')
+		.then(response => (this.freeManagers=response.data))
+		
+	axios
+		.get('/rest/manager/resId')
+		.then(response=>(this.newID=response.data))	
+					
+					
+					})
+				}
+		})	
+						
+						
+						
+						
+						
+						
+						
+			})
+			
+		}else{
+			
+			
+			
+			axios
+		.post('rest/restaurant/add',this.newRestaurant)
+		.then(response=>{
+				
+					axios
+					.post('rest/manager/addRestaurant',this.chosenManager)
+					.then(response=>{
+						toast("Uspešno kreiran restoran.");
+						this.newRestaurant={name:null,type:null,location:{address:null},imagePath:null};
+						this.selectedManager=null;
+						this.testPic=null;
+						this.error=null;
 						axios
 		.get('/rest/user/freeManagers')
 		.then(response => (this.freeManagers=response.data))
@@ -201,8 +268,14 @@ Vue.component("adminAddRestaurant", {
 		.get('/rest/manager/resId')
 		.then(response=>(this.newID=response.data))	
 					})
-				}
-		})
+				
+		})	
+						
+			
+			
+			
+		}
+	
 	}
 	},
 	mounted () {

@@ -20,7 +20,7 @@ Vue.component("cartContent", {
 	<h2>{{a.name}}</h2>
 	<p style="font-size:18px">{{a.price}} RSD </p><br>
 	Količina:&nbsp;
-	<input type="number" style="width:60px" size="33" min="1" v-model="a.counter" v-on:change="changeQuantity(a)"><br>
+	<input type="number" style="width:60px" size="33" min="1" v-on:keydown="proba" v-on:paste="proba" v-model="a.counter" v-on:change="changeQuantity(a)"><br>
 	<button style="margin-top:35px" v-on:click="removeArticle(a)">Izbaci artikl iz korpe</button>
 	</td>
 	</tr>
@@ -31,6 +31,13 @@ Vue.component("cartContent", {
 `
 	, 
 	methods : {
+		proba : function(e){
+			 if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58) 
+      || e.keyCode == 8)) {
+        e.preventDefault();
+    }
+		},
 		isLogged : function(user){
 			this.user=user
 			if(this.user===null){

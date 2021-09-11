@@ -42,7 +42,7 @@ Vue.component("restaurantDetails", {
 	{{a.description}}<br><br>
 	<span style="font-size:20px">{{a.price}} RSD </span><br><br>
 	<span v-if="user && user.role=='SHOPPER' && status=='Radi'">
-	<input type="number" style="width:80px" size="33" min="1" v-model="a.counter">
+	<input type="number" v-on:keydown="proba" v-on:paste="proba" style="width:80px" size="33" min="1" v-model="a.counter">
 	<button style="margin-left:10px" v-on:click="addToCart(a)">Dodaj u korpu</button>
 	</span>
 	</td>
@@ -77,6 +77,13 @@ Vue.component("restaurantDetails", {
 `
   ,
 	methods : {
+		proba : function(e){
+			 if(!((e.keyCode > 95 && e.keyCode < 106)
+      || (e.keyCode > 47 && e.keyCode < 58) 
+      || e.keyCode == 8)) {
+        e.preventDefault();
+    }
+		},
 		logIn : function () {
 			event.preventDefault();
 			axios

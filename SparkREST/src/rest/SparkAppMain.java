@@ -33,6 +33,7 @@ import beans.Restaurant;
 import beans.RestaurantStatus;
 import beans.Role;
 import beans.Shopper;
+import beans.ShopperType;
 import beans.User;
 import services.AdministratorService;
 import services.CommentService;
@@ -76,6 +77,8 @@ public class SparkAppMain {
 			Shopper shopper = gg.fromJson(req.body(), Shopper.class);
 			if(shopperService.isThereEmptyField(shopper)) return "EMPTYERROR";
 			if(userService.usernameExists(shopper.getUsername())) return "USERNAMEERROR";
+			shopper.setCart(new Cart(new ArrayList<Article>(),new User(shopper.getUsername()),0,0,0));
+			shopper.setType(new ShopperType("Bronza",0,3000));
 			shopperService.addShopper(shopper);
 			userService.addUser(new User(shopper.getUsername(),shopper.getPassword(),Role.SHOPPER));
 			Session session=req.session(true);
@@ -531,6 +534,13 @@ public class SparkAppMain {
 			
 			restaurantService.changeArticle(article, manager.getRestaurant().getId());
 			return "SUCCESS";
+		});
+		
+		post("/rest/username/exists", (req, res) -> {
+			res.type("application/json");
+			Manager manager=gg.fromJson(req.body(), Manager.class);
+			if(userService.usernameExists(manager.getUsername())) return "USERNAMEERROR";
+			return "OK";
 		});
 		
 	}

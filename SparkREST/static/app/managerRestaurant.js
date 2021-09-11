@@ -79,11 +79,11 @@ Vue.component("managerRestaurant", {
 	<td><input type="file" v-on:change="addImage"></td>
 	</tr>
 	<tr>
-	<td>Opis:</td>
+	<td>Opis (opciono):</td>
 	<td><input type="text" v-model="newArticle.description"></td>
 	</tr>
 	<tr>
-	<td>Količina:</td>
+	<td>Količina (opciono):</td>
 	<td><input type="text" v-model="newArticle.quantity"></td>
 	</tr>
 	<tr>
@@ -125,11 +125,11 @@ Vue.component("managerRestaurant", {
 	</td>
 	</tr>
 	<tr>
-	<td>Opis:</td>
+	<td>Opis (opciono):</td>
 	<td><input type="text" v-model="changedArticle.description"></td>
 	</tr>
 	<tr>
-	<td>Količina:</td>
+	<td>Količina (opciono):</td>
 	<td><input type="text" v-model="changedArticle.quantity"></td>
 	</tr>
 	<tr>
@@ -155,6 +155,11 @@ Vue.component("managerRestaurant", {
 			this.showNewArticle=false;	
 			this.showChangeArticle=false;
 			this.pictureStays=true;
+			this.newArticle.price=null;
+			this.newArticle.type=null;
+			this.newArticle.name=null;
+			this.newArticle.quantity=null;
+			this.newArticle.description=null;
 			this.error=null;
 		}
 		},
@@ -181,6 +186,19 @@ Vue.component("managerRestaurant", {
             reader.readAsDataURL(file);
     },
 	addArticle : function(){
+		if(!this.newArticle.name || !this.newArticle.price || !this.newArticle.type || !this.image){
+			this.error="Nisu sva polja popunjena.";
+			return;
+		}
+		if(isNaN(this.newArticle.price)){
+			this.error="Cena mora biti broj.";
+			return;
+		}
+		
+		if(this.newArticle.quantity && isNaN(this.newArticle.quantity)){
+			this.error="Količina mora biti broj.";
+			return;
+		}
 		if(this.user.restaurant.articles){
 		for(let i=0;i<this.user.restaurant.articles.length;i++){
 			if(this.user.restaurant.articles[i].name==this.newArticle.name){
@@ -211,6 +229,22 @@ Vue.component("managerRestaurant", {
 		this.pictureStays=false;
 	},
 	saveChanges : function(){
+		
+		if(!this.changedArticle.name || !this.changedArticle.price || !this.changedArticle.type || (!this.image && !this.pictureStays)){
+			this.error="Nisu sva polja popunjena.";
+			return;
+		}
+		
+		if(isNaN(this.changedArticle.price)){
+			this.error="Cena mora biti broj.";
+			return;
+		}
+		
+		if(this.changedArticle.quantity && isNaN(this.changedArticle.quantity)){
+			this.error="Količina mora biti broj.";
+			return;
+		}
+		
 		var cnt=0;
 		for(let i=0;i<this.user.restaurant.articles.length;i++){
 			if(this.user.restaurant.articles[i].name==this.changedArticle.name){
