@@ -109,6 +109,19 @@
     "role": "MANAGER"
   },
   {
+    "restaurant": {
+      "id": "1",
+      "name": "Olimp",
+      "type": "Primorski",
+      "status": "CLOSED",
+      "location": {
+        "longitude": 18.83846,
+        "latitude": 42.28163,
+        "address": "Slovenska obala 6, Budva, 85310"
+      },
+      "imagePath": ".\\resources\\Restaurant1.jpg",
+      "averageGrade": 0.0
+    },
     "isBlocked": false,
     "username": "menadzer2",
     "password": "sifra2",
@@ -116,6 +129,21 @@
     "surname": "Ankić",
     "gender": "Ženski",
     "date": "1996-01-31T00:00:00.000+0100",
+    "role": "MANAGER"
+  },
+  {
+  "restaurant": {
+      "id": "3",
+      "name": "JANGCE",
+      "type": "Kineski",
+      "averageGrade": 0.0},
+    "isBlocked": false,
+    "username": "menadzer3",
+    "password": "sifra3",
+    "name": "NekoIme",
+    "surname": "NekoPrezime",
+    "gender": "Muški",
+    "date": "1995-03-01T00:00:00.000+0100",
     "role": "MANAGER"
   }
 ]

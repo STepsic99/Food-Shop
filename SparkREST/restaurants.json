@@ -3,6 +3,23 @@
     "id": "1",
     "name": "Olimp",
     "type": "Primorski",
+    "articles": [
+      {
+        "name": "Biftek tartar",
+        "price": 3000.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "1",
+          "name": "Olimp",
+          "type": "Primorski",
+          "averageGrade": 0.0
+        },
+        "quantity": 250.0,
+        "description": "Biftek tartar je predjelo od fino iseckanog sirovog goveđeg ili konjskog mesa začinjeno solju, biberom, Vorcestershire sosom ili sa Tabascom ili senfom.",
+        "image": "./resources/res1Biftek tartar.jpg",
+        "counter": 1
+      }
+    ],
     "status": "CLOSED",
     "location": {
       "longitude": 18.83846,
@@ -135,6 +152,21 @@
         "quantity": 550.0,
         "description": "Udon nudle sa povrcem i piletinom seckanom na rezance u blagom sosu",
         "image": ".\\resources\\udon-nudle-sa-piletinom.jpg",
+        "counter": 1
+      },
+      {
+        "name": "Lignje u soja sosu",
+        "price": 620.0,
+        "type": "FOOD",
+        "restaurant": {
+          "id": "3",
+          "name": "JANGCE",
+          "type": "Kineski",
+          "averageGrade": 0.0
+        },
+        "quantity": 300.0,
+        "description": "(Lignje, pileće belo meso, soja sos, praziluk)",
+        "image": "./resources/res3Lignje u soja sosu.jpg",
         "counter": 1
       }
     ],

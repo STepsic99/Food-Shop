@@ -60,6 +60,7 @@ public class Restaurants {
 	
 	public void addArticle(Article article,String id) {
 		Restaurant restaurant=restaurants.get(id);
+		if(restaurant.getArticles()==null) restaurant.setArticles(new ArrayList<Article>());
 		restaurant.getArticles().add(article);
 		Serialization();
 	}

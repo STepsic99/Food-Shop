@@ -181,11 +181,13 @@ Vue.component("managerRestaurant", {
             reader.readAsDataURL(file);
     },
 	addArticle : function(){
+		if(this.user.restaurant.articles){
 		for(let i=0;i<this.user.restaurant.articles.length;i++){
 			if(this.user.restaurant.articles[i].name==this.newArticle.name){
 				this.error="Već postoji artikl sa istim imenom.";
 				return;
 			}
+		}
 		}
 		this.newArticle.image=this.image;
 		axios
