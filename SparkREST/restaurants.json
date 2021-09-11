@@ -10,7 +10,7 @@
       "address": "Slovenska obala 6, Budva, 85310"
     },
     "imagePath": ".\\resources\\Restaurant1.jpg",
-    "averageGrade": 2.5
+    "averageGrade": 0.0
   },
   {
     "id": "2",
@@ -111,11 +111,11 @@
     "status": "OPEN",
     "location": {
       "longitude": 20.46708,
-      "latitude": 44.79410,
+      "latitude": 44.7941,
       "address": "Nebojšina 8, Beograd, 11000"
     },
     "imagePath": ".\\resources\\italian.jpg",
-    "averageGrade": 4.5
+    "averageGrade": 0.0
   },
   {
     "id": "3",
@@ -145,6 +145,6 @@
       "address": "Trifkovićev trg 2,  Novi Sad, 21000"
     },
     "imagePath": ".\\resources\\chinese.jpg",
-    "averageGrade": 3.5
+    "averageGrade": 0.0
   }
 ]

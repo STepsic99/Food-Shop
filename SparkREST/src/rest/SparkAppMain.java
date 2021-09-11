@@ -23,6 +23,7 @@ import com.google.gson.GsonBuilder;
 import beans.Article;
 import beans.Cart;
 import beans.Comment;
+import beans.CommentStatus;
 import beans.Deliverer;
 import beans.DeliveryRequests;
 import beans.Manager;
@@ -373,6 +374,11 @@ public class SparkAppMain {
 			res.type("application/json");
 			Comment comment = gg.fromJson(req.body(), Comment.class);
 			commentService.changeStatus(comment);
+			if(comment.getStatus().equals(CommentStatus.APPROVED)) {
+				Manager manager=(Manager)getUser(req);
+				double newAGrade=commentService.getAverageGradeForRestaurant(manager.getRestaurant().getId());
+				restaurantService.updateGrade(manager.getRestaurant().getId(), newAGrade);
+			}
 			return "SUCCESS";
 		});
 		

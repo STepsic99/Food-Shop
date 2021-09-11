@@ -82,4 +82,17 @@ public class Comments {
 		}
 		return restaurantComments;
 	}
+	
+	public double getAverageGradeForRestaurant(String restaurantId) {
+		double retVal=0;
+		int cnt=0;
+		for(Comment comment:commentList) {
+			if(comment.getRestaurant().getId().equals(restaurantId) && comment.getStatus().equals(CommentStatus.APPROVED)) {
+				retVal+=comment.getGrade();
+				cnt++;
+			}
+		}
+		if(cnt!=0)retVal=retVal/cnt;
+		return retVal;
+	}
 }

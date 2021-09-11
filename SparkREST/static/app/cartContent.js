@@ -74,6 +74,7 @@ Vue.component("cartContent", {
 								this.user.cart.price=0;
 								this.user.cart.discountPrice=0;
 								this.$root.$emit('counterZero', 0);
+								toast('Uspešno kreirana porudžbina')
 			})
 		}
 	},

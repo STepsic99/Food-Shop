@@ -28,4 +28,8 @@ public class RestaurantService {
 	public void changeArticle(Article article,String id) {
 		this.restaurants.changeArticle(article, id);
 	}
+	
+	public void updateGrade(String id,double newGrade) {
+		this.restaurants.updateGrade(id, newGrade);
+	}
 }

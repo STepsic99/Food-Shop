@@ -29,7 +29,7 @@ Vue.component("managerRestaurant", {
 	Lokacija: {{user.restaurant.location.address}} <br><br>
 	Tip restorana: {{user.restaurant.type}} <br><br>
 	Status restorana: {{status}} <br><br>
-	Prosečna ocena: {{user.restaurant.averageGrade}} <br><br>
+	Prosečna ocena: <span v-if="user.restaurant.averageGrade===0"> Nije još ocenjen</span> <span v-else> {{user.restaurant.averageGrade}}  </span> <br><br>
 	</span>
 	</td>
 	</tr>

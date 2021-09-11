@@ -24,4 +24,8 @@ public class CommentService {
 	public ArrayList<Comment> getComments(String restaurantId){
 		return this.comments.getComments(restaurantId);
 	}
+	
+	public double getAverageGradeForRestaurant(String restaurantId) {
+		return this.comments.getAverageGradeForRestaurant(restaurantId);
+	}
 }

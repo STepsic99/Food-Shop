@@ -9,11 +9,11 @@
       "numberOfItems": 0,
       "discountPrice": 0.0
     },
-    "points": 585.2,
+    "points": 0,
     "type": {
       "name": "Bronza",
       "discount": 0,
-      "requiredPoints": 2414.8
+      "requiredPoints": 3000
     },
     "cancelDates": [],
     "isBlocked": false,
@@ -35,11 +35,11 @@
       "numberOfItems": 0,
       "discountPrice": 0.0
     },
-    "points": 433.58000000000004,
+    "points": 0.0,
     "type": {
       "name": "Bronza",
       "discount": 0,
-      "requiredPoints": 2566.42
+      "requiredPoints": 3000.0
     },
     "cancelDates": [],
     "isBlocked": false,
@@ -61,20 +61,13 @@
       "numberOfItems": 0,
       "discountPrice": 0.0
     },
-    "points": -1344.63,
+    "points": 0.0,
     "type": {
       "name": "Bronza",
       "discount": 0,
-      "requiredPoints": 4344.63
+      "requiredPoints": 3000.0
     },
-    "cancelDates": [
-      "2021-09-03T04:41:50.157+0200",
-      "2021-09-03T04:41:50.700+0200",
-      "2021-09-03T04:41:51.830+0200",
-      "2021-09-03T04:41:52.540+0200",
-      "2021-09-03T04:41:53.621+0200",
-      "2021-09-03T04:42:40.581+0200"
-    ],
+    "cancelDates": [],
     "isBlocked": false,
     "username": "korisnik3",
     "password": "sifra3",

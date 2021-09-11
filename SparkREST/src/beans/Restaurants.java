@@ -80,4 +80,10 @@ public class Restaurants {
 		}
 		Serialization();
 	}
+	
+	public void updateGrade(String id,double newGrade) {
+		Restaurant restaurant=restaurants.get(id);
+		restaurant.setAverageGrade(newGrade);
+		Serialization();
+	}
 }

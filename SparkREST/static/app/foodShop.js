@@ -8,7 +8,7 @@ Vue.component("food-shop", {
 			  searchedName: null,
 			  searchedType: "Prikaži sve",
 			  searchedLocation: null,
-			  searchedGrade:1,
+			  searchedGrade:0,
 			  showFilters:false,
 			  status:"SVI",
 			  chineseTicked:true,
@@ -34,7 +34,7 @@ Vue.component("food-shop", {
   	</select><br><br>
    <label>Ocena:</label>
   <select v-model="searchedGrade">
-    <option value="1">Prikaži sve</option>
+    <option value="0">Prikaži sve</option>
     <option value="2">&gt;2</option>
     <option value="3">&gt;3</option>
     <option value="4">&gt;4</option>
@@ -81,7 +81,7 @@ Vue.component("food-shop", {
 	<td>
 	Lokacija: {{r.location.address}} <br><br>
 	Tip restorana: {{r.type}} <br><br>
-	Prosečna ocena: {{r.averageGrade}} <br><br>
+	Prosečna ocena:<span v-if="r.averageGrade===0"> Nije još ocenjen</span> <span v-else> {{r.averageGrade}} </span> <br><br>
 	<button v-on:click="showRestaurantDetails(r.id)">Prikaži restoran</button>
 	</td>
 	</tr>
