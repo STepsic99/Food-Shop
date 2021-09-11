@@ -145,6 +145,7 @@ public class SparkAppMain {
 			User user = session.attribute("user");
 			if(user!=null && user.getRole()!=null && user.getRole().equals(Role.MANAGER)) {
 				Manager manager=(Manager)user;
+				if(manager.getRestaurant()!=null)
 				manager.setRestaurant(restaurantService.getRestaurant(manager.getRestaurant().getId()));
 				return gson1.toJson(manager);
 			}

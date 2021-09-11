@@ -140,8 +140,8 @@
     ],
     "status": "OPEN",
     "location": {
-      "longitude": 45.257170687032094,
-      "latitude": 19.844307426995137,
+      "longitude": 19.844296642893877,
+      "latitude": 45.256991530809934,
       "address": "Trifkovićev trg 2,  Novi Sad, 21000"
     },
     "imagePath": ".\\resources\\chinese.jpg",

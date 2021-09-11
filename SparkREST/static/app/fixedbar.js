@@ -15,9 +15,9 @@ Vue.component("fixedbar", {
   <li v-if="visibleLogout  && user.role=='ADMINISTRATOR'" v-on:click="showAdminAddRestaurant"><a v-bind:class="{active : this.selectedLink===12}" href="/adminAddRestaurant">Dodaj restoran</a></li>
   <li v-if="visibleLogout  && user.role=='ADMINISTRATOR'" v-on:click="showAdminUsers"><a v-bind:class="{active : this.selectedLink===13}" href="/adminUsers">Registrovani korisnici</a></li>
   <li v-if="visibleLogout  && user.role=='ADMINISTRATOR'" v-on:click="showAdminAddUser"><a v-bind:class="{active : this.selectedLink===14}" href="/adminAddUser">Dodaj korisnika</a></li>
-  <li v-if="visibleLogout  && user.role=='MANAGER'" v-on:click="showManagerRestaurant"><a v-bind:class="{active : this.selectedLink===8}" href="/managerRestaurant">Moj Restoran</a></li>
-  <li v-if="visibleLogout  && user.role=='MANAGER'" v-on:click="showManagerOrders"><a v-bind:class="{active : this.selectedLink===9}" href="/managerOrders">Porudžbine restorana</a></li>
-  <li v-if="visibleLogout  && user.role=='MANAGER'" v-on:click="showManagerShoppers"><a v-bind:class="{active : this.selectedLink===10}" href="/managerShoppers">Kupci restorana</a></li>
+  <li v-if="visibleLogout  && user.role=='MANAGER' && user.restaurant" v-on:click="showManagerRestaurant"><a v-bind:class="{active : this.selectedLink===8}" href="/managerRestaurant">Moj Restoran</a></li>
+  <li v-if="visibleLogout  && user.role=='MANAGER' && user.restaurant" v-on:click="showManagerOrders"><a v-bind:class="{active : this.selectedLink===9}" href="/managerOrders">Porudžbine restorana</a></li>
+  <li v-if="visibleLogout  && user.role=='MANAGER' && user.restaurant" v-on:click="showManagerShoppers"><a v-bind:class="{active : this.selectedLink===10}" href="/managerShoppers">Kupci restorana</a></li>
   <li v-if="visibleLogout  && user.role=='DELIVERER'" v-on:click="showDelivererOrders"><a v-bind:class="{active : this.selectedLink===6}" href="/delivererOrder">Moje porudžbine</a></li>
   <li v-if="visibleLogout  && user.role=='DELIVERER'" v-on:click="showUnassignedOrders"><a v-bind:class="{active : this.selectedLink===7}" href="/unassignedOrder">Nedodeljene porudžbine</a></li>
   <li v-if="visibleLogout  && user.role=='SHOPPER'" v-on:click="showOrders"><a v-bind:class="{active : this.selectedLink===5}" href="/myOrder">Porudžbine</a></li>
@@ -31,7 +31,7 @@ Vue.component("fixedbar", {
  <li v-if="visibleLogout && user.role=='SHOPPER'" style="float:right;" class="probna" v-on:click="showCart"><a v-bind:class="{active : this.selectedLink===4}" href="/cart">
  <span class="icon-button__badge">{{this.user.cart.numberOfItems}}</span>
  </a></li>
-<li v-if="visibleLogout && user.role=='MANAGER'" style="float:right" v-on:click="showManagerRequests"><a v-bind:class="{active : this.selectedLink===11}" href="/managerRequests">Zahtevi</a></li>
+<li v-if="visibleLogout && user.role=='MANAGER' && user.restaurant" style="float:right" v-on:click="showManagerRequests"><a v-bind:class="{active : this.selectedLink===11}" href="/managerRequests">Zahtevi</a></li>
 <li v-if="visibleLogout && user.role=='ADMINISTRATOR'" style="float:right" v-on:click="showAdminShadyUsers"><a v-bind:class="{active : this.selectedLink===15}" href="/adminShadyUsers">Sumnjivi korisnici</a></li>
 </ul>
 </div>		  
